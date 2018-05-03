@@ -15,3 +15,9 @@ Utilizaremos las siguientes convenciones/consideraciones en el proyecto:
   4.1 Debemos tener las mismas clases php en relacion a las tablas de las entidades de la bd. 
   4.2 En las clases php cada objeto contendra los metodos o funciones que le corresponden a ese objeto.
   4.2.1 Se debe evitar declarar funciones en una clase php que maneje datos de una clase que no le corresponde.
+
+
+
+
+¿Dudas con Github?
+    http://lemoncode.net/lemoncode-blog/2017/12/12/git-y-visual-studio-code
