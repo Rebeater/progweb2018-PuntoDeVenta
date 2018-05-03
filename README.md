@@ -9,16 +9,16 @@ Utilizaremos las siguientes convenciones/consideraciones en el proyecto:
   
     1.3 Seguir la estructura del diagrama de clases.
 
-2. Usuarios 
+**2. Usuarios**
 
-    2.1 Usar correos reales para validar cosas como recuperación de cuenta y asi.
+     2.1 Usar correos reales para validar cosas como recuperación de cuenta y asi.
 
-3. Valdaciones 
+**3. Valdaciones**
 
     3.1 Utilizar el archivo valida.php para validar los textos.
   
 
-4. Clases y objetos 
+**4. Clases y objetos**
 
     4.1 Debemos tener las mismas clases php en relacion a las tablas de las entidades de la bd. 
   
@@ -27,6 +27,6 @@ Utilizaremos las siguientes convenciones/consideraciones en el proyecto:
     4.2.1 Se debe evitar declarar funciones en una clase php que maneje datos de una clase que no le corresponde.
 
 
-¿Dudas con Github? 
+**¿Dudas con Github?**
 
-    [git y visual studio code](http://lemoncode.net/lemoncode-blog/2017/12/12/git-y-visual-studio-code)
+[git y visual studio code](http://lemoncode.net/lemoncode-blog/2017/12/12/git-y-visual-studio-code)
