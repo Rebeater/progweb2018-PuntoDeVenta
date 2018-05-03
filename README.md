@@ -27,6 +27,6 @@ Utilizaremos las siguientes convenciones/consideraciones en el proyecto:
     4.2.1 Se debe evitar declarar funciones en una clase php que maneje datos de una clase que no le corresponde.
 
 
-**¿Dudas con Github?**
 
-[git y visual studio code](http://lemoncode.net/lemoncode-blog/2017/12/12/git-y-visual-studio-code)
+
+[**¿Dudas con Github?**](http://lemoncode.net/lemoncode-blog/2017/12/12/git-y-visual-studio-code)
