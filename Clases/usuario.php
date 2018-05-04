@@ -4,7 +4,7 @@
 
     class usuario{
         private $id;
-        private $nombre;
+        private $nombre = "";
         private $correo;
         private $contrasena;
         private $puesto;
@@ -12,54 +12,60 @@
         private $domicilio;
         private $fechaNacimiento;
         private $fechaAlta;
-
+    
 //#region Declaracion de atributos get set
-        public function getId(){ return $id; }
+        public function setId($id){ 
+            $this->id = $id;
+        }
+        public function getId(){ return $this->$id; }
         
-        public function setNombre($Nombre){ $this->$nombre = $Nombre; }
-        public function getNombre(){ return $this->$nombre; }
+        public function setNombre($name){ 
+            $this->nombre = $name;
+         }
+        public function getNombre(){ 
+            return $this->nombre;
+         }
 
-        public function setCorreo($Correo){ $this->$correo = $Correo; }
-        public function getCorreo(){ return $this->$correo; }
+        public function setCorreo($correo){ $this->correo = $correo; }
+        public function getCorreo(){ return $this->correo; }
 
-        public function setContrasena($Contrasena){ $this->$contrasena = $Contrasena; }
-        public function getContrasena(){ return $this->$contrasena; }
+        public function setContrasena($contrasena){ $this->contrasena = $contrasena; }
+        public function getContrasena(){ return $this->contrasena; }
+        
+        public function setPuesto($puesto){ $this->puesto = $puesto; }
+        public function getPuesto(){ return $this->puesto; }
 
-        public function setPuesto($Puesto){ $this->$puesto = $Puesto; }
-        public function getPuesto(){ return $this->$puesto; }
+        public function setTelefono($telefono){ $this->telefono = $telefono; }
+        public function getTelefono(){ return $this->telefono; }
 
-        public function setTelefono($Telefono){ $this->$telefono = $Telefono; }
-        public function getTelefono(){ return $this->$telefono; }
+        public function setDomicilio($domicilio){ $this->domicilio = $domicilio; }
+        public function getDomicilio(){ return $this->domicilio; }
 
-        public function setDomicilio($Domicilio){ $this->$domicilio = $Domicilio; }
-        public function getDomicilio(){ return $this->$domicilio; }
+        public function setFechaNacimiento($fechaNacimiento){ $this->fechaNacimiento = $fechaNacimiento; }
+        public function getFechaNacimiento(){ return $this->fechaNacimiento; }
 
-        public function setFechaNacimiento($FechaNacimiento){ $this->$fechaNacimiento = $FechaNacimiento; }
-        public function getFechaNacimiento(){ return $this->$fechaNacimiento; }
-
-        public function setFechaAlta($FechaAlta){ $this->$fechaAlta = $FechaAlta; }
-        public function getFechaAlta(){ return $this->$fechaAlta; }
+        public function setFechaAlta($fechaAlta){ $this->fechaAlta = $fechaAlta; }
+        public function getFechaAlta(){ return $this->fechaAlta; }
 //#endregion
 
 
 //#region CRUD = Create, Read, Update, Delete
         public function Insertar(){
             try{
-                $cadena="INSERT INTO usuario (nombre, correo, contraseña, puesto, telefono, domicilio, fechaNacimiento, fechaAlta) VALUES (:nombre, :correo, :contraseña, :puesto, :telefono, :domicilio, :fechaNacimiento, :fechaAlta)";
+                $cadena= "INSERT INTO usuario (nombre, correo, contrasena, puesto, telefono, domicilio, fechaNacimiento, fechaAlta) VALUES (:nombre, :correo, :contrasena, :puesto, :telefono, :domicilio, :fechaNacimiento, :fechaAlta)";
 				$conex=new conexion();
 				$conn = $conex->conectarse();
-				$stmt = $conn->prepare($cadena);
-				echo $cadena;
-				
-                $stmt->bindParam(':nombre', $this->$nombre);
-				$stmt->bindParam(':correoid', $this->$correo);
-				$stmt->bindParam(':contraseña', $this->$contraseña);
-				$stmt->bindParam(':puesto', $this->$puesto);
-				$stmt->bindParam(':telefono', $this->$telefono);
-				$stmt->bindParam(':domicilio', $this->$domicilio);
-				$stmt->bindParam(':fechaNacimiento', $this->$fechaNacimiento);
-				$stmt->bindParam(':fechaAlta', $this->$fechaAlta);
-				
+                $stmt = $conn->prepare($cadena);
+
+                $stmt->bindParam(':nombre', $this->nombre);                    
+				$stmt->bindParam(':correo', $this->correo);
+				$stmt->bindParam(':contrasena', $this->contrasena);
+				$stmt->bindParam(':puesto', $this->puesto);
+				$stmt->bindParam(':telefono', $this->telefono);
+				$stmt->bindParam(':domicilio', $this->domicilio);
+				$stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
+                $stmt->bindParam(':fechaAlta', $this->fechaAlta);                
+            
 				if($stmt->execute())
 				{
 					echo "No hubo error";
@@ -67,7 +73,13 @@
 				}
 				else
 				{
-					echo "No hubo error";
+                    
+                    foreach($stmt->errorInfo() as $errores){
+                        echo "<br>";
+                        echo $errores;}
+                        echo "<br>";
+                    
+					echo "hubo error";
 					return false;
 				}
 				$conn = null;
@@ -106,48 +118,120 @@
                         echo $row['id'];
                     echo "</td>";
 
-                    echo "<td id='nombre_row".$row['id']."'>";
+                    echo "<td> <span id='nombre_row".$row['id']."'>";
                         echo $row['nombre'];
-                    echo "</td>";
+                    echo "</span></td>";
 
-                    echo "<td id='correo_row".$row['id']."'>";
-                        echo $row['correo'];
-                    echo "</td>";
+                    echo "<td>";
+                        echo "<span id='correo_row".$row['id']."'>".$row['correo']."</span>";
+                    echo "</span></td>";
 
-                    echo "<td id='puesto_row".$row['id']."'>";
+                    echo "<td> <span id='puesto_row".$row['id']."'>";
                         echo $row['puesto'];
-                    echo "</td>";
+                    echo "</span></td>";
 
-                    echo "<td id='telefono_row".$row['id']."'>";
+                    echo "<td> <span id='telefono_row".$row['id']."'>";
                         echo $row['telefono'];
-                    echo "</td>";
+                    echo "</span></td>";
 
-                    echo "<td id='domicilio_row".$row['id']."'>";
+                    echo "<td> <span id='domicilio_row".$row['id']."'>";
                         echo $row['domicilio'];
-                    echo "</td>";
+                    echo "</span></td>";
 
-                    echo "<td id='fechaNacimiento_row".$row['id']."'>";
+                    echo "<td> <span id='fechaNacimiento_row".$row['id']."'>";
                         echo $row['fechaNacimiento'];
-                    echo "</td>";
+                    echo "</span></td>";
 
-                    echo "<td id='fechaAlta_row".$row['id']."'>";
+                    echo "<td> <span id='fechaAlta_row".$row['id']."'>";
                         echo $row['fechaAlta'];
-                    echo "</td>";
+                    echo "</span></td>";
 
                     echo "<td id='opciones_row".$row['id']."'>";
                         echo "<div style='text-align: center; font-size: 1.25em;'> ";
-                        echo "<a href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
-                        echo "<a href='#' class='far fa-trash-alt' style='color: rgba(255,0, 0, 0.8);'></a>";
+                        echo "<a data-toggle='modal' href='#modalEdit' onClick='openUser(this)' id='edit_".$row['id']."' href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
+                        echo "<a data-toggle='modal' href='#modalDelete' onClick='deleteUser(this)' id='delete_".$row['id']."' href='#' class='far fa-trash-alt' style='color: rgba(255,0, 0, 0.8);'></a>";
                         echo "</div>";
                     echo "</td>";
                 echo "</tr>";
             }
             echo "</tbody>";
         }
+
+        public function editar(){
+            try{
+                $cadena= "update usuario set nombre=:nombre, correo=:correo, contrasena=:contrasena, puesto=:puesto, telefono=:telefono, domicilio=:domicilio, fechaNacimiento=:fechaNacimiento WHERE id=:id";
+				$conex=new conexion();
+				$conn = $conex->conectarse();
+                $stmt = $conn->prepare($cadena);
+
+                $stmt->bindParam(':id', $this->id);
+                $stmt->bindParam(':nombre', $this->nombre);                    
+				$stmt->bindParam(':correo', $this->correo);
+				$stmt->bindParam(':contrasena', $this->contrasena);
+				$stmt->bindParam(':puesto', $this->puesto);
+				$stmt->bindParam(':telefono', $this->telefono);
+				$stmt->bindParam(':domicilio', $this->domicilio);
+				$stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
+            
+                echo $this->id;
+
+				if($stmt->execute())
+				{
+					echo "No hubo error";
+					return true;
+				}
+				else
+				{
+                    
+                    foreach($stmt->errorInfo() as $errores){
+                        echo "<br>";
+                        echo $errores;}
+                        echo "<br>";
+                    
+					echo "hubo error";
+					return false;
+				}
+				$conn = null;
+            }catch(PDOException $e)
+			{
+				echo "Error: " . $e->getMessage();
+			} 
+        }
+
+        public function Eliminar(){
+            try{
+                $cadena= "delete from usuario where id = :id";
+				$conex=new conexion();
+				$conn = $conex->conectarse();
+                $stmt = $conn->prepare($cadena);
+
+                $stmt->bindParam(':id', $this->id);
+            
+                echo $this->id;
+
+				if($stmt->execute())
+				{
+					echo "No hubo error";
+					return true;
+				}
+				else
+				{
+                    
+                    foreach($stmt->errorInfo() as $errores){
+                        echo "<br>";
+                        echo $errores;}
+                        echo "<br>";
+                    
+					echo "hubo error";
+					return false;
+				}
+				$conn = null;
+            }catch(PDOException $e)
+			{
+				echo "Error: " . $e->getMessage();
+			} 
+        }
+
 //#endregion
-
-
-
-
     }
 ?>
