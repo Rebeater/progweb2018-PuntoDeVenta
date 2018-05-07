@@ -45,19 +45,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $usr->setDomicilio($domicilio);
         $usr->setFechaNacimiento($fechaNacimiento);
 
-		$usr->Editar();
+        $usr->Editar();
 	} elseif ( isset($_POST['btnEliminar'])){
-
         $id = $valida->test_input($_POST['lbl_ID']);
         $usr = new usuario();
         $usr->setId($id);
         $usr->Eliminar();
-        
-	} else {
+    } elseif ( isset($_POST['btnBuscar'])){
+        echo "buscar";
+    } 
+    else {
 	    echo "Nada";
     }
-    header("Location: mantenimiento_Usuarios.php"); 
+    
+   header("Location: mantenimiento_Usuarios.php"); 
 
+}
+else if ($_SERVER["REQUEST_METHOD"] == "GET") 
+{
+    if(isset($_GET['u'])){
+
+        $usr = new usuario();
+        $id = $valida->test_input($_GET['u']);
+        
+        $usr->setId($id) ;
+        $usr->cbxEditpuesto($id);
+        
+    }
 }
         
 ?> 

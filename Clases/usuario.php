@@ -95,7 +95,13 @@
         public function LeerTodo(){
             $conex = new conexion();
             $resultado = $conex->Consultar("Select id, nombre, correo, puesto, telefono, domicilio, fechaNacimiento, fechaAlta from usuario ORDER BY id ASC");
-
+            $resultadoPuestos = $conex->Consultar("Select id, nombre from puestos ORDER BY id ASC");
+            
+            $array_Puestos = array();
+            foreach($resultadoPuestos as $row){
+                $array_Puestos += [$row['id']=> $row['nombre']];
+            }
+            
             echo "<table id='tabla_usuarios' class='table table-striped'>";
             echo "<thead>";
             echo "<tr>";
@@ -126,8 +132,10 @@
                         echo "<span id='correo_row".$row['id']."'>".$row['correo']."</span>";
                     echo "</span></td>";
 
+                    
+
                     echo "<td> <span id='puesto_row".$row['id']."'>";
-                        echo $row['puesto'];
+                        echo $array_Puestos[$row['puesto']];
                     echo "</span></td>";
 
                     echo "<td> <span id='telefono_row".$row['id']."'>";
@@ -233,5 +241,26 @@
         }
 
 //#endregion
+
+        public function cbxEditpuesto($id){
+            $conex = new conexion();
+            $resultado = $conex->Consultar("Select id, nombre FROM puestos ORDER BY id ASC");
+            $resultadoUsr = $conex->Consultar("Select puestos.id FROM puestos, usuario WHERE usuario.puesto = puestos.id AND usuario.id = ".$id);
+            $selected = "";          
+            $str = "";
+
+            foreach($resultadoUsr as $usr){
+                    $str = $usr['id'];
+            }
+            foreach($resultado as $row){
+                if($row['id'] == $str )
+                    $select= "Selected";
+                    else{
+                        $select= "";
+                    }
+                echo "<option ".$select." value='".$row['id']."'>".$row['nombre']."</option>";
+            }
+        }
+
     }
 ?>
