@@ -22,35 +22,37 @@
 </head>
 <body>
   <?php include_once("header.php"); ?>
-    
-    <form id='usuariosList' name='usuariosList' action="procesa_Usuarios.php" class="container" method="POST">
+
+  <form id='usuariosList' name='usuariosList' action="procesa_Usuarios.php" class="container" method="POST">
         
-        <crumb>
-          <span>Inicio > Usuarios</span>
-        </crumb>
+    <crumb>
+      <span>Inicio > Usuarios</span>
+    </crumb>
 
+    <h2>Usuarios</h2>
+    <!-- Buscador -->
+    <!-- Bscador <input type="text" id="txt_Buscador" name="txt_Buscador" class="buscador" onKeyUp="buscar();" placeholder="Escribe el nombre del usuario o parte de este para realizar una busqueda...">
+    <input type="submit" class="btn btn-default" id="btnBuscar"    name="btnBuscar" value="Buscar">-->
+    <div class="input-group">
+      <input type="text" class="form-control" id="txt_Buscador" name="txt_Buscador" onKeyUp="buscar();" placeholder="Escribe el nombre del usuario o parte de este para realizar una busqueda...">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit" id="btnBuscar"    name="btnBuscar">
+        <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div><br>
 
+    <!-- Add user link -->
+    <a data-toggle="modal" href="#myModal">Agregar nuevo usuario</a>
 
-
-        <h2>Usuarios</h2>
-        <!--<input type="text" id="txt_Buscador" name="txt_Buscador" class="buscador" onKeyUp="buscar();" placeholder="Escribe el nombre del usuario o parte de este para realizar una busqueda...">
-        <input type="submit" class="btn btn-default" id="btnBuscar"    name="btnBuscar" value="Buscar">-->
-        <div class="input-group">
-    <input type="text" class="form-control" id="txt_Buscador" name="txt_Buscador" onKeyUp="buscar();" placeholder="Escribe el nombre del usuario o parte de este para realizar una busqueda...">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit" id="btnBuscar"    name="btnBuscar">
-      <i class="fas fa-search"></i>
-      </button>
+    <!-- users table -->
+    <div id="divUsers" name="divUsers" class="col">
+        <?php  
+            $user = new usuario();
+            $user->LeerTodo();
+        ?>
     </div>
-  </div>
-        <br>
-        <a data-toggle="modal" href="#myModal">Agregar nuevo usuario</a>
-        <div id="divUsers" name="divUsers" class="col">
-            <?php  
-                $user = new usuario();
-                $user->LeerTodo();
-            ?>
-        </div>
+    
 
         
 
@@ -215,7 +217,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <input type="submit" value="Actualizar" id="btnActualizar"  name="btnActualizar" class="btn">
+        <input type="button" value="Actualizar" id="btnActualizar"  name="btnActualizar" class="btn" onclick="updateTableUsers()" >
       </div>
     </div>
 
@@ -241,7 +243,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <input type="submit" value="Confirmar" id="btnEliminar"  name="btnEliminar" class="btn">
+        <input type="submit" value="Confirmar" id="btnEliminar"  name="btnEliminar" class="btn" >
       </div>
     </div>
 

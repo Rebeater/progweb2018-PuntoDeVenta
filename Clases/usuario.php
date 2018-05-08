@@ -162,7 +162,7 @@
                     echo "</td>";
                 echo "</tr>";
             }
-            echo "</tbody>";
+            echo "</tbody> </table>";
         }
 
         public function editar(){
@@ -181,7 +181,7 @@
 				$stmt->bindParam(':domicilio', $this->domicilio);
 				$stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
             
-                echo $this->id;
+                //echo $this->id;
 
 				if($stmt->execute())
 				{
