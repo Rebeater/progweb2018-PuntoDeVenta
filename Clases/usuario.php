@@ -240,6 +240,18 @@
 			} 
         }
 
+        public function getUserById($id){  
+            $conex = new conexion();
+            $result = $conex->Consultar("Select id, nombre, correo, contrasena, puesto, telefono, domicilio, fechaNacimiento, fechaAlta from usuario where id = ".$id);
+            foreach($result as $row){
+                $arrUsr = array('id' => $row['id'], 'nombre' => $row['nombre'],'correo' => $row['correo'],'contrasena' => $row['contrasena'],'puesto' => $row['puesto'],'telefono' => $row['telefono'],'domicilio' => $row['domicilio'],'fechaAlta' => $row['fechaAlta'],'fechaNacimiento' => $row['fechaNacimiento']);
+                
+                $usrJson = json_encode($arrUsr);
+                echo $usrJson;
+            }
+           
+        }
+
 //#endregion
 
         public function cbxEditpuesto($id){
@@ -262,6 +274,8 @@
                 echo "<option ".$select." value='".$row['id']."'>".$row['nombre']."</option>";
             }
         }
+
+
 
     }
 ?>

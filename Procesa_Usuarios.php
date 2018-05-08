@@ -46,18 +46,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $usr->setFechaNacimiento($fechaNacimiento);
 
         $usr->Editar();
-	} elseif ( isset($_POST['btnEliminar'])){
+	} else if ( isset($_POST['btnEliminar'])){
         $id = $valida->test_input($_POST['lbl_ID']);
         $usr = new usuario();
         $usr->setId($id);
         $usr->Eliminar();
-    } elseif ( isset($_POST['btnBuscar'])){
+    } else if ( isset($_POST['btnBuscar'])){
         echo "buscar";
     } 
+    else if(isset($_POST['getDataUser'])){
+        if(isset($_POST['id'])){
+            $usr = new usuario();
+            $id = $valida->test_input($_POST['id']);
+            $usr->getUserById($id);           
+            exit();
+        }
+    }
     else {
 	    echo "Nada";
     }
-    
    header("Location: mantenimiento_Usuarios.php"); 
 
 }
