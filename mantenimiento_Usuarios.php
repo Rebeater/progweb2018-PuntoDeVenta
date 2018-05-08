@@ -71,25 +71,61 @@
       </div>
 
       <div class="modal-body">            
-  
-    
+      
+      
+        <label class="sr-only" for="txt_correo">Correo</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Correo</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_correo" id="txt_correo" placeholder="Correo">
+        </div>
 
-            <label>Correo</label> <input id="txt_correo" name="txt_correo" type="email" placeholder="Correo"><br>
+        <label class="sr-only" for="txt_contrasena">Contraseña</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Contraseña</div>
+          </div>
+          <input type="password" class="form-control"  name="txt_contrasena" id="txt_contrasena" placeholder="Contraseña">
+        </div>
             
-            <label>Contraseña</label> <input id="txt_contrasena" name="txt_contrasena"  type="password" placeholder="Contraseña"><br>
-            
-            <label>Nombre</label> <input id="txt_nombre" name="txt_nombre" type="text" placeholder="Nombre"><br>
-            
+        <label class="sr-only" for="txt_contrasena">Nombre</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Nombre</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre">
+        </div>
+
             <?php 
               $puesto = new puesto();
               $puesto->LeerTodo("cbx_puesto");
             ?>
+        <label class="sr-only" for="txt_telefono">Teléfono</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Teléfono</div>
+          </div>
+          <input type="number" class="form-control"  name="txt_telefono" id="txt_telefono" placeholder="Teléfono">
+        </div>
 
-            <label>Teléfono</label> <input id="txt_telefono" name="txt_telefono" type="number" placeholder="Teléfono"><br>
+        <label class="sr-only" for="txt_domicilio">Domicilio</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Domicilio</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_domicilio" id="txt_domicilio" placeholder="Domicilio">
+        </div>
+
+        <label class="sr-only" for="date_Nacimiento">Fecha Nacimiento</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Fecha Nacimiento</div>
+          </div>
+          <input type="date" class="form-control"  name="date_Nacimiento" id="date_Nacimiento" placeholder="Fecha Nacimiento">
+        </div>
+
             
-            <label>Domicilio</label> <input id="txt_domicilio" name="txt_domicilio" type="text" placeholder="Domicilio"><br>
-            
-            <label>Fecha Nacimiento</label> <input id="date_Nacimiento" name ="date_Nacimiento" type="date">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -111,19 +147,71 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">            
-            <label>Id</label> <input id="txt_edit_id" name="txt_edit_id" type="text" readonly><br>
-            <label>Correo</label> <input id="txt_edit_correo" name="txt_edit_correo" type="email" placeholder="Correo"><br>
-            <label>Contraseña</label> <input id="txt_edit_contrasena" name="txt_edit_contrasena"  type="password" placeholder="Contraseña"><br>
-            <label>Nombre</label> <input id="txt_edit_nombre" name="txt_edit_nombre" type="text" placeholder="Nombre"><br>
+
+
+<label class="sr-only" for="txt_edit_nombre">Id</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Id</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_edit_id" id="txt_edit_id"  readonly placeholder="Id">
+        </div>
+
+      <label class="sr-only" for="txt_edit_correo">Correo</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Correo</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_edit_correo" id="txt_edit_correo" placeholder="Correo">
+        </div>
+
+        <label class="sr-only" for="txt_edit_contrasena">Contraseña</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Contraseña</div>
+          </div>
+          <input type="password" class="form-control"  name="txt_edit_contrasena" id="txt_edit_contrasena" placeholder="Contraseña">
+        </div>
+            
+        <label class="sr-only" for="txt_edit_nombre">Nombre</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Nombre</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_edit_nombre" id="txt_edit_nombre" placeholder="Nombre">
+        </div>
+
             
             <?php 
               $puesto = new puesto();
               $puesto->LeerTodo("cbx_edit_puesto");
             ?>
 
-            <label>Teléfono</label> <input id="txt_edit_telefono" name="txt_edit_telefono" type="number" placeholder="Teléfono"><br>
-            <label>Domicilio</label> <input id="txt_edit_domicilio" name="txt_edit_domicilio" type="text" placeholder="Domicilio"><br>
-            <label>Fecha Nacimiento</label> <input id="date_edit_Nacimiento" name ="date_edit_Nacimiento" type="date">
+
+        <label class="sr-only" for="txt_edit_telefono">Teléfono</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Teléfono</div>
+          </div>
+          <input type="number" class="form-control"  name="txt_edit_telefono" id="txt_edit_telefono" placeholder="Teléfono">
+        </div>
+
+        <label class="sr-only" for="txt_edit_domicilio">Domicilio</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Domicilio</div>
+          </div>
+          <input type="text" class="form-control"  name="txt_edit_domicilio" id="txt_edit_domicilio" placeholder="Domicilio">
+        </div>
+
+        <label class="sr-only" for="date_edit_Nacimiento">Fecha Nacimiento</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Fecha Nacimiento</div>
+          </div>
+          <input type="date" class="form-control"  name="date_edit_Nacimiento" id="date_edit_Nacimiento" placeholder="Fecha Nacimiento">
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

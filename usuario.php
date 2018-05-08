@@ -1,7 +1,6 @@
 <?php 
     include_once("validaciones.php");
     include_once("conexion.php");
-
     class usuario{
         private $id;
         private $nombre = "";
@@ -25,30 +24,22 @@
         public function getNombre(){ 
             return $this->nombre;
          }
-
         public function setCorreo($correo){ $this->correo = $correo; }
         public function getCorreo(){ return $this->correo; }
-
         public function setContrasena($contrasena){ $this->contrasena = $contrasena; }
         public function getContrasena(){ return $this->contrasena; }
         
         public function setPuesto($puesto){ $this->puesto = $puesto; }
         public function getPuesto(){ return $this->puesto; }
-
         public function setTelefono($telefono){ $this->telefono = $telefono; }
         public function getTelefono(){ return $this->telefono; }
-
         public function setDomicilio($domicilio){ $this->domicilio = $domicilio; }
         public function getDomicilio(){ return $this->domicilio; }
-
         public function setFechaNacimiento($fechaNacimiento){ $this->fechaNacimiento = $fechaNacimiento; }
         public function getFechaNacimiento(){ return $this->fechaNacimiento; }
-
         public function setFechaAlta($fechaAlta){ $this->fechaAlta = $fechaAlta; }
         public function getFechaAlta(){ return $this->fechaAlta; }
 //#endregion
-
-
 //#region CRUD = Create, Read, Update, Delete
         public function Insertar(){
             try{
@@ -56,7 +47,6 @@
 				$conex=new conexion();
 				$conn = $conex->conectarse();
                 $stmt = $conn->prepare($cadena);
-
                 $stmt->bindParam(':nombre', $this->nombre);                    
 				$stmt->bindParam(':correo', $this->correo);
 				$stmt->bindParam(':contrasena', $this->contrasena);
@@ -87,9 +77,6 @@
 			{
 				echo "Error: " . $e->getMessage();
 			}
-
-
-
         }
         
         public function LeerTodo(){
@@ -117,43 +104,33 @@
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
-
             foreach($resultado as $row){
                 echo "<tr id='".$row['id']."'>";
                     echo "<td id='id_row".$row['id']."' style='text-align:center'>";
                         echo $row['id'];
                     echo "</td>";
-
                     echo "<td> <span id='nombre_row".$row['id']."'>";
                         echo $row['nombre'];
                     echo "</span></td>";
-
                     echo "<td>";
                         echo "<span id='correo_row".$row['id']."'>".$row['correo']."</span>";
                     echo "</span></td>";
-
                     
-
                     echo "<td> <span id='puesto_row".$row['id']."'>";
                         echo $array_Puestos[$row['puesto']];
                     echo "</span></td>";
-
                     echo "<td> <span id='telefono_row".$row['id']."'>";
                         echo $row['telefono'];
                     echo "</span></td>";
-
                     echo "<td> <span id='domicilio_row".$row['id']."'>";
                         echo $row['domicilio'];
                     echo "</span></td>";
-
                     echo "<td> <span id='fechaNacimiento_row".$row['id']."'>";
                         echo $row['fechaNacimiento'];
                     echo "</span></td>";
-
                     echo "<td> <span id='fechaAlta_row".$row['id']."'>";
                         echo $row['fechaAlta'];
                     echo "</span></td>";
-
                     echo "<td id='opciones_row".$row['id']."'>";
                         echo "<div style='text-align: center; font-size: 1.25em;'> ";
                         echo "<a data-toggle='modal' href='#modalEdit' onClick='openUser(this)' id='edit_".$row['id']."' href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
@@ -164,14 +141,12 @@
             }
             echo "</tbody>";
         }
-
         public function editar(){
             try{
                 $cadena= "update usuario set nombre=:nombre, correo=:correo, contrasena=:contrasena, puesto=:puesto, telefono=:telefono, domicilio=:domicilio, fechaNacimiento=:fechaNacimiento WHERE id=:id";
 				$conex=new conexion();
 				$conn = $conex->conectarse();
                 $stmt = $conn->prepare($cadena);
-
                 $stmt->bindParam(':id', $this->id);
                 $stmt->bindParam(':nombre', $this->nombre);                    
 				$stmt->bindParam(':correo', $this->correo);
@@ -182,7 +157,6 @@
 				$stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
             
                 echo $this->id;
-
 				if($stmt->execute())
 				{
 					echo "No hubo error";
@@ -205,18 +179,15 @@
 				echo "Error: " . $e->getMessage();
 			} 
         }
-
         public function Eliminar(){
             try{
                 $cadena= "delete from usuario where id = :id";
 				$conex=new conexion();
 				$conn = $conex->conectarse();
                 $stmt = $conn->prepare($cadena);
-
                 $stmt->bindParam(':id', $this->id);
             
                 echo $this->id;
-
 				if($stmt->execute())
 				{
 					echo "No hubo error";
@@ -239,20 +210,16 @@
 				echo "Error: " . $e->getMessage();
 			} 
         }
-
 //#endregion
-
         public function cbxEditpuesto($id){
             $conex = new conexion();
             $resultado = $conex->Consultar("Select id, nombre FROM puestos ORDER BY id ASC");
             $resultadoUsr = $conex->Consultar("Select puestos.id FROM puestos, usuario WHERE usuario.puesto = puestos.id AND usuario.id = ".$id);
             $selected = "";          
             $str = "";
-
             foreach($resultadoUsr as $usr){
                     $str = $usr['id'];
             }
-
             foreach($resultado as $row){
                 if($row['id'] == $str )
                     $select= "Selected";
@@ -262,6 +229,5 @@
                 echo "<option ".$select." value='".$row['id']."'>".$row['nombre']."</option>";
             }
         }
-
     }
 ?>
