@@ -1,7 +1,6 @@
 :root{
-    --size-nav: 200px;
+	--size-nav: 200px;
 }
-
 
 body{
 	font-family: 'Open sans';
@@ -48,7 +47,7 @@ header #button-menu{
 	width: 0%;
 	height: 100vh;
 	background: rgba(0,0,0,.0);
-
+	z-index: 50;
 }
 
 .navegacion ul{
@@ -93,15 +92,14 @@ header #button-menu{
 }
 
 .navegacion .menu .item-submenu > a::after{
-	font: normal normal normal 14px/1 FontAwesome;
-  	font-size: inherit;
+  	/*font-size: inherit;
   	text-rendering: auto;
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 	content: '\f105';
 
 	float: right;
-	color: #C5C5C5;
+	color: #C5C5C5;*/
 }
 
 /* Submenu ============*/
@@ -133,4 +131,11 @@ header #button-menu{
 	.navegacion ul{
 		width: 100%;
 	}
+}
+
+
+.iconRigh{
+	right: 1em; 
+	position: absolute;
+
 }
