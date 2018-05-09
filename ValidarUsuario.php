@@ -20,16 +20,16 @@ include 'Clases/usuario.php';
 			$conex = new conexion;
 			$puesto = "";
 			
-			$cons = "SELECT puesto FROM usuario WHERE correo ='" .$correo."' AND contrasena ='" .$contraseña."'";
+			$cons = "SELECT puesto, correo FROM usuario WHERE correo ='" .$correo."' AND contrasena ='" .$contraseña."'";
 			
 			$this->getConexion();
 			
 			$result = $conex->Consultar($cons);
 			
 			foreach($result as $row){
-				
 				$puesto = $row['puesto'];
 				$_SESSION["usuario"] = $correo;
+				$_SESSION['logged'] = true;
 				if($puesto == "Supervisor"){
 					echo "idhid";
 					$_SESSION["puesto"] = "Supervisor";
