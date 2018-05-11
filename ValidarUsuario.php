@@ -20,20 +20,20 @@ include 'Clases/usuario.php';
 			$conex = new conexion;
 			$puesto = "";
 			
-			$cons = "SELECT puesto FROM usuario WHERE correo ='" .$correo."' AND contrasena ='" .$contraseña."'";
+			$cons = "SELECT puesto, correo FROM usuario WHERE correo ='" .$correo."' AND contrasena ='" .$contraseña."'";
 			
 			$this->getConexion();
 			
 			$result = $conex->Consultar($cons);
 			
 			foreach($result as $row){
-				
 				$puesto = $row['puesto'];
 				$_SESSION["usuario"] = $correo;
+				$_SESSION['logged'] = true;
 				if($puesto == "Supervisor"){
 					echo "idhid";
 					$_SESSION["puesto"] = "Supervisor";
-					header("location: Supervisor.html");
+					header("location: Supervisor.php");
 				}
 				if($puesto == "1"){
 					$_SESSION["puesto"] = "Administrador";
@@ -41,11 +41,11 @@ include 'Clases/usuario.php';
 				}
 				if($puesto == "4"){
 					$_SESSION["puesto"] = "Caja";
-					header("location: Cajero.html");
+					header("location: Cajero.php");
 				}
 				if($puesto == "2"){
 					$_SESSION["puesto"] = "Ventas";
-					header("location: Vendedor.html");
+					header("location: Vendedor.php");
 				}
 			}
 			

@@ -35,4 +35,22 @@ $(document).ready(function(){
 
 	});
 
+	$('.photo-prev').click(function(){
+		$('#card-user').toggleClass("prevUserMostrar");
+	});
+
+
+	$("#btn_prevUsr_logout").click(function(){
+		location.href = "logout.php";
+	});
+
+	$("#btn_prevUsr_help").click(function(){
+		location.href = "help.php";
+	});
+
+	$("#btn_prevUsr_Cuenta").click(function(){
+		location.href = "Perfil.php";
+	});
+	
+
 });

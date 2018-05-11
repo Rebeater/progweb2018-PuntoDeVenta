@@ -1,4 +1,5 @@
 <?php
+	include_once("conexion.php");
 	class menu
 	{
 		private $id;
@@ -186,10 +187,7 @@
 			$conex=new conexion();
 			$resultado=$conex->Consultar("select id, nombre, url, padre FROM menus Where padre= -1 ORDER BY id asc");
 
-            echo "<header>";
-		    echo "<span id='button-menu' class='fa fa-bars'></span>";
-
-		    echo "<nav class='navegacion'>";
+		    
 		    echo "	<ul class='menu'>";
             echo "		<li class='title-menu'>Menu</li>";
 		
@@ -211,8 +209,7 @@
 				echo "</li>";
 			}
             echo "	</ul>";
-            echo "</nav>";
-            echo "</header>";
+            
 		}
 		public function RegresaHijos($Padre, $namePadre)
 		{

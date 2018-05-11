@@ -1,4 +1,15 @@
 <!Doctype html>
+<?php 
+session_start(['read_and_close'  => true]);
+
+if(isset($_SESSION["puesto"]) && isset($_SESSION['usuario'])){
+	header("location:index.php");    
+}
+else{
+	
+	
+}
+?>
 <html>
 <meta charset="utf-8">
 <meta http-equiv="cache-control" content="no-cache" />
