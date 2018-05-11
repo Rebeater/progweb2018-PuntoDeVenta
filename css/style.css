@@ -1,6 +1,15 @@
 :root{
 	--size-nav: 200px;
+	--size-prevUser: 340px;
+	--color-header:#34495E;
+	--color-prevUser:#34495E;
 }
+/* Para usarla debes pasarla como parametro a la funcion var() sin comillas ni nada
+	nav{
+		width: var(--size-nav);
+	}
+*/
+
 
 body{
 	font-family: 'Open sans';
@@ -24,14 +33,12 @@ crumb{
 }
 
 header{
-    
 	position: relative;
 	width: 100%;
 	top: 0;
 	left: 0;
-
-	padding: 20px;
-	background: #34495E;
+	padding: 10px;
+	background: var(--color-header);
 }
 
 header #button-menu{
@@ -47,7 +54,7 @@ header #button-menu{
 	width: 0%;
 	height: 100vh;
 	background: rgba(0,0,0,.0);
-	z-index: 50;
+	z-index: 5000;
 }
 
 .navegacion ul{
@@ -55,7 +62,6 @@ header #button-menu{
 	height: 100%;
 	background: #fff;
 	list-style: none;
-
 	position: absolute;
 	top: 0;
 	left: -320px;
@@ -73,10 +79,10 @@ header #button-menu{
 
 .navegacion .menu a{
 	display: block;
-	padding: 20px;
+	padding: 10px;
 	border-bottom: 1px solid #C6D0DA;
 
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: 200;
 	text-decoration: none;
 	color: #575D69;
@@ -138,4 +144,111 @@ header #button-menu{
 	right: 1em; 
 	position: absolute;
 
+}
+header{
+	z-index: 4500;
+}
+.prevUser{
+	display: grid;
+	/*top: 104%;*/
+	box-shadow: 1px 0px 10px 1px;
+	position: absolute;
+	width: var(--size-prevUser);
+	background:  var(--color-prevUser);
+	z-index: 3000;
+	border-radius: 25px 25px 25px 25px;
+	top: -20em;	
+	right: calc(1em/4);
+	transition: top .2s;
+}
+
+
+.prevUserMostrar{
+	/*right: calc(1em/4);*/
+	top:54px;
+	transition: top .2s;
+	
+	/*left: calc(100% - var(--size-prevUser));*/
+}
+
+
+.prevUser ul {
+	list-style: none;
+	background: var(--color-prevUser);
+	margin-left: 1ex;
+	/*width: 100%;*/
+	margin-top: 5px;
+}
+.prevUser div{
+	display:-webkit-inline-box;
+	padding-top: 1ex;	
+}
+.prevUser p{
+	margin: 0;
+	color: rgba(255,255,255);
+	word-break: break-all;
+	/* Non standard for webkit */
+	word-break: break-word; 
+ 
+-webkit-hyphens: auto;
+  -moz-hyphens: auto;
+   -ms-hyphens: auto;
+	   hyphens: auto;
+	   
+}
+
+.prevUser li {
+	margin-bottom: 8px;
+}
+#frm_prevUser img {
+	cursor: pointer;	
+	border-radius: 50%;	
+	box-shadow: green 12px solid;
+	margin-left: 1ex;	
+}
+
+.photo-prev{
+	position: absolute;
+	right: 1em;	
+	width: 35px;
+	height: 35px;
+}
+
+#photo-prev2{
+	margin:1ex;
+	border-radius: 50%;	
+	width: 90px;
+	line-height: 90px;
+}
+img{
+	background: rgba(255,255,255,1);
+	font-size: smaller;
+	display: block;
+	
+	
+}
+.ulHorizontal {
+	width: 320px;	
+}
+
+.ulHorizontal li{
+		float: left;
+		padding-left: 1.5em;
+}
+.ulHorizontal input{
+	width:  130px;
+	font-size: 14px;
+	background: rgba(255,255,255,.9);
+}
+
+.line{
+	border-top: 1px solid black; margin:0; padding: 0;
+}
+
+header .companyName{
+	color: white;
+	display: block;
+	margin-left: 10px;
+	font-size: 22px;
+	
 }

@@ -17,7 +17,9 @@
         public function setId($id){ 
             $this->id = $id;
         }
-        public function getId(){ return $this->$id; }
+        public function getId(){ 
+            return $this->$id; 
+        }
         
         public function setNombre($name){ 
             $this->nombre = $name;
@@ -26,7 +28,8 @@
             return $this->nombre;
          }
 
-        public function setCorreo($correo){ $this->correo = $correo; }
+        
+         public function setCorreo($correo){ $this->correo = $correo; }
         public function getCorreo(){ return $this->correo; }
 
         public function setContrasena($contrasena){ $this->contrasena = $contrasena; }
@@ -250,6 +253,31 @@
                 echo $usrJson;
             }
            
+        }
+
+        public function getUserByEmail($email){
+            $conex = new conexion();
+            $result = $conex->Consultar("Select id, nombre, correo, contrasena, puesto, telefono, domicilio, fechaNacimiento, fechaAlta from usuario where correo = '".$email."'");
+            foreach($result as $row){
+                $arrUsr = array('id' => $row['id'], 'nombre' => $row['nombre'],'correo' => $row['correo'],'contrasena' => $row['contrasena'],'puesto' => $row['puesto'],'telefono' => $row['telefono'],'domicilio' => $row['domicilio'],'fechaAlta' => $row['fechaAlta'],'fechaNacimiento' => $row['fechaNacimiento']);                
+
+                $this->id = $row['id'];
+                
+                
+                $this->setNombre($row['nombre']);
+                $this->setCorreo($row['correo']);
+                $this->setContrasena($row['contrasena']);
+                $this->setPuesto($row['puesto']);
+                $this->setTelefono($row['telefono']);
+                $this->setDomicilio($row['domicilio']);
+                $this->setFechaAlta($row['fechaAlta']);
+                $this->setFechaNacimiento($row['fechaNacimiento']);
+                
+                $usrJson = json_encode($arrUsr);
+                //echo $usrJson;
+                return isset($this->id) ? $this->id : "";
+                
+            }
         }
 
 //#endregion
