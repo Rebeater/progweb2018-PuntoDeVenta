@@ -8,11 +8,9 @@ include_once("Clases/usuario.php");
 	$_SESSION['idActual'] = $usrId;
 	$conf = new configuracion();
 ?>
-<script src="js/jquery-3.3.1.min.js"></script>
-	<link rel="stylesheet" href="css/bootstrap.css">
-    <script src="js/bootstrap.js"></script>
-    <link rel="stylesheet" href="fontawesome/web-fonts-with-css/css/fontawesome-all.css">    
-	<link rel="stylesheet" href="css/style.css">	
+
+	
+    
 <header style=' display: -webkit-inline-box;'>
 	<!-- toggle button -->
 	<span id='button-menu' class='fa fa-bars'></span> 
@@ -61,7 +59,7 @@ include_once("Clases/usuario.php");
 				</ul>
 			</div>
 		</seccion>
-
+		<div id="snackbar">Some text some message..</div>
 
 
 <script src='js/mostrarNav.js'></script>

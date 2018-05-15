@@ -105,7 +105,7 @@
                 $array_Puestos += [$row['id']=> $row['nombre']];
             }
             echo "<div class='table-container'>";
-            echo "<table id='tabla_usuarios' class='table table-striped table-rwd'>";
+            echo "<table id='tabla_usuarios' class='table table-hover table-striped table-rwd'>";
             echo "<thead>";
             echo "<tr>";
             echo "<th>Id</th>";
@@ -314,7 +314,7 @@
                 $array_Puestos += [$row['id']=> $row['nombre']];
             }
             echo "<div class='table-container'>";
-            echo "<table id='tabla_usuarios' class='table table-striped table-rwd'>";
+            echo "<table id='tabla_usuarios' class='table table-hover table-striped table-rwd'>";
             echo "<thead>";
             echo "<tr>";
             echo "<th>Id</th>";
