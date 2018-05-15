@@ -104,8 +104,8 @@
             foreach($resultadoPuestos as $row){
                 $array_Puestos += [$row['id']=> $row['nombre']];
             }
-            
-            echo "<table id='tabla_usuarios' class='table table-striped'>";
+            echo "<div class='table-container'>";
+            echo "<table id='tabla_usuarios' class='table table-striped table-rwd'>";
             echo "<thead>";
             echo "<tr>";
             echo "<th>Id</th>";
@@ -166,6 +166,7 @@
                 echo "</tr>";
             }
             echo "</tbody> </table>";
+            echo "</div>";
         }
 
         public function editar(){
@@ -301,6 +302,80 @@
                     }
                 echo "<option ".$select." value='".$row['id']."'>".$row['nombre']."</option>";
             }
+        }
+
+
+        public function LeerTodobyCampo($campo, $data){
+            $conex = new conexion();
+            $resultado = $conex->Consultar("Select id, nombre, correo, puesto, telefono, domicilio, fechaNacimiento, fechaAlta from usuario WHERE ".$campo." like '%".$data."%'  ORDER BY id ASC");
+            $resultadoPuestos = $conex->Consultar("Select id, nombre from puestos ORDER BY id ASC");
+            $array_Puestos = array();
+            foreach($resultadoPuestos as $row){
+                $array_Puestos += [$row['id']=> $row['nombre']];
+            }
+            echo "<div class='table-container'>";
+            echo "<table id='tabla_usuarios' class='table table-striped table-rwd'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th>Id</th>";
+            echo "<th>Nombre</th>";
+            echo "<th>Correo</th>";
+            echo "<th>Puesto</th>";
+            echo "<th>Teléfono </th>";
+            echo "<th>Domicilio</th>";
+            echo "<th>Fecha Nacimiento</th>";
+            echo "<th>Fecha Alta </th>";
+            echo "<th>Opciones</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+
+            foreach($resultado as $row){
+                echo "<tr id='".$row['id']."'>";
+                    echo "<td id='id_row".$row['id']."' style='text-align:center'>";
+                        echo $row['id'];
+                    echo "</td>";
+
+                    echo "<td> <span id='nombre_row".$row['id']."'>";
+                        echo $row['nombre'];
+                    echo "</span></td>";
+
+                    echo "<td>";
+                        echo "<span id='correo_row".$row['id']."'>".$row['correo']."</span>";
+                    echo "</span></td>";
+
+                    
+
+                    echo "<td> <span id='puesto_row".$row['id']."'>";
+                        echo $array_Puestos[$row['puesto']];
+                    echo "</span></td>";
+
+                    echo "<td> <span id='telefono_row".$row['id']."'>";
+                        echo $row['telefono'];
+                    echo "</span></td>";
+
+                    echo "<td> <span id='domicilio_row".$row['id']."'>";
+                        echo $row['domicilio'];
+                    echo "</span></td>";
+
+                    echo "<td> <span id='fechaNacimiento_row".$row['id']."'>";
+                        echo $row['fechaNacimiento'];
+                    echo "</span></td>";
+
+                    echo "<td> <span id='fechaAlta_row".$row['id']."'>";
+                        echo $row['fechaAlta'];
+                    echo "</span></td>";
+
+                    echo "<td id='opciones_row".$row['id']."'>";
+                        echo "<div style='text-align: center; font-size: 1.25em;'> ";
+                        echo "<a data-toggle='modal' href='#modalEdit' onClick='openUser(this)' id='edit_".$row['id']."' href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
+                        echo "<a data-toggle='modal' href='#modalDelete' onClick='deleteUser(this)' id='delete_".$row['id']."' href='#' class='far fa-trash-alt' style='color: rgba(255,0, 0, 0.8);'></a>";
+                        echo "</div>";
+                    echo "</td>";
+                echo "</tr>";
+            }
+            echo "</tbody> </table>";
+            echo "</div>";
         }
 
 

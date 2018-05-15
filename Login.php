@@ -15,8 +15,8 @@ else{
 <meta http-equiv="cache-control" content="no-cache" />
 <head>
 	<link rel="stylesheet" href="css/bootstrap.css">
-    <script src="js/bootstrap.js"></script>
-
+	<script src="js/bootstrap.js"></script>
+	<title>Login</title>
 	<h1 class="bg-secondary text-white" style = "text-align: center;">Login</h1>
 </head>
 <body>

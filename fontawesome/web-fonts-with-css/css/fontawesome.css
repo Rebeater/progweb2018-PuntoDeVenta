@@ -1652,7 +1652,12 @@ readers do not read off random characters that represent icons */
   content: "\f124"; }
 
 .fa-lock:before {
-  content: "\f023"; }
+  content: "\f023"; 
+  padding-top: 5px;
+  font-size: 24px;
+  vertical-align: middle;
+  height: 35px;
+}
 
 .fa-lock-open:before {
   content: "\f3c1"; }
@@ -2651,7 +2656,12 @@ readers do not read off random characters that represent icons */
   content: "\f127"; }
 
 .fa-unlock:before {
-  content: "\f09c"; }
+  content: "\f09c"; 
+  padding-top: 5px;
+  font-size: 24px;
+  vertical-align: middle;
+  height: 35px;
+}
 
 .fa-unlock-alt:before {
   content: "\f13e"; }

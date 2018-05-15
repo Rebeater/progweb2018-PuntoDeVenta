@@ -1,5 +1,6 @@
 var id;
 
+
 function openUser(user){
     id = user.id.replace("edit_","")
     if (id == "") {
@@ -17,7 +18,8 @@ function openUser(user){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var usrJson = JSON.parse(this.responseText);
-
+                document.getElementById("photo-EditUsr").src = "img/perfiles/" + usrJson.id + ".png";
+                //document.getElementById('').src = "img/perfiles/" + usrJson.id;
                 document.getElementById("txt_edit_id").value          = usrJson.id;
                 document.getElementById("txt_edit_correo").value      = usrJson.correo;
                 document.getElementById("txt_edit_contrasena").value  = usrJson.contrasena;
@@ -46,7 +48,6 @@ function openUser(user){
     }
     //#endregion
 }
-    
 
 function deleteUser(user){
     id = user.id.replace("delete_","")
@@ -55,9 +56,7 @@ function deleteUser(user){
     document.getElementById("lbl_correo").innerHTML      = document.getElementById("correo_row" + id).innerHTML;
     document.getElementById("lbl_nombre").innerHTML      = document.getElementById("nombre_row" + id).innerHTML;
     document.getElementById("lbl_puesto").innerHTML      = document.getElementById("puesto_row" + id).innerHTML;
-
 } 
-
 
 function updateTableUsers(){
     if (window.XMLHttpRequest) {
@@ -112,3 +111,74 @@ function updateTableUsers(){
 
 }
 
+
+$('#btnBuscar').click(function (){
+    alert("ko");
+});
+
+
+function buscarByNombre(){    
+    var button = "btnBuscar";
+    var nombre = document.getElementById('txt_Buscador').value;
+    $.ajax(
+        {
+            type:"POST",
+            url: "procesa_Usuarios.php", 
+            data: "nombreABuscar=" + nombre + "&" + button +"=sa",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(result){
+                document.getElementById('divUsers').innerHTML = result;
+            }						
+        });					
+
+}
+
+
+function onKeyDownHandler(event) {
+        buscarByNombre();     
+}
+
+
+ function cambiarFoto(id){    
+     document.getElementById("updatePhotoId").value = id;
+     $('#fileToUpload').trigger('click');    
+
+ }
+
+ 
+ function uploadFoto() {
+        var upload = document.getElementById('fileToUpload');
+        var image = upload.files[0];
+        $.ajax({
+          url:"procesa_upload.php",
+          type: "POST",
+          data: new FormData($('#uploadImg')[0]),
+          contentType: false,
+          cache: false,
+          processData:false,
+          success:function (msg) {
+            document.getElementById('uploadImg').innerHTML = msg;
+          }
+        });
+};
+
+
+
+function iconpass(){
+    $('#icon-pass').toggleClass('fa-unlock');
+    if($('#txt_edit_contrasena')[0].type == 'password'){
+        $('#txt_edit_contrasena')[0].type = 'text';
+    }else if($('#txt_edit_contrasena')[0].type == 'text'){
+        $('#txt_edit_contrasena')[0].type = 'password';
+    }
+    
+}
+
+function iconpass(){
+    $('#icon-pass').toggleClass('fa-unlock');
+    if($('#txt_edit_contrasena')[0].type == 'password'){
+        $('#txt_edit_contrasena')[0].type = 'text';
+    }else if($('#txt_edit_contrasena')[0].type == 'text'){
+        $('#txt_edit_contrasena')[0].type = 'password';
+    }
+}
