@@ -90,7 +90,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Correo</div>
           </div>
-          <input type="text" class="form-control"  name="txt_correo" id="txt_correo" placeholder="Correo">
+          <input type="text" class="form-control"  name="txt_correo" id="txt_correo" placeholder="Correo"  maxlength="255" required>
         </div>
 
         <label class="sr-only" for="txt_contrasena">Contraseña</label>
@@ -98,7 +98,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Contraseña</div>
           </div>
-          <input type="password" class="form-control"  name="txt_contrasena" id="txt_contrasena" placeholder="Contraseña">
+          <input type="password" class="form-control"  name="txt_contrasena" id="txt_contrasena" placeholder="Contraseña" maxlength="255" required>
           <div class="input-group-btn">
           <i id="icon-pass_New" class="fas fa-lock" onclick="iconpassNew()"></i>
           </div>
@@ -109,7 +109,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Nombre</div>
           </div>
-          <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre">
+          <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre" maxlength="255" required>
         </div>
 
             <?php 
@@ -121,7 +121,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Teléfono</div>
           </div>
-          <input type="number" class="form-control"  name="txt_telefono" id="txt_telefono" placeholder="Teléfono">
+          <input type="number" class="form-control"  name="txt_telefono" id="txt_telefono" placeholder="Teléfono" max="9999999999">
         </div>
 
         <label class="sr-only" for="txt_domicilio">Domicilio</label>
@@ -129,7 +129,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Domicilio</div>
           </div>
-          <input type="text" class="form-control"  name="txt_domicilio" id="txt_domicilio" placeholder="Domicilio">
+          <input type="text" class="form-control"  name="txt_domicilio" id="txt_domicilio" placeholder="Domicilio" maxlength="255">
         </div>
 
         <label class="sr-only" for="date_Nacimiento">Fecha Nacimiento</label>
@@ -168,7 +168,7 @@
       
 
 
-        <label class="sr-only" for="txt_edit_nombre">Id</label>
+        <label class="sr-only" for="txt_edit_id">Id</label>
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Id</div>
@@ -181,7 +181,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Correo</div>
           </div>
-          <input type="text" class="form-control"  name="txt_edit_correo" id="txt_edit_correo" placeholder="Correo">
+          <input type="text" class="form-control"  name="txt_edit_correo" id="txt_edit_correo" placeholder="Correo" maxlength="255" required>
         </div>
 
         <label class="sr-only" for="txt_edit_contrasena">Contraseña</label>
@@ -189,7 +189,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Contraseña</div>
           </div>
-          <input type="password" class="form-control"  name="txt_edit_contrasena" id="txt_edit_contrasena" placeholder="Contraseña">
+          <input type="password" class="form-control"  name="txt_edit_contrasena" id="txt_edit_contrasena" placeholder="Contraseña" maxlength="255" required>
           <div class="input-group-btn">
           <i id="icon-pass" class="fas fa-lock" onclick="iconpass()"></i>
           </div>
@@ -200,7 +200,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Nombre</div>
           </div>
-          <input type="text" class="form-control"  name="txt_edit_nombre" id="txt_edit_nombre" placeholder="Nombre">
+          <input type="text" class="form-control"  name="txt_edit_nombre" id="txt_edit_nombre" placeholder="Nombre" maxlength="255" required>
         </div>
 
             
@@ -215,7 +215,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Teléfono</div>
           </div>
-          <input type="number" class="form-control"  name="txt_edit_telefono" id="txt_edit_telefono" placeholder="Teléfono">
+          <input type="number" class="form-control"  name="txt_edit_telefono" id="txt_edit_telefono" placeholder="Teléfono" max="9999999999">
         </div>
 
         <label class="sr-only" for="txt_edit_domicilio">Domicilio</label>
@@ -223,7 +223,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Domicilio</div>
           </div>
-          <input type="text" class="form-control"  name="txt_edit_domicilio" id="txt_edit_domicilio" placeholder="Domicilio">
+          <input type="text" class="form-control"  name="txt_edit_domicilio" id="txt_edit_domicilio" placeholder="Domicilio" maxlength="255">
         </div>
 
         <label class="sr-only" for="date_edit_Nacimiento">Fecha Nacimiento</label>
@@ -231,7 +231,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Fecha Nacimiento</div>
           </div>
-          <input type="date" class="form-control"  name="date_edit_Nacimiento" id="date_edit_Nacimiento" placeholder="Fecha Nacimiento">
+          <input type="date" class="form-control"  name="date_edit_Nacimiento" id="date_edit_Nacimiento" placeholder="Fecha Nacimiento" >
         </div>
 
       </div>
