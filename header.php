@@ -2,20 +2,17 @@
 include_once("Clases/configuracion.php");
 include_once("Clases/menu.php");
 include_once("Clases/usuario.php");
-session_start();
-	$usr = new usuario();
+	$usrLogged = new usuario();
 	$email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : "";	
-	$usrId =  $usr->getUserByEmail($email);
+	$usrId =  $usrLogged->getUserByEmail($email);
+	$_SESSION['idActual'] = $usrId;
 	$conf = new configuracion();
 ?>
 <script src="js/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="fontawesome/web-fonts-with-css/css/fontawesome-all.css">    
-    <script src="js/usuarios.js"></script>
-	<link rel="stylesheet" href="css/style.css">
-	
-	
+	<link rel="stylesheet" href="css/style.css">	
 <header style=' display: -webkit-inline-box;'>
 	<!-- toggle button -->
 	<span id='button-menu' class='fa fa-bars'></span> 
@@ -25,7 +22,7 @@ session_start();
 	
 	<!-- Ventana previa Usuario -->
 	<form id='frm_prevUser' name='frm_prevUser' action="prevUser.php" method="POST" class="">
-			<img id="photo-prev" class="photo-prev" alt=""  <?php echo ($usrId != "") ? "src='img/perfiles/".$usrId."'" : "src='img/perfiles/user.png'";  ?> height="35" width="35">
+			<img id="photo-prev" class="photo-prev" alt=""  <?php echo ($usrId != "") ? "src='img/perfiles/".$usrId.".png'" : "src='img/perfiles/user.png'";  ?> height="35" width="35">
 		
 	</form>
 
@@ -40,17 +37,17 @@ session_start();
 
 <seccion id="card-user" class="prevUser">
 			<div>
-				<img alt="img error" id="photo-prev2" height="90" width="90" <?php echo ($usrId != "") ? "src='img/perfiles/".$usrId."'" : "src='img/perfiles/user.png'";  ?>>
+				<img alt="" id="photo-prev2" height="90" width="90" <?php echo ($usrId != "") ? "src='img/perfiles/".$usrId.".png'" : "src='img/perfiles/user.png'";?> <?php echo " onclick='cambiarFoto(".$_SESSION['idActual'].")'";?> >
 				<ul>
 					<li><p id="frm_prevUser_lblName">
 						<?php
-						  echo $usr->getNombre();
+						  echo $usrLogged->getNombre();
 						?>
 
 					</p></li>	
 					<li><p id="frm_prevUser_lblEmail">
 						<?php
-						 echo $usr->getCorreo();
+						 echo $usrLogged->getCorreo();
 						?>
 					</p></li>	
 					<li><input class="btn btn-primary" type="submit" id="btn_prevUsr_Cuenta" name="btn_prevUsr_Cuenta" value="Mi cuenta"></li>	

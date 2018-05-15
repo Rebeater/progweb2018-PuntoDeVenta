@@ -56,7 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $usr->setId($id);
         $usr->Eliminar();
     } else if ( isset($_POST['btnBuscar'])){
-        echo "buscar";
+        if(isset($_POST['nombreABuscar'])){
+            $nombre =  $_POST['nombreABuscar'];
+            $usr = new usuario();
+            $usr->LeerTodobyCampo("nombre", $nombre );
+        }
+        else  {
+            echo "No existe valor a buscar";
+        }
+        exit();
     } 
     else if(isset($_POST['getDataUser'])){
         if(isset($_POST['id'])){
