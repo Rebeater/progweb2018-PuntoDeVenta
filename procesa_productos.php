@@ -13,7 +13,7 @@
             if(isset($_POST['conceptoABuscar'])){
                 $concepto =  $_POST['conceptoABuscar'];
                 $product = new producto();
-                $product->getTablaProductos($concepto);
+                $product->getTablaProductos↑($concepto);
             }
             else  {
                 echo "No existe valor a buscar";
