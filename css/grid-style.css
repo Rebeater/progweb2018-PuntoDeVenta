@@ -1,0 +1,159 @@
+
+.grid-main { grid-area: main; }
+.grid-promocional { grid-area: promocional; width: 350px;}
+.grid-totales {     grid-area: totales;     width: 350px; }
+.grid-pagar {       grid-area: pagar;       width: 350px; }
+.grid-codigo {      grid-area: codigo; }
+
+.grid-container {
+  
+  display: grid;
+  grid-template-areas:
+    'main   main    main    main    main    promocional'
+    'main   main    main    main    main   totales'
+    'codigo codigo  codigo  codigo  codigo  pagar';
+  grid-gap: 10px;
+  margin: 1px 10px;
+
+}
+.grid-container > div {
+    border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 20px 0;
+}
+
+
+
+
+#totalAcumulado { grid-area: totalAcumulado; }
+#datosVenta { grid-area: datosVenta; }
+#datosCliente { grid-area: datosCliente; }
+
+
+.grid-container-totales {
+    display: grid;
+    grid-template-areas:
+      'totalAcumulado'
+      'datosVenta'
+      'datosCliente';
+    grid-gap: 10px;
+    margin: 1px 10px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .grid-container{
+        grid-template-areas:
+    'main        main        main        main        main        main'
+    'totales     totales     totales     totales     totales     totales'
+    'codigo      codigo      codigo      codigo      codigo      pagar';
+     grid-gap: 2px;
+     padding: 2px;
+    }
+    .grid-container-totales {
+        display: grid;
+        grid-template-areas:
+          'totalAcumulado  datosVenta'
+          'datosCliente  datosVenta';
+        
+        margin: 1px 10px;
+    }
+    .grid-totales{
+        width: 100%;
+    }
+    .table-container{
+        max-height: 200px;
+        font-size: smaller;}
+
+    .grid-promocional{
+        display: none;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .grid-container {
+        grid-template-areas:
+        'main        main        main        main        main        main'
+        'totales     totales     totales     totales     totales     totales'
+        'codigo      codigo      codigo      codigo      codigo      pagar';
+          grid-gap: 2px;
+        padding: 2px;
+      }
+      .grid-container-totales {
+        display: grid;
+        grid-template-areas:
+          'totalAcumulado  datosVenta'
+          'datosCliente  datosVenta';
+        
+        margin: 1px 10px;
+    }
+    .grid-totales{
+        width: 100%;
+    }
+
+      .table-container{
+        max-height: 200px;
+        font-size: smaller;
+        
+	}	
+    .grid-promocional{
+        display: none;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .grid-container {
+        grid-template-areas:
+        'main   main    main    main    main    promocional'
+        'main   main    main    main    main   totales'
+        'codigo codigo  codigo  codigo  codigo  pagar';
+    }
+    .table-container{
+        max-height: unset;
+        font-size: smaller;
+    }	
+    .grid-container-totales {
+        display: grid;
+        grid-template-areas:
+          'totalAcumulado'
+          'datosVenta'
+          'datosCliente';
+        grid-gap: 10px;
+        margin: 1px 10px;
+    }
+    .grid-promocional{
+        display: unset;
+    }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .table-container{
+		max-height: 200px;
+    }	
+    
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .grid-container {
+        grid-template-areas:
+        'main   main    main    main    main    promocional'
+        'main   main    main    main    main   totales'
+        'codigo codigo  codigo  codigo  codigo  pagar';
+    }
+    .table-container{
+        max-height: unset;
+        font-size: smaller;
+	}	
+    .grid-promocional{
+        display: unset;
+    }
+}
+
+
+

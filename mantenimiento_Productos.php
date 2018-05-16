@@ -50,7 +50,7 @@
     <form id='productosList' name='productosList' action="procesa_productos.php" class="container" method="POST">
         <!-- Add producto link -->
         <a data-toggle="modal" href="#myModal">Agregar nuevo producto</a>
-
+        
         <!-- users table -->
         <div id="divProducts" name="divProducts">
         </div>
@@ -207,5 +207,10 @@
             </div>
         </div>
     </form>
+    <script>
+            $(document).ready(function(){
+                 rellenarTabla();
+            });
+        </script>
 </body>
 </html>

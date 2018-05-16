@@ -282,6 +282,8 @@ display: none;
 
 .table-container { 
 	overflow-x: auto; 
+	overflow-y: auto; 
+	max-height: 1000px;
 }
 
 .table-rwd { min-width: 900px; }
@@ -346,3 +348,13 @@ display: none;
 	    to {bottom: 0; opacity: 0;}
 	}
 /* END SNACK BAR */
+
+
+
+.hidden{
+	display: none;	
+}
+
+.mostrar{
+	display: unset;	
+}

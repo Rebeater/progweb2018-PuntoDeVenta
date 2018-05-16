@@ -41,11 +41,11 @@ include 'Clases/usuario.php';
 				}
 				if($puesto == "4"){
 					$_SESSION["puesto"] = "Caja";
-					header("location: Cajero.php");
+					header("location: puntoventa.php");
 				}
 				if($puesto == "2"){
 					$_SESSION["puesto"] = "Ventas";
-					header("location: Vendedor.php");
+					header("location: puntoventa.php");
 				}
 			}
 			

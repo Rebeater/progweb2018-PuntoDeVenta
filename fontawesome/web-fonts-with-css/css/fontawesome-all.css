@@ -2001,7 +2001,10 @@ readers do not read off random characters that represent icons */
   content: "\f1e6"; }
 
 .fa-plus:before {
-  content: "\f067"; }
+  content: "\f067"; 
+  cursor:pointer; 
+  color:rgba(0, 128,0, 0.7);
+}
 
 .fa-plus-circle:before {
   content: "\f055"; }
@@ -2556,7 +2559,11 @@ readers do not read off random characters that represent icons */
   content: "\f3ff"; }
 
 .fa-times:before {
-  content: "\f00d"; }
+  content: "\f00d"; 
+  color: rgba(123, 0, 0, 0.7);
+  cursor: pointer;
+}
+
 
 .fa-times-circle:before {
   content: "\f057"; }

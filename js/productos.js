@@ -1,6 +1,4 @@
-$(document).ready(function(){
-    rellenarTabla();
-});
+
 
 function buscarByNombre(){    
     var button = "btnBuscar";
@@ -87,9 +85,9 @@ function updateTableProducts(){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                if(this.responseText == "No hubo error")
-                show_snackbar("Registro actualizado correctamente.");
+                show_snackbar("Registro actualizado correctamente." , 3000);
                 else    
-               show_snackbar("Error al guardar los cambios.");
+               show_snackbar("Error al guardar los cambios.", 3000);
                rellenarTabla();
             }
         };
@@ -111,7 +109,7 @@ function rellenarTabla(){
             data:  "getTabla=true",
             success: function(result){
                 if("Error" == result){
-                    show_snackbar("Error al cargar los datos.");
+                    show_snackbar("Error al cargar los datos.", 3000);
                 }else{
                  document.getElementById("divProducts").outerHTML = result;
                 }
@@ -135,9 +133,9 @@ function deleteProductAJAX(){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 if(this.responseText == "No hubo error")
-                    show_snackbar("Registro eliminado correctamente.");
+                    show_snackbar("Registro eliminado correctamente.", 3000);
                 else    
-                    show_snackbar("Error al guardar los cambios.");
+                    show_snackbar("Error al guardar los cambios.", 3000);
                     rellenarTabla();
             }
         };
@@ -163,9 +161,9 @@ function createProductAJAX(){
             "&txt_precioUnitario="+             document.getElementById("txt_precioUnitario").value,
             success: function(result){
                     if(result == "No hubo error")
-                        show_snackbar("Registro creado correctamente.");
+                        show_snackbar("Registro creado correctamente." , 3000);
                     else    
-                        show_snackbar("Error al guardar los cambios.");
+                        show_snackbar("Error al guardar los cambios.", 3000);
                     rellenarTabla();
             }
         });
