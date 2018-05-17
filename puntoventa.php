@@ -76,7 +76,7 @@
                         Total Articulos: <span id="lbl_totalArticulos">0</span><br>
                     </div>
                     <div id="datosCliente">
-                        Cliente: <span>General</span>
+                        Cliente: <span id="lbl_cliente">General</span>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
 
 
             <div class="grid-pagar">
-                <input type="button" class="btn btn-success" value="Pagar" style="">
+                <input type="button" id="btnPagar" name="btnPagar" class="btn btn-success" value="Pagar" onclick="registrarVenta();">
             </div>
             </div>     
     </main>

@@ -24,9 +24,9 @@ function addProduct(value){
                 itemCounter = itemCounter+1;
                 trow.id = "item"+itemCounter;
                 trow.classList.add("rowitem");
-                trow.innerHTML =  "<td id='id_row"+itemCounter+"' style='margin-left:1em'><span>"+codigo+"</span></td>"+
+                trow.innerHTML =  "<td id='id_row"+itemCounter+"' style='margin-left:1em'><span class='tdCodigo'>"+codigo+"</span></td>"+
                                   "<td id='concepto_row"+itemCounter+"' style='text-align:left'><span>"+producto.concepto+"</span></td>"+
-                                  "<td id='cantidad_row"+itemCounter+"' style='margin-left:1em'><span>"+ cantidad +"  <i class='fas fa-plus'></i></span></td>"+
+                                  "<td id='cantidad_row"+itemCounter+"' style='margin-left:1em'><span class='tdCantidad'>"+ cantidad +"  <i class='fas fa-plus'></i></span></td>"+
                                   "<td id='precioUnitario_row"+itemCounter+"' style='margin-left:1em'><span>$"+producto.precioUnitario+"</span></td>"+
                                   "<td id='monto_row"+itemCounter+"' style='margin-left:1em'><span>$</span><span class='tdmonto'>"+(producto.precioUnitario * cantidad)+"</span></td>"+
                                   "<td id='cancelar_row"+itemCounter+"' style='margin-left:1em'><i id='itemcancelar_row"+itemCounter+"' class='fas fa-times' onclick='quitarItem(this)'></i></td>";
@@ -71,8 +71,6 @@ function calcularCantArticulos(){
 
 function establecerCaja(){
     var caja = document.getElementById("cboxCajas").value;
-    alert(caja);
-    
     $.ajax(
         {
             type:"POST",
@@ -90,4 +88,82 @@ function establecerCaja(){
                 }
             }						
         });
+}
+
+
+function recuperarItemsVenta(){
+        var items = [];
+        
+        var codigos = document.getElementsByClassName('tdCodigo');
+        var cantidades = document.getElementsByClassName('tdCantidad');
+        
+        for (i = 0; i < codigos.length; i++){
+            var item = new Object();
+            item.codigo = codigos[i].textContent.toString();
+            item.cantidad = parseInt(cantidades[i].textContent.toString());
+            items.push(item);            
+        }
+        
+        return items;
+}
+
+function getTodayDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
+    } 
+    if(mm<10){
+        mm='0'+mm;
+    } 
+    //var today = dd+'/'+mm+'/'+yyyy;
+    var today = yyyy+'-'+mm+'-'+dd;
+    return today;
+}
+
+function registrarVenta(){
+    var cliente  = document.getElementById("lbl_cliente").innerText;
+    var vendedor = document.getElementById("lbl_cajero").innerText;
+    var fecha    = getTodayDate();    
+    var total    = document.getElementById("lbl_totalDinero").innerText;1
+    
+    $.ajax(
+        {
+            type:"POST",
+            url: "procesa_ventas.php", 
+            data: "insertarVenta="+"true"+"&cliente="+cliente+"&vendedor="+vendedor+"&fecha="+fecha+"&total="+total,
+            contentType: "application/x-www-form-urlencoded",
+            success: function(result){
+             if(result!="error"){
+                registrarVentas(result);
+            }
+            else{
+                show_snackbar("Venta no registrada", 3000);
+            }
+            }						
+        });
+}
+
+function registrarVentas(idVenta){
+    var items = recuperarItemsVenta();
+    for (let i = 0; i < items.length; i++) {
+        $.ajax(
+            {
+                type:"POST",
+                url: "procesa_ventas.php", 
+                data: "insertarVentas="+"true"+"&idVenta="+idVenta+"&idProducto="+items[i].codigo+"&cantidad="+items[i].cantidad,
+                contentType: "application/x-www-form-urlencoded",
+                success: function(result){
+                 if(result!="error"){
+                    alert(result);
+                }
+                else{
+                    show_snackbar("Venta no registrada", 3000);
+                }
+                }						
+            });
+    }
 }
