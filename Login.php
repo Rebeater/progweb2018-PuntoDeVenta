@@ -40,7 +40,7 @@ else{
 		<form method="post" action="<?php echo htmlspecialchars('Accion.php');?>">
 			Usuario:
 			<br>
-			<input type = "text" name = "correo" placeholder = "Correo" maxlength="30">
+			<input type = "email" name = "correo" placeholder = "Correo" maxlength="30">
 			<br>
 			Contraseña:
 			<br>
