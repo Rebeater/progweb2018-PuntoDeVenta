@@ -82,6 +82,7 @@ function establecerCaja(){
                     $("#PuntoDeVenta").toggleClass("mostrar");
                     document.getElementById("lbl_caja").innerHTML = result;
                     $("#modalCaja").toggleClass("hidden");
+                    document.getElementById("txt_Buscador").focus();
                 }
                 else{
                     show_snackbar("Error al cargar caja.", 3000);
@@ -139,6 +140,7 @@ function registrarVenta(){
             success: function(result){
              if(result!="error"){
                 registrarVentas(result);
+                reiniciarCampos();
             }
             else{
                 show_snackbar("Venta no registrada", 3000);
@@ -157,8 +159,7 @@ function registrarVentas(idVenta){
                 data: "insertarVentas="+"true"+"&idVenta="+idVenta+"&idProducto="+items[i].codigo+"&cantidad="+items[i].cantidad,
                 contentType: "application/x-www-form-urlencoded",
                 success: function(result){
-                 if(result!="error"){
-                    alert(result);
+                if(result!="error"){
                 }
                 else{
                     show_snackbar("Venta no registrada", 3000);
@@ -166,4 +167,24 @@ function registrarVentas(idVenta){
                 }						
             });
     }
+}
+
+function reiniciarCampos(){
+    document.getElementById("tbody").innerHTML = "";
+    document.getElementById("lbl_totalArticulos").innerHTML = "0";
+    document.getElementById("lbl_totalDinero").innerHTML = "0";
+    itemCounter = 0;
+}
+
+
+
+
+
+function onKeyDownHandler(event) {
+    event.preventDefault();
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Trigger the button element with a click
+        $('#btnBuscar').trigger('click');     
+  }  
 }
