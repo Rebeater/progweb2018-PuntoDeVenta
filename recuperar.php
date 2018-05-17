@@ -2,7 +2,7 @@
 include ("Clases/conexion.php");
 include ("Clases/funciones.php");
 $errores = array();
-
+//prueba
 if(empty($_POST)){
 
 }
