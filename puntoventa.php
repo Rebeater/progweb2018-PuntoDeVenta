@@ -24,7 +24,7 @@
     <script src="js/puntodeventa.js"></script>    
     <title>Punto de venta</title>
 </head>
-<body>
+<body onload="paginaCargada()" onbeforeunload="paginaClose()">
     <!--#region HEADER -->
         <form id='uploadImg' name='uploadImg' action="procesa_upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" id="fileToUpload" name="fileToUpload" class="inputFileLogo" onchange="uploadFoto()">
@@ -36,22 +36,24 @@
     
     <main id="PuntoDeVenta" class="hidden">
     <div class="grid-container">
-            <div class="grid-main table-container">
-                    <table id='tabla_productos' style="max-height: 200px;" class='table table-hover table-striped'>
-                            <thead>
-                            <tr>
-                            <th>Codigo</th>
-                            <th>Concepto</th>
-                            <th>Cantidad</th>
-                            <th>Precio U.</th>
-                            <th>Monto</th>
-                            <th>Canc</th>
-                            </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                                                        
-                            </tbody> 
-                        </table>
+            <div id="tableContainer" class="grid-main table-container" style="padding-top:0px;">
+                <div id="datetime" name="datetime"> Domingo 22 de Diciembre del 2018 12:22 PM </div>
+                <table id='tabla_productos' style="max-height: 200px;" class='table table-hover table-striped'>
+                    <thead>
+                        <tr>
+                        <th>Codigo</th>
+                        <th>Concepto</th>
+                        <th>Cantidad</th>
+                        <th>Precio U.</th>
+                        <th>Descuento</th>
+                        <th>Monto</th>
+                        <th>Canc</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                                                                    
+                    </tbody> 
+                </table>
             </div>
 
             <div class="grid-promocional">
@@ -74,9 +76,10 @@
                         </span><br>
                         Cajero: <span id="lbl_cajero"><?php echo $usrLogged->getNombre(); ?></span><br>
                         Total Articulos: <span id="lbl_totalArticulos">0</span><br>
-                    </div>
+                    </div>  
                     <div id="datosCliente">
-                        Cliente: <span id="lbl_cliente">General</span>
+                        Cliente: <select  id="cbox_cliente">
+                        </select>
                     </div>
                 </div>
             </div>

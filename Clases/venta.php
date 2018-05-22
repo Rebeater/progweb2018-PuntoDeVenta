@@ -40,7 +40,7 @@ include_once("conexion.php");
         public function Insertar(){
             try{
                 
-                $cadena= "insert into ventas (cliente, vendedor, fecha, total) VALUES (:cliente, :vendedor, :fecha, :total)";
+                $cadena= "insert into ventas (cliente, vendedor, total) VALUES (:cliente, :vendedor, :total)";
 
                 $conex=new conexion();
                 $conn = $conex->conectarse();
@@ -48,7 +48,6 @@ include_once("conexion.php");
 
                 $stmt->bindParam(':cliente', $this->cliente);
                 $stmt->bindParam(':vendedor', $this->vendedor);
-                $stmt->bindParam(':fecha', $this->fecha);                    
                 $stmt->bindParam(':total', $this->total);                    
                 if($stmt->execute())
                 {
@@ -92,13 +91,23 @@ include_once("conexion.php");
                 }
                 return $precio;
         }
+        public function getDescuento($idProducto){
+            $conex = new conexion();
+            $result = $conex->Consultar("SELECT descuento FROM producto where id = '".$idProducto."'");
+            $descuento= 0;
+            foreach ($result as $row) {
+                $descuento = $row['descuento'];
+            }
+            return $descuento;
+        }
 
         public function InsertarRegistroVenta($idVenta, $idProducto, $cantidad){
             try{
                 $precioUnitario = $this->getPrecioUnitario($idProducto);
-                $monto = $precioUnitario * $cantidad; 
-            
-                $cadena= "insert into registroventa (idVenta, idProducto, precioUnitario, cantidad, monto) VALUES (:idVenta, :idProducto, :precioUnitario, :cantidad, :monto)";
+                $descuento = $this->getDescuento($idProducto);
+                $monto = ($precioUnitario * $cantidad)- (($precioUnitario * $cantidad)*($descuento/100)); 
+                
+                $cadena= "insert into registroventa (idVenta, idProducto, precioUnitario, cantidad, descuento, monto) VALUES (:idVenta, :idProducto, :precioUnitario, :cantidad, :descuento, :monto)";
 
                 $conex=new conexion();
                 $conn = $conex->conectarse();
@@ -108,6 +117,7 @@ include_once("conexion.php");
                 $stmt->bindParam(':idProducto', $idProducto);
                 $stmt->bindParam(':precioUnitario', $precioUnitario);                    
                 $stmt->bindParam(':cantidad', $cantidad);                    
+                $stmt->bindParam(':descuento', $descuento);                    
                 $stmt->bindParam(':monto', $monto);                    
                 if($stmt->execute())
                 {
@@ -208,11 +218,11 @@ include_once("conexion.php");
 
         public function getArrayProductosJSON($concepto=""){
             $result = $this->getArrayProductos($concepto);
+            $arrProduct;
             foreach($result as $row){
-                $arrProduct = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario']);
-                $productosJson = json_encode($arrProduct);
-                return $productosJson;
+                $arrProduct[] = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario']);
             }
+            return json_encode($arrProduct);
         }
 
         public function getTablaProductos($concepto=""){

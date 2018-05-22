@@ -9,6 +9,7 @@ include_once("conexion.php");
         private $concepto;
         private $stock;
         private $precioUnitario;
+        private $descuento;
 
     // ------------- C O N S T R U C T O R  ----------------------
 
@@ -40,17 +41,19 @@ include_once("conexion.php");
         public function getConcepto() { return $this->concepto; }    
         public function getStock() { return $this->stock; }    
         public function getPrecioUnitario() { return $this->precioUnitario; }    
+        public function getDescuento() { return $this->descuento; }    
 
         public function setId($id) { $this->id = $id; }    
         public function setConcepto($concepto) {$this->concepto = $concepto; }    
         public function setStock($stock) { $this->stock = $stock; }    
         public function setPrecioUnitario($precioUnitario) {  $this->precioUnitario = $precioUnitario; }    
+        public function setDescuento($descuento) {  $this->descuento = $descuento; }    
 
     // ---------- M E T O D O S   F U N C I O N A L E S ------------      
 
         public function Insertar(){
             try{
-                $cadena= "insert into producto (id, concepto, stock, precioUnitario) VALUES (:id, :concepto, :stock, :precioUnitario)";
+                $cadena= "insert into producto (id, concepto, stock, precioUnitario, descuento) VALUES (:id, :concepto, :stock, :precioUnitario, :descuento)";
 
                 $conex=new conexion();
                 $conn = $conex->conectarse();
@@ -60,6 +63,7 @@ include_once("conexion.php");
                 $stmt->bindParam(':concepto', $this->concepto);
                 $stmt->bindParam(':stock', $this->stock);                    
                 $stmt->bindParam(':precioUnitario', $this->precioUnitario);                    
+                $stmt->bindParam(':descuento', $this->descuento);                    
                 if($stmt->execute())
                 {
                     echo "No hubo error";
@@ -88,7 +92,7 @@ include_once("conexion.php");
 
         public function editar($hiddenID){
             try{
-                $cadena= "update producto set id=:id, concepto=:concepto, stock=:stock, precioUnitario=:precioUnitario WHERE id=:hiddenID";
+                $cadena= "update producto set id=:id, concepto=:concepto, stock=:stock, precioUnitario=:precioUnitario, descuento=:descuento WHERE id=:hiddenID";
 				$conex=new conexion();
 				$conn = $conex->conectarse();
                 $stmt = $conn->prepare($cadena);
@@ -98,6 +102,7 @@ include_once("conexion.php");
                 $stmt->bindParam(':concepto', $this->concepto);                    
                 $stmt->bindParam(':stock', $this->stock);                    
                 $stmt->bindParam(':precioUnitario', $this->precioUnitario);                    
+                $stmt->bindParam(':descuento', $this->descuento);
 				if($stmt->execute())
 				{
 					echo "No hubo error";
@@ -154,17 +159,17 @@ include_once("conexion.php");
 
         private function getArrayProductos($concepto){            
             $conex = new conexion();
-            $result = $conex->Consultar("Select id, concepto, stock, precioUnitario from producto where concepto like '%".$concepto."%'");
+            $result = $conex->Consultar("Select id, concepto, stock, precioUnitario, descuento from producto where concepto like '%".$concepto."%'");
             return $result;
         }
 
         public function getArrayProductosJSON($concepto=""){
             $result = $this->getArrayProductos($concepto);
+            $arrProduct;
             foreach($result as $row){
-                $arrProduct = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario']);
-                $productosJson = json_encode($arrProduct);
-                return $productosJson;
+                $arrProduct[] = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario'], 'descuento' => $row['descuento'] );
             }
+            return json_encode($arrProduct);
         }
 
         public function getTablaProductos($concepto=""){
@@ -182,6 +187,7 @@ include_once("conexion.php");
                 $string = $string."<th>Concepto</th>";
                 $string = $string."<th>Stock</th>";
                 $string = $string."<th>Precio Unitario</th>";
+                $string = $string."<th>Descuento</th>";
                 $string = $string."<th>Opciones</th>";
                 $string = $string."</tr>";
                 $string = $string."</thead>";
@@ -204,7 +210,11 @@ include_once("conexion.php");
                         $string = $string."</span></td>";
 
                         $string = $string."<td>";     
-                            $string = $string."<span id='precioUnitario_row".$row['id']."'>".$row['precioUnitario']."</span>";
+                            $string = $string."<span>$</span><span id='precioUnitario_row".$row['id']."'>".$row['precioUnitario']."</span>";
+                        $string = $string."</span></td>";
+                       
+                        $string = $string."<td>";     
+                            $string = $string."<span id='descuento_row".$row['id']."'>".$row['descuento']."</span><span>%</span>";
                         $string = $string."</span></td>";
 
                         $string = $string."<td id='opciones_row".$row['id']."'>";
@@ -232,7 +242,7 @@ include_once("conexion.php");
 
         private function getProductoByCampo($campo, $data){
             $conex = new conexion();
-            $result = $conex->Consultar("Select id, concepto, stock, precioUnitario from producto where ".$campo." = '".$data."'");
+            $result = $conex->Consultar("Select id, concepto, stock, precioUnitario, descuento from producto where ".$campo." = '".$data."'");
             return $result;
         }
         
@@ -240,7 +250,7 @@ include_once("conexion.php");
             try{
                 $result = $this->getProductoByCampo($campo, $data);
                 foreach($result as $row){
-                    $Product = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario']);                
+                    $Product = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario'], 'descuento' => $row['descuento']);                
                     $productJson = json_encode($Product);
                     return $productJson;
                 }
@@ -258,6 +268,7 @@ include_once("conexion.php");
                     $this->setConcepto($row['concepto']);
                     $this->setStock($row['stock']);
                     $this->setPrecioUnitario($row['precioUnitario']);
+                    $this->setDescuento($row['descuento']);
                 }
             } catch(PDOException $e)
             {

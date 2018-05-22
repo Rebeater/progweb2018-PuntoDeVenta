@@ -13,7 +13,7 @@
             if(isset($_POST['conceptoABuscar'])){
                 $concepto =  $_POST['conceptoABuscar'];
                 $product = new producto();
-                $product->getTablaProductos↑($concepto);
+                $product->getTablaProductos($concepto);
             }
             else  {
                 echo "No existe valor a buscar";
@@ -21,16 +21,18 @@
             exit();
         }
         else if(isset($_POST['btnInsertar'])){
-            $product = new producto();
-            $id       = $valida->test_input($_POST['txt_id']);
+            $product        = new producto();
+            $id             = $valida->test_input($_POST['txt_id']);
             $concepto       = $valida->test_input($_POST['txt_concepto']);
             $stock          = $valida->test_input($_POST['txt_stock']);
             $precioUnitario = $valida->test_input($_POST['txt_precioUnitario']);
+            $descuento      = $valida->test_input($_POST['txt_descuento']);
 
             $product->setId($id);
             $product->setConcepto($concepto);
             $product->setStock($stock);
             $product->setPrecioUnitario($precioUnitario);
+            $product->setDescuento($descuento);
             $product->Insertar();
             exit();
         }
@@ -45,7 +47,7 @@
             if(isset($_POST['id'])){
                 $product = new producto();
                 $id = $valida->test_input($_POST['id']);
-                echo $product->getProductoByCampoJSON("id",$id);           
+                echo $product->getProductoByCampoJSON("id",$id);
             }
             exit();
         } elseif (isset($_POST['btnActualizar'])){
@@ -55,10 +57,12 @@
             $concepto       = $valida->test_input($_POST['txt_edit_concepto']);
             $stock          = $valida->test_input($_POST['txt_edit_stock']);
             $precioUnitario = $valida->test_input($_POST['txt_edit_precioUnitario']);
+            $descuento = $valida->test_input($_POST['txt_edit_descuento']);
             $product->setId($id);
             $product->setConcepto($concepto);
             $product->setStock($stock);
             $product->setPrecioUnitario($precioUnitario);
+            $product->setDescuento($descuento);            
             $product->Editar($hidenid);
             exit();
         }else if(isset($_POST['getTabla'])){

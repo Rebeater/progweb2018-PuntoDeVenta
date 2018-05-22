@@ -73,6 +73,11 @@
             $client->getTablaClientes("");
             exit();
         }
+        else if(isset($_POST['getListJSON'])){
+            $client = new cliente();
+            echo $client->getArrayClientesJSON();
+            exit();
+        }
     }
 
 ?>

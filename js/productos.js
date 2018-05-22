@@ -51,6 +51,7 @@ function openProduct(user){
                 document.getElementById("txt_edit_id").value          = productJson.id;
                 document.getElementById("txt_edit_precioUnitario").value      = productJson.precioUnitario;
                 document.getElementById("txt_edit_stock").value      = productJson.stock;
+                document.getElementById("txt_edit_descuento").value      = productJson.descuento;
                 document.getElementById("txt_edit_concepto").value      = productJson.concepto;
             
             }
@@ -77,11 +78,12 @@ function updateTableProducts(){
 
     //#region AJAX para actualizar el registro 
     var data =  "btnActualizar=true"+
-                "&hiddenEdit_ID="+            document.getElementById("hiddenEdit_ID").value+
-                "&txt_edit_id="+            document.getElementById("txt_edit_id").value+
+                "&hiddenEdit_ID="+            document.getElementById("hiddenEdit_ID").value +
+                "&txt_edit_id="+            document.getElementById("txt_edit_id").value.toString().toUpperCase()+
                 "&txt_edit_concepto="+        document.getElementById("txt_edit_concepto").value+
                 "&txt_edit_precioUnitario="+        document.getElementById("txt_edit_precioUnitario").value+
-                "&txt_edit_stock="+           document.getElementById("txt_edit_stock").value;
+                "&txt_edit_stock="+           document.getElementById("txt_edit_stock").value+
+                "&txt_edit_descuento="+           document.getElementById("txt_edit_descuento").value;
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                if(this.responseText == "No hubo error")
@@ -155,9 +157,10 @@ function createProductAJAX(){
             url: "procesa_productos.php", 
             contentType: "application/x-www-form-urlencoded",
             data:  "btnInsertar=true"+
-            "&txt_id="+             document.getElementById("txt_id").value+
+            "&txt_id="+             document.getElementById("txt_id").value.toString().toUpperCase() +
             "&txt_concepto="+             document.getElementById("txt_concepto").value+
             "&txt_stock="+                document.getElementById("txt_stock").value+
+            "&txt_descuento="+                document.getElementById("txt_descuento").value+
             "&txt_precioUnitario="+             document.getElementById("txt_precioUnitario").value,
             success: function(result){
                     if(result == "No hubo error")
@@ -174,6 +177,7 @@ function createProductAJAX(){
     document.getElementById("txt_id").value = "";
     document.getElementById("txt_concepto").value = "";
     document.getElementById("txt_stock").value = "";
+    document.getElementById("txt_descuento").value = "";
     document.getElementById("txt_precioUnitario").value = "";
     
 }

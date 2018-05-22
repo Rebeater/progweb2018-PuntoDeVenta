@@ -58,8 +58,8 @@ include_once("Clases/usuario.php");
 					<li><input class="btn" type="submit" id="btn_prevUsr_logout" name="btn_prevUsr_logout" value="Cerrar Sesión"></li>
 				</ul>
 			</div>
-		</seccion>
-		<div id="snackbar">Some text some message..</div>
+</seccion>
+<div id="snackbar">Some text some message..</div>
 
 
 <script src='js/mostrarNav.js'></script>

@@ -182,11 +182,12 @@ include_once("conexion.php");
 
         public function getArrayClientesJSON($nombre=""){
             $result = $this->getArrayClientes($nombre);
+            $arrClient;
             foreach($result as $row){
-                $arrClient = array('id' => $row['id'], 'rfc' => $row['rfc'], 'nombre' => $row['nombre'], 'correo' => $row['correo'], 'telefono' => $row['telefono'],'domicilio' => $row['domicilio'],'ciudad' => $row['ciudad']);
-                $clientsJson = json_encode($arrClient);
-                return $clientsJson;
+                $arrClient[] = array('id' => $row['id'], 'rfc' => $row['rfc'], 'nombre' => $row['nombre'], 'correo' => $row['correo'], 'telefono' => $row['telefono'],'domicilio' => $row['domicilio'],'ciudad' => $row['ciudad']);
             }
+            $clientsJson = json_encode($arrClient);
+            return $clientsJson;
         }
 
         public function getTablaClientes($nombre=""){
