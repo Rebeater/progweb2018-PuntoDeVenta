@@ -24,7 +24,7 @@
     <script src="js/puntodeventa.js"></script>    
     <title>Punto de venta</title>
 </head>
-<body>
+<body onload="paginaCargada()" onbeforeunload="paginaClose()">
     <!--#region HEADER -->
         <form id='uploadImg' name='uploadImg' action="procesa_upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" id="fileToUpload" name="fileToUpload" class="inputFileLogo" onchange="uploadFoto()">
@@ -36,22 +36,24 @@
     
     <main id="PuntoDeVenta" class="hidden">
     <div class="grid-container">
-            <div class="grid-main table-container">
-                    <table id='tabla_productos' style="max-height: 200px;" class='table table-hover table-striped'>
-                            <thead>
-                            <tr>
-                            <th>Codigo</th>
-                            <th>Concepto</th>
-                            <th>Cantidad</th>
-                            <th>Precio U.</th>
-                            <th>Monto</th>
-                            <th>Canc</th>
-                            </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                                                        
-                            </tbody> 
-                        </table>
+            <div id="tableContainer" class="grid-main table-container" style="padding-top:0px;">
+                <div id="datetime" name="datetime"> Domingo 22 de Diciembre del 2018 12:22 PM </div>
+                <table id='tabla_productos' style="max-height: 200px;" class='table table-hover table-striped'>
+                    <thead>
+                        <tr>
+                        <th>Codigo</th>
+                        <th>Concepto</th>
+                        <th>Cantidad</th>
+                        <th>Precio U.</th>
+                        <th>Descuento</th>
+                        <th>Monto</th>
+                        <th>Canc</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                                                                    
+                    </tbody> 
+                </table>
             </div>
 
             <div class="grid-promocional">
@@ -74,9 +76,10 @@
                         </span><br>
                         Cajero: <span id="lbl_cajero"><?php echo $usrLogged->getNombre(); ?></span><br>
                         Total Articulos: <span id="lbl_totalArticulos">0</span><br>
-                    </div>
+                    </div>  
                     <div id="datosCliente">
-                        Cliente: <span id="lbl_cliente">General</span>
+                        Cliente: <select  id="cbox_cliente">
+                        </select>
                     </div>
                 </div>
             </div>
@@ -84,7 +87,7 @@
 
             <div class="grid-codigo">
                 <div class="container input-group">
-                    <input type="text" class="form-control mayusculas" id="txt_Buscador" name="txt_Buscador" onkeyup="" placeholder="Codigo..." autocomplete="off">
+                    <input type="text" class="form-control mayusculas" id="txt_Buscador" name="txt_Buscador" onkeyup="onKeyDownHandler(event);" placeholder="Codigo..." autocomplete="off">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="" id="btnBuscar" name="btnBuscar" onclick="addProduct()">
                             <i class="fas fa-search"></i>
@@ -128,7 +131,7 @@
 
 
     <script>
-            var myIndex = 0;
+        var myIndex = 0;
             carousel();
             
             function carousel() {

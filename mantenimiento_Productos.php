@@ -99,6 +99,15 @@
                             <input type="number" class="form-control" name="txt_stock" id="txt_stock" placeholder="Stock" maxlength="255" required>
                         </div>
 
+                        <!-- Descuento -->                        
+                        <label class="sr-only" for="txt_descuento">Descuento</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Descuento (%)</div>
+                            </div>
+                            <input type="number" class="form-control" name="txt_descuento" step='1' value='0' id="txt_descuento" placeholder="Descuento"   max="100"  required>
+                        </div>
+
                         <!-- Precio Unitario -->                        
                         <label class="sr-only" for="txt_precioUnitario">Precio Unitario</label>
                         <div class="input-group mb-2 mr-sm-2">
@@ -107,6 +116,7 @@
                             </div>
                             <input type="number" class="form-control" name="txt_precioUnitario" step='0.01' value='0.00' id="txt_precioUnitario" placeholder="Precio Unitario"   max="9999999999"  required>
                         </div>
+
                      </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -155,6 +165,15 @@
                                 <div class="input-group-text">Stock</div>
                             </div>
                             <input type="number" class="form-control" name="txt_edit_stock" id="txt_edit_stock" placeholder="Stock" maxlength="255" required>
+                        </div>
+                        
+                        <!-- Descuento -->                        
+                        <label class="sr-only" for="txt_edit_descuento">Descuento</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Descuento (%)</div>
+                            </div>
+                            <input type="number" class="form-control" name="txt_edit_descuento" step='1' value='0' id="txt_edit_descuento" placeholder="Descuento"   max="100"  required>
                         </div>
 
                         <!-- Precio Unitario -->                        

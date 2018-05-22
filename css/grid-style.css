@@ -1,5 +1,5 @@
 
-.grid-main { grid-area: main; }
+.grid-main { grid-area: main;}
 .grid-promocional { grid-area: promocional; width: 350px;}
 .grid-totales {     grid-area: totales;     width: 350px; }
 .grid-pagar {       grid-area: pagar;       width: 350px; }

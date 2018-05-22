@@ -358,3 +358,7 @@ display: none;
 .mostrar{
 	display: unset;	
 }
+
+#datetime{
+	font-size: large;
+}
