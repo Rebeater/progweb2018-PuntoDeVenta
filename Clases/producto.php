@@ -169,7 +169,8 @@ include_once("conexion.php");
             foreach($result as $row){
                 $arrProduct[] = array('id' => $row['id'], 'concepto' => $row['concepto'], 'stock' => $row['stock'], 'precioUnitario' => $row['precioUnitario'], 'descuento' => $row['descuento'] );
             }
-            return json_encode($arrProduct);
+
+            return isset($arrProduct) ? json_encode($arrProduct) : "";
         }
 
         public function getTablaProductos($concepto=""){

@@ -133,6 +133,7 @@ function registrarVenta(){
              if(result!="error"){
                 registrarVentas(result);
                 reiniciarCampos();
+                show_snackbar("Gracias por su compra", 3000);
             }
             else{
                 show_snackbar("Venta no registrada", 3000);
@@ -180,8 +181,6 @@ function onKeyDownHandler(event) {
   }  
 }
 
-
-
 function documentOnKeyDownHandler(event){
     if(event.keyCode != 116){ //F5 
         switch (event.keyCode) {
@@ -189,14 +188,13 @@ function documentOnKeyDownHandler(event){
                 //alert('F6: No definido');
                 break;
             case 118:
-                alert('F7: Pagar'); 
                 $('#btnPagar').trigger('click');
                 break;
             case 119:
                 alert('F8: No definido');
                 break;
             case 120:
-                alert('F9: Buscar');//$('#btnBuscar').trigger('click');
+                $('#btnBuscar').trigger('click');
                 break;
             default:
                 break;
@@ -358,28 +356,60 @@ function createCboxClientes(){
             }						
         });   
     
-
-
-
-
-
-
-
-
-/*
-    const v = '<div> Buscar Cliente </div>';
-    const menu = document.appendChild(v);
-    //menu.textContent = "Buscar Cliente";
-    document.body.appendChild();
-
-    menu.style.padding = '1em';
-    menu.style.background = '#eee';
-    menu.style.position = 'fixed';
-    menu.style.top = '$(e.pageX)px';
-    menu.style.left = '$(e.pageX)px';*/
 }
 
+// ------------------ B U S C A D O R    M O D A L  --------------------
+    
+    function dismissBuscador(){ 
+        $("#modalSearch").toggleClass("mostrar"); 
+        document.getElementById('txt_Buscador').focus();
+    }
 
+    function openBuscador(){ 
+        $("#modalSearch").toggleClass("mostrar"); 
+        document.getElementById('txt_BuscadorName').focus();
+        $('#txt_BuscadorName').trigger('keyup');
+    }
+
+    function searchByName(){
+        const txt_BuscadorName = document.getElementById('txt_BuscadorName').value;
+        $.ajax({
+            type:"POST",
+            url: "procesa_productos.php", 
+            data: "searchByName=" + "true" + "&name=" + txt_BuscadorName,
+            contentType: "application/x-www-form-urlencoded",
+            success: function(result){
+              document.getElementById("seach_tbody").innerHTML = "";
+              if(result!=""){                   
+                var productos = JSON.parse(result);
+                for (let i = 0; i < productos.length; i++) {
+                    var search_trow = document.createElement('tr');
+                    search_trow.id = "search_item"+i;
+                    search_trow.classList.add("rowitem");
+                    var innerHTML =  "<td id='search_id_row"+i+"' style='margin-left:1em'><span class='search_tdCodigo'>"+productos[i].id+"</span></td>"+
+                    "<td id='search_concepto_row"+i+"' style='text-align:left'><span>"+productos[i].concepto+"</span></td>"+
+                    "<td id='search_precioUnitario_row"+i+"' style='margin-left:1em'><span>$"+productos[i].precioUnitario+"</span></td>"+
+                    "<td id='search_descuento_row"+i+"' style='margin-left:1em'><span>"+productos[i].descuento+" %</span></td>"+
+                    "<td id='search_monto_row"+i+"' style='margin-left:1em'><span>$</span><span>"+((productos[i].precioUnitario)-(productos[i].precioUnitario*(productos[i].descuento/100)))+"</span></td>";
+                    document.getElementById("seach_tbody").appendChild(search_trow);
+                    search_trow.outerHTML = "<tr  ondblclick='añadirCodigoAltxt_Buscador(this)'>" + innerHTML;
+                   }
+              }
+              else{
+              }
+            }
+        });
+    }
+
+    function añadirCodigoAltxt_Buscador(tr){
+        document.getElementById('txt_Buscador').value = tr.getElementsByClassName('search_tdCodigo')[0].textContent;
+        document.getElementById('txt_BuscadorName').value = "";
+        dismissBuscador();
+
+    }
+     
+    
+    
 
 /*
  $.ajax(
@@ -399,4 +429,3 @@ function createCboxClientes(){
             }						
         });        
 */
-
