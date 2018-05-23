@@ -69,7 +69,18 @@
             $product = new producto();
             $product->getTablaProductos("");
             exit();
+        }else if(isset($_POST['searchByName'])){
+            $name    = isset($_POST['name'])? $valida->test_input($_POST['name']) : '';            
+            $product = new producto();
+            echo $product->getArrayProductosJSON($name);
+            exit();
+        }else if(isset($_POST['validaStock'])){
+            $idProducto    = isset($_POST['producto'])? $valida->test_input($_POST['producto']) : '';            
+            $product = new producto($idProducto);
+            echo $product->getStock();
+            exit();
         }
+        
     }
 
 ?>

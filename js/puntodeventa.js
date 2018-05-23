@@ -22,38 +22,57 @@ function addProduct(Codigo, Cantidad){
         {
             type:"POST",
             url: "procesa_productos.php", 
-            data: "getDataProducto=true&id="+codigo,
+            data: "validaStock=" + "true" + "&producto="+codigo,
             contentType: "application/x-www-form-urlencoded",
             success: function(result){
-             if(result!=""){
-                var producto = JSON.parse(result);
-                const trow = document.createElement('tr');
-                itemCounter = itemCounter+1;
-                trow.id = "item"+itemCounter;
-                trow.classList.add("rowitem");
-                trow.innerHTML =  "<td id='id_row"+itemCounter+"' style='margin-left:1em'><span class='tdCodigo'>"+codigo+"</span></td>"+
-                                  "<td id='concepto_row"+itemCounter+"' style='text-align:left'><span>"+producto.concepto+"</span></td>"+
-                                  "<td id='cantidad_row"+itemCounter+"' style='margin-left:1em'><span class='tdCantidad'>"+ cantidad +"  <i class='fas fa-plus'></i></span></td>"+
-                                  "<td id='precioUnitario_row"+itemCounter+"' style='margin-left:1em'><span>$"+producto.precioUnitario+"</span></td>"+
-                                  "<td id='descuento_row"+itemCounter+"' style='margin-left:1em'><span class='tddescuento'>"+producto.descuento+" %</span></td>"+
-                                  "<td id='monto_row"+itemCounter+"' style='margin-left:1em'><span>$</span><span class='tdmonto'>"+((producto.precioUnitario * cantidad)-(producto.precioUnitario*cantidad*(producto.descuento/100)))+"</span></td>"+
-                                  "<td id='cancelar_row"+itemCounter+"' style='margin-left:1em'><i id='itemcancelar_row"+itemCounter+"' class='fas fa-times' onclick='quitarItem(this)'></i></td>";
-                document.getElementById("tbody").appendChild(trow);
-                document.getElementById("lbl_totalDinero").innerHTML = calcularTotal().toFixed(2);
-                document.getElementById("lbl_totalArticulos").innerHTML = calcularCantArticulos();
-                document.getElementById('txt_Buscador').value = "";
-                
-                document.getElementById('tableContainer').scrollTop = 10000;
-
-            }
-            else{
-                show_snackbar("Codigo de producto no encontrado", 1500);
-            }
+                if(result != ""){
+                    var stock = result;
+                    if(stock>0){
+                        $.ajax(
+                            {
+                                type:"POST",
+                                url: "procesa_productos.php", 
+                                data: "getDataProducto=true&id="+codigo,
+                                contentType: "application/x-www-form-urlencoded",
+                                success: function(result){
+                                 if(result!=""){
+                                    var producto = JSON.parse(result);
+                                    const trow = document.createElement('tr');
+                                    itemCounter = itemCounter+1;
+                                    trow.id = "item"+itemCounter;
+                                    trow.classList.add("rowitem");
+                                    trow.innerHTML =  "<td id='id_row"+itemCounter+"' style='margin-left:1em'><span class='tdCodigo'>"+codigo+"</span></td>"+
+                                                      "<td id='concepto_row"+itemCounter+"' style='text-align:left'><span>"+producto.concepto+"</span></td>"+
+                                                      "<td id='cantidad_row"+itemCounter+"' style='margin-left:1em'><span class='tdCantidad'>"+ cantidad +"  <i class='fas fa-plus'></i></span></td>"+
+                                                      "<td id='precioUnitario_row"+itemCounter+"' style='margin-left:1em'><span>$"+producto.precioUnitario+"</span></td>"+
+                                                      "<td id='descuento_row"+itemCounter+"' style='margin-left:1em'><span class='tddescuento'>"+producto.descuento+" %</span></td>"+
+                                                      "<td id='monto_row"+itemCounter+"' style='margin-left:1em'><span>$</span><span class='tdmonto'>"+((producto.precioUnitario * cantidad)-(producto.precioUnitario*cantidad*(producto.descuento/100)))+"</span></td>"+
+                                                      "<td id='cancelar_row"+itemCounter+"' style='margin-left:1em'><i id='itemcancelar_row"+itemCounter+"' class='fas fa-times' onclick='quitarItem(this)'></i></td>";
+                                    document.getElementById("tbody").appendChild(trow);
+                                    document.getElementById("lbl_totalDinero").innerHTML = calcularTotal().toFixed(2);
+                                    document.getElementById("lbl_totalArticulos").innerHTML = calcularCantArticulos();
+                                    document.getElementById('txt_Buscador').value = "";
+                                    
+                                    document.getElementById('tableContainer').scrollTop = 10000;
+                    
+                                }
+                                else{
+                                    show_snackbar("Codigo de producto no encontrado", 1500);
+                                }
+                                }						
+                            });	
+                    }
+                    else{
+                        show_snackbar("No hay stock para el producto " + codigo , 3000);                            
+                        stock = false;
+                    }
+                }
+                else{
+                    show_snackbar("Error en la base de datos al calcular el Stock", 3000);
+                }
             }						
-        });		
-        
-        
-
+        });        
+    	
 }
 
 function quitarItem(item){
@@ -117,9 +136,11 @@ function recuperarItemsVenta(){
 }
 
 function registrarVenta(){
+    
+    var total    = document.getElementById("lbl_totalDinero").innerText;
+    if(total > 0){
     var cliente  = document.getElementById("cbox_cliente").value;
     var vendedor = document.getElementById("lbl_cajero").innerText;
-    var total    = document.getElementById("lbl_totalDinero").innerText;1
     
     $.ajax(
         {
@@ -131,12 +152,14 @@ function registrarVenta(){
              if(result!="error"){
                 registrarVentas(result);
                 reiniciarCampos();
+                show_snackbar("Gracias por su compra", 3000);
             }
             else{
                 show_snackbar("Venta no registrada", 3000);
             }
             }						
         });
+    }
 }
 
 function registrarVentas(idVenta){
@@ -173,8 +196,29 @@ function onKeyDownHandler(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
     // Trigger the button element with a click
-        $('#btnBuscar').trigger('click');     
+        addProduct();
   }  
+}
+
+function documentOnKeyDownHandler(event){
+    if(event.keyCode != 116){ //F5 
+        switch (event.keyCode) {
+            case 117:
+                //alert('F6: No definido');
+                break;
+            case 118:
+                $('#btnPagar').trigger('click');
+                break;
+            case 119:
+                alert('F8: No definido');
+                break;
+            case 120:
+                $('#btnBuscar').trigger('click');
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 function paginaCargada(){
@@ -203,6 +247,11 @@ function paginaCargada(){
             }						
         });        
     iniciarReloj();
+
+    document.addEventListener('keyup', e =>{
+        documentOnKeyDownHandler(e);
+    });
+
     
 }
 
@@ -326,28 +375,60 @@ function createCboxClientes(){
             }						
         });   
     
-
-
-
-
-
-
-
-
-/*
-    const v = '<div> Buscar Cliente </div>';
-    const menu = document.appendChild(v);
-    //menu.textContent = "Buscar Cliente";
-    document.body.appendChild();
-
-    menu.style.padding = '1em';
-    menu.style.background = '#eee';
-    menu.style.position = 'fixed';
-    menu.style.top = '$(e.pageX)px';
-    menu.style.left = '$(e.pageX)px';*/
 }
 
+// ------------------ B U S C A D O R    M O D A L  --------------------
+    
+    function dismissBuscador(){ 
+        $("#modalSearch").toggleClass("mostrar"); 
+        document.getElementById('txt_Buscador').focus();
+    }
 
+    function openBuscador(){ 
+        $("#modalSearch").toggleClass("mostrar"); 
+        document.getElementById('txt_BuscadorName').focus();
+        $('#txt_BuscadorName').trigger('keyup');
+    }
+
+    function searchByName(){
+        const txt_BuscadorName = document.getElementById('txt_BuscadorName').value;
+        $.ajax({
+            type:"POST",
+            url: "procesa_productos.php", 
+            data: "searchByName=" + "true" + "&name=" + txt_BuscadorName,
+            contentType: "application/x-www-form-urlencoded",
+            success: function(result){
+              document.getElementById("seach_tbody").innerHTML = "";
+              if(result!=""){                   
+                var productos = JSON.parse(result);
+                for (let i = 0; i < productos.length; i++) {
+                    var search_trow = document.createElement('tr');
+                    search_trow.id = "search_item"+i;
+                    search_trow.classList.add("rowitem");
+                    var innerHTML =  "<td id='search_id_row"+i+"' style='margin-left:1em'><span class='search_tdCodigo'>"+productos[i].id+"</span></td>"+
+                    "<td id='search_concepto_row"+i+"' style='text-align:left'><span>"+productos[i].concepto+"</span></td>"+
+                    "<td id='search_precioUnitario_row"+i+"' style='margin-left:1em'><span>$"+productos[i].precioUnitario+"</span></td>"+
+                    "<td id='search_descuento_row"+i+"' style='margin-left:1em'><span>"+productos[i].descuento+" %</span></td>"+
+                    "<td id='search_monto_row"+i+"' style='margin-left:1em'><span>$</span><span>"+((productos[i].precioUnitario)-(productos[i].precioUnitario*(productos[i].descuento/100)))+"</span></td>";
+                    document.getElementById("seach_tbody").appendChild(search_trow);
+                    search_trow.outerHTML = "<tr  ondblclick='añadirCodigoAltxt_Buscador(this)'>" + innerHTML;
+                   }
+              }
+              else{
+              }
+            }
+        });
+    }
+
+    function añadirCodigoAltxt_Buscador(tr){
+        document.getElementById('txt_Buscador').value = tr.getElementsByClassName('search_tdCodigo')[0].textContent;
+        document.getElementById('txt_BuscadorName').value = "";
+        dismissBuscador();
+
+    }
+     
+    
+    
 
 /*
  $.ajax(
@@ -367,4 +448,3 @@ function createCboxClientes(){
             }						
         });        
 */
-
