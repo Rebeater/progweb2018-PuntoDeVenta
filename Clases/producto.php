@@ -21,7 +21,7 @@ include_once("conexion.php");
             if($id !=""){
                 try{
                     $conex = new conexion();
-                    $result = $conex->Consultar("Select id, concepto, stock, precioUnitario from producto where id = ".$id);
+                    $result = $conex->Consultar("Select id, concepto, stock, precioUnitario from producto where id = '".$id."'");
                     foreach($result as $row){
                         $this->id = $row['id'];
                         $this->concepto = $row['concepto'];

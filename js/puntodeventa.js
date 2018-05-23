@@ -22,38 +22,57 @@ function addProduct(Codigo, Cantidad){
         {
             type:"POST",
             url: "procesa_productos.php", 
-            data: "getDataProducto=true&id="+codigo,
+            data: "validaStock=" + "true" + "&producto="+codigo,
             contentType: "application/x-www-form-urlencoded",
             success: function(result){
-             if(result!=""){
-                var producto = JSON.parse(result);
-                const trow = document.createElement('tr');
-                itemCounter = itemCounter+1;
-                trow.id = "item"+itemCounter;
-                trow.classList.add("rowitem");
-                trow.innerHTML =  "<td id='id_row"+itemCounter+"' style='margin-left:1em'><span class='tdCodigo'>"+codigo+"</span></td>"+
-                                  "<td id='concepto_row"+itemCounter+"' style='text-align:left'><span>"+producto.concepto+"</span></td>"+
-                                  "<td id='cantidad_row"+itemCounter+"' style='margin-left:1em'><span class='tdCantidad'>"+ cantidad +"  <i class='fas fa-plus'></i></span></td>"+
-                                  "<td id='precioUnitario_row"+itemCounter+"' style='margin-left:1em'><span>$"+producto.precioUnitario+"</span></td>"+
-                                  "<td id='descuento_row"+itemCounter+"' style='margin-left:1em'><span class='tddescuento'>"+producto.descuento+" %</span></td>"+
-                                  "<td id='monto_row"+itemCounter+"' style='margin-left:1em'><span>$</span><span class='tdmonto'>"+((producto.precioUnitario * cantidad)-(producto.precioUnitario*cantidad*(producto.descuento/100)))+"</span></td>"+
-                                  "<td id='cancelar_row"+itemCounter+"' style='margin-left:1em'><i id='itemcancelar_row"+itemCounter+"' class='fas fa-times' onclick='quitarItem(this)'></i></td>";
-                document.getElementById("tbody").appendChild(trow);
-                document.getElementById("lbl_totalDinero").innerHTML = calcularTotal().toFixed(2);
-                document.getElementById("lbl_totalArticulos").innerHTML = calcularCantArticulos();
-                document.getElementById('txt_Buscador').value = "";
-                
-                document.getElementById('tableContainer').scrollTop = 10000;
-
-            }
-            else{
-                show_snackbar("Codigo de producto no encontrado", 1500);
-            }
+                if(result != ""){
+                    var stock = result;
+                    if(stock>0){
+                        $.ajax(
+                            {
+                                type:"POST",
+                                url: "procesa_productos.php", 
+                                data: "getDataProducto=true&id="+codigo,
+                                contentType: "application/x-www-form-urlencoded",
+                                success: function(result){
+                                 if(result!=""){
+                                    var producto = JSON.parse(result);
+                                    const trow = document.createElement('tr');
+                                    itemCounter = itemCounter+1;
+                                    trow.id = "item"+itemCounter;
+                                    trow.classList.add("rowitem");
+                                    trow.innerHTML =  "<td id='id_row"+itemCounter+"' style='margin-left:1em'><span class='tdCodigo'>"+codigo+"</span></td>"+
+                                                      "<td id='concepto_row"+itemCounter+"' style='text-align:left'><span>"+producto.concepto+"</span></td>"+
+                                                      "<td id='cantidad_row"+itemCounter+"' style='margin-left:1em'><span class='tdCantidad'>"+ cantidad +"  <i class='fas fa-plus'></i></span></td>"+
+                                                      "<td id='precioUnitario_row"+itemCounter+"' style='margin-left:1em'><span>$"+producto.precioUnitario+"</span></td>"+
+                                                      "<td id='descuento_row"+itemCounter+"' style='margin-left:1em'><span class='tddescuento'>"+producto.descuento+" %</span></td>"+
+                                                      "<td id='monto_row"+itemCounter+"' style='margin-left:1em'><span>$</span><span class='tdmonto'>"+((producto.precioUnitario * cantidad)-(producto.precioUnitario*cantidad*(producto.descuento/100)))+"</span></td>"+
+                                                      "<td id='cancelar_row"+itemCounter+"' style='margin-left:1em'><i id='itemcancelar_row"+itemCounter+"' class='fas fa-times' onclick='quitarItem(this)'></i></td>";
+                                    document.getElementById("tbody").appendChild(trow);
+                                    document.getElementById("lbl_totalDinero").innerHTML = calcularTotal().toFixed(2);
+                                    document.getElementById("lbl_totalArticulos").innerHTML = calcularCantArticulos();
+                                    document.getElementById('txt_Buscador').value = "";
+                                    
+                                    document.getElementById('tableContainer').scrollTop = 10000;
+                    
+                                }
+                                else{
+                                    show_snackbar("Codigo de producto no encontrado", 1500);
+                                }
+                                }						
+                            });	
+                    }
+                    else{
+                        show_snackbar("No hay stock para el producto " + codigo , 3000);                            
+                        stock = false;
+                    }
+                }
+                else{
+                    show_snackbar("Error en la base de datos al calcular el Stock", 3000);
+                }
             }						
-        });		
-        
-        
-
+        });        
+    	
 }
 
 function quitarItem(item){
