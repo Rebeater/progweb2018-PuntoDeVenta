@@ -87,7 +87,7 @@
 
             <div class="grid-codigo">
                 <div class="container input-group">
-                    <input type="text" class="form-control mayusculas" id="txt_Buscador" name="txt_Buscador" onkeyup="onKeyDownHandler(event);" placeholder="Codigo..." autocomplete="off">
+                    <input type="text" class="form-control" id="txt_Buscador" name="txt_Buscador" onkeyup="onKeyDownHandler(event);" placeholder="Inserte el codigo del producto y presione Enter para ingresarlo..." autocomplete="off">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="" id="btnBuscar" name="btnBuscar" onclick="addProduct()">
                             <i class="fas fa-search"></i>

@@ -117,9 +117,11 @@ function recuperarItemsVenta(){
 }
 
 function registrarVenta(){
+    
+    var total    = document.getElementById("lbl_totalDinero").innerText;
+    if(total > 0){
     var cliente  = document.getElementById("cbox_cliente").value;
     var vendedor = document.getElementById("lbl_cajero").innerText;
-    var total    = document.getElementById("lbl_totalDinero").innerText;1
     
     $.ajax(
         {
@@ -137,6 +139,7 @@ function registrarVenta(){
             }
             }						
         });
+    }
 }
 
 function registrarVentas(idVenta){
@@ -173,8 +176,32 @@ function onKeyDownHandler(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
     // Trigger the button element with a click
-        $('#btnBuscar').trigger('click');     
+        addProduct();
   }  
+}
+
+
+
+function documentOnKeyDownHandler(event){
+    if(event.keyCode != 116){ //F5 
+        switch (event.keyCode) {
+            case 117:
+                //alert('F6: No definido');
+                break;
+            case 118:
+                alert('F7: Pagar'); 
+                $('#btnPagar').trigger('click');
+                break;
+            case 119:
+                alert('F8: No definido');
+                break;
+            case 120:
+                alert('F9: Buscar');//$('#btnBuscar').trigger('click');
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 function paginaCargada(){
@@ -203,6 +230,11 @@ function paginaCargada(){
             }						
         });        
     iniciarReloj();
+
+    document.addEventListener('keyup', e =>{
+        documentOnKeyDownHandler(e);
+    });
+
     
 }
 
