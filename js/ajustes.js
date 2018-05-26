@@ -61,7 +61,8 @@ function armarCboxPaises(paises){
 }
 
 function loadData(){
-     var result2 = '{ "companyName":"Electronics" ,'+
+    //obeto de prueba
+     /*var result2 = '{ "companyName":"Electronics" ,'+
                        ' "pais":"Mexico" ,'+
                        ' "cp":"2305" ,'+
                        ' "ciudad":"La Pah" ,'+
@@ -74,7 +75,7 @@ function loadData(){
                        ' "passSoporte":"contrasena" ,'+
                        ' "img":"img/131-logo-steren.png" ,'+
                        ' "descripcion":"Electrónica Steren es una empresa Mexicana que fue fundada en la Ciudad de México en 1956 que se dedica a comercializar bienes electrónicos, de computación y tecnología. Tiene más de 360 tiendas distribuidas en México, Costa Rica, República Dominicana, Guatemala, Colombia y Estados Unidos, y una oficina de control de calidad en Shanghai, China."}';
-        
+       */ 
                       
     $.ajax(
         {
@@ -83,7 +84,7 @@ function loadData(){
             data: "loadData=" + "true",
             contentType: "application/x-www-form-urlencoded",
             success: function(result){
-                var ajustes = JSON.parse(result2);
+                var ajustes = JSON.parse(result);
                 document.getElementById("companyName").value = ajustes.companyName;
                 document.getElementById("cbx_pais").value = ajustes.pais;
                 document.getElementById("txt_cp").value = ajustes.cp;
