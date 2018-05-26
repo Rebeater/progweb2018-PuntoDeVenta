@@ -67,7 +67,7 @@
             <div class="grid-totales">
                 <div class="grid-container-totales">
                     <div id="totalAcumulado" style="border-bottom:1px solid black">
-                        $<span id="lbl_totalDinero">00.00</span> <br>
+                        <span class="fs-xxl">$</span><span class="fs-xxl" id="lbl_totalDinero">00.00</span> <br>
                         <span>total</span> 
                     </div>
                     <div id="datosVenta" style="border-bottom:1px solid black">
