@@ -162,7 +162,6 @@ function onKeyDownHandler(event) {
 };
 
 
-
 function iconpass(){
     $('#icon-pass').toggleClass('fa-unlock');
     if($('#txt_edit_contrasena')[0].type == 'password'){

@@ -93,7 +93,7 @@
             </div>
         </form>
         <!-- Modal EDIT USER-->
-        <form id='productoEdit' name='productoEdit' action="procesa_productos.php" method="POST">
+        <form id='productoEdit' name='productoEdit' action="procesa_productos.php" method="POST" enctype="multipart/form-data" >
                         <div id="modalEdit" class="modal fade" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->

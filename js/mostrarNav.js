@@ -58,7 +58,7 @@ $(document).ready(function(){
 function show_snackbar(msg, timeout){
 	// Get the snackbar DIV
 	var x = document.getElementById("snackbar");
-			
+			timeout = (timeout)? timeout : 3000;
 	x.innerText  = msg;
 
 	// Add the "show" class to DIV

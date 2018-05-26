@@ -27,12 +27,22 @@
 .grid-container-domicilio{
     display: grid;
     grid-gap: 5px 5px ;
+    grid-template-columns: 50% 50%;
+    
     grid-template-areas:
     'lblDomicilio lblDomicilio'
-    'pais estado'
-    'ciudad cp'
+    'pais cp'
+    'ciudad estado'
     'txtdomicilio txtdomicilio';
-    
+}
+
+.grid-container-telefono{
+    display: grid;
+    grid-gap: 5px 5px ;
+    grid-template-columns: 10% 90%;
+    grid-template-areas:
+    'lbltel lbltel '    
+    'telcode  tel  '    
 }
 .grid-content-logo{
     display: grid;
@@ -118,14 +128,18 @@
         'div_Personalizacion'
     }
     .grid-container-domicilio{
-    
+    grid-template-columns: 100%;
+        
         grid-template-areas:
         'lblDomicilio'
         'pais' 
-        'estado'
-        'ciudad'
         'cp'
+        'ciudad'
+        'estado'
         'txtdomicilio';
+    }
+    .grid-container-telefono{
+        grid-template-columns: 15% 85%;
     }
     .grid-content-logo{
 
