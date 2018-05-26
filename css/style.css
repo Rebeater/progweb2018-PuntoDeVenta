@@ -47,7 +47,19 @@ header #button-menu{
 	color: #fff;
 	cursor: pointer;
 }
+.fs-xxl{
+	font-size: xx-large;
+}
 
+.w50{
+	
+	float: left;
+	width: 49%;
+}
+.w100{
+	width: 100%
+	
+}
 .navegacion{
 	position: absolute;
 	top: 100%;
@@ -362,3 +374,4 @@ display: none;
 #datetime{
 	font-size: large;
 }
+

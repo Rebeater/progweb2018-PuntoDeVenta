@@ -142,7 +142,6 @@ function onKeyDownHandler(event) {
  function cambiarFoto(id){    
      document.getElementById("updatePhotoId").value = id;
      $('#fileToUpload').trigger('click');    
-
  }
 
  

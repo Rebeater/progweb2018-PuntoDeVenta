@@ -1,4 +1,3 @@
-
 .grid-main { grid-area: main;}
 .grid-promocional { grid-area: promocional; width: 350px;}
 .grid-totales {     grid-area: totales;     width: 350px; }
@@ -16,11 +15,46 @@
   margin: 1px 10px;
 
 }
+.grid-container-ajustes{    
+    max-width: 1200px;
+    display: grid;
+    grid-gap: 5px 2em;
+    grid-template-areas:
+    'div_datosEmpresa div_Personalizacion'
+    'div_datosEmpresa div_Personalizacion'
+}
+
+.grid-container-domicilio{
+    display: grid;
+    grid-gap: 5px 5px ;
+    grid-template-areas:
+    'lblDomicilio lblDomicilio'
+    'pais estado'
+    'ciudad cp'
+    'txtdomicilio txtdomicilio';
+    
+}
+.grid-content-logo{
+    display: grid;
+    grid-gap: 5px 5px ;
+    grid-template-areas:
+    'imgLogo imgLogo'
+    'btnSubir btnEliminar';
+}
+
+
+.grid-container-publicidad{
+    justify-content: space-around;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 10px;
+    margin: 1px 10px;
+}
 .grid-container > div {
     border: 1px solid black;
-  background-color: rgba(255, 255, 255, 0.85);
-  text-align: center;
-  padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    padding: 20px 0;
 }
 
 
@@ -70,6 +104,36 @@
     .grid-promocional{
         display: none;
     }
+    
+    #div_datosEmpresa{
+        width: 95%;
+    }
+    #div_Personalizacion{
+        width: 95%;        
+    }
+    .grid-container-ajustes{
+        
+        grid-template-areas:
+        'div_datosEmpresa '
+        'div_Personalizacion'
+    }
+    .grid-container-domicilio{
+    
+        grid-template-areas:
+        'lblDomicilio'
+        'pais' 
+        'estado'
+        'ciudad'
+        'cp'
+        'txtdomicilio';
+    }
+    .grid-content-logo{
+
+        grid-template-areas:
+        'imgLogo'
+        'btnSubir'
+        'btnEliminar'    
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -102,6 +166,9 @@
     .grid-promocional{
         display: none;
     }
+    .grid-container-publicidad{
+        grid-template-columns: auto ;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -128,6 +195,9 @@
     .grid-promocional{
         display: unset;
     }
+    .grid-container-publicidad{
+        grid-template-columns: auto auto ;
+    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -135,6 +205,9 @@
     .table-container{
 		max-height: 200px;
     }	
+    .grid-container-publicidad{
+        grid-template-columns: auto auto auto;
+    }
     
 } 
 
@@ -153,7 +226,16 @@
     .grid-promocional{
         display: unset;
     }
+    .grid-container-publicidad{
+        grid-template-columns: auto auto auto;
+    }
 }
 
 
+#div_datosEmpresa input{ 
+    margin-bottom: 5px;
+}
 
+#div_datosEmpresa p{ 
+    margin: 7px 0;
+}

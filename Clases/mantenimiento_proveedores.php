@@ -91,8 +91,8 @@
             echo "<th>Id</th>";
             echo "<th>Nombre</th>";
             echo "<th>Teléfono </th>";
-            echo "<th>Nombre_Social</th>";
-            echo "<th>Opciones</th>";
+            echo "<th>Nombre Social</th>";
+            echo "<th>Ciudad</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -122,8 +122,8 @@
 
                     echo "<td id='opciones_row".$row['id']."'>";
                         echo "<div style='text-align: center; font-size: 1.25em;'> ";
-                        echo "<a data-toggle='modal' href='#modalEdit' onClick='openUser(this)' id='edit_".$row['id']."' href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
-                        echo "<a data-toggle='modal' href='#modalDelete' onClick='deleteUser(this)' id='delete_".$row['id']."' href='#' class='far fa-trash-alt' style='color: rgba(255,0, 0, 0.8);'></a>";
+                        echo "<a data-toggle='modal' href='#modalEdit' onClick='openProveedor(this)' id='edit_".$row['id']."' href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
+                        echo "<a data-toggle='modal' href='#modalDelete' onClick='deleteProveedor(this)' id='delete_".$row['id']."' href='#' class='far fa-trash-alt' style='color: rgba(255,0, 0, 0.8);'></a>";
                         echo "</div>";
                     echo "</td>";
                 echo "</tr>";
@@ -132,7 +132,7 @@
         }
         }
 
-        public function editar(){
+        public function editar($hidenid){
             try{
                 $cadena= "update proveedores set nombre=:nombre, telefono=:telefono, nombre_social=:nombre_social, ciudad=:ciudad WHERE id=:id";
 				$conex=new conexion();
@@ -215,6 +215,100 @@
             }
            
         }
+
+        public function getTablaProveedor($concepto=""){
+            try{
+                $proveedores_array = $this->getArrayProveedor($concepto);
+                $string ="";
+
+                $string = $string."<div id='divProveedores' name='divProveedores'>";
+                
+                $string = $string."<div class='table-container'>";
+                $string = $string."<table id='tabla_proveedores' class='table table-hover table-striped table-rwd'>";
+                $string = $string."<thead>";
+                $string = $string."<tr>";
+                $string = $string."<th>ID</th>";
+                $string = $string."<th>Nombre</th>";
+                $string = $string."<th>Telefono</th>";
+                $string = $string."<th>Nombre social</th>";
+                $string = $string."<th>Ciudad</th>";
+                $string = $string."</tr>";
+                $string = $string."</thead>";
+                $string = $string."<tbody>";
+
+                ///echo $row['id']." ".$row['rfc']." ".$row['nombre']." ".$row['telefono']." ".$row['domicilio']." ".$row['ciudad']."<br>";
+                if(isset($proveedores_array)){
+                    foreach ($proveedores_array as $row) {
+                        $string = $string."<tr id='".$row['id']."'>";
+                        $string = $string."<td id='id_row".$row['id']."' style='margin-left:1em'>";
+                        $string = $string.$row['id'];
+                        $string = $string."</td>";
+
+                        $string = $string."<td> <span id='nombre_row".$row['id']."'>";
+                            $string = $string.$row['nombre'];
+                        $string = $string."</span></td>";
+
+                        $string = $string."<td>";
+                            $string = $string."<span id='telefono_row".$row['id']."'>".$row['telefono']."</span>";
+                        $string = $string."</span></td>";
+
+                        $string = $string."<td>";     
+                            $string = $string."<span id='nombre_social_row".$row['id']."'>".$row['nombre_social']."</span>";
+                        $string = $string."</span></td>";
+
+                        $string = $string."<td>";     
+                            $string = $string."<span id='ciudad".$row['id']."'>".$row['ciudad']."</span>";
+                        $string = $string."</span></td>";
+
+                        $string = $string."<td id='opciones_row".$row['id']."'>";
+                            $string = $string."<div style='text-align: center; font-size: 1.25em;'> ";
+                            $string = $string."<a data-toggle='modal' href='#modalEdit' onClick='openProduct(this)' id='edit_".$row['id']."' href='#' class='far fa-edit' style='color:black; margin-right: 5px;'></a>";
+                            $string = $string."<a data-toggle='modal' href='#modalDelete' onClick='deleteProveedor(this)' id='delete_".$row['id']."' href='#' class='far fa-trash-alt' style='color: rgba(255,0, 0, 0.8);'></a>";
+                            $string = $string."</div>";
+                        $string = $string."</td>";
+                        $string = $string."</tr>";
+                    }
+                    $string = $string."</tbody> </table>";
+                    $string = $string."</div>";
+                    $string = $string."</div>";
+                    echo $string;
+                }else{
+                    echo "Error";
+                }
+            }
+            catch(Exception $e)
+			{
+                echo "Error";
+				//echo "Error: " . $e->getMessage();
+			} 
+        }
+
+        private function getArrayProveedor($concepto){            
+            $conex = new conexion();
+            $result = $conex->Consultar("Select id, nombre, telefono, nombre_social, ciudad from proveedores where nombre like '%".$concepto."%' or nombre_social like '%".$concepto."%'");
+            return $result;
+        }
+
+        private function getProveedorByCampo($campo, $data){
+            $conex = new conexion();
+            $result = $conex->Consultar("Select id, nombre, telefono, nombre_social, ciudad from proveedores where ".$campo." = '".$data."'");
+            return $result;
+        }
+
+        public function getProveedorByCampoJSON($campo="nombre", $data=""){
+            try{
+                $result = $this->getProveedorByCampo($campo, $data);
+                foreach($result as $row){
+                    $Product = array('id' => $row['id'], 'nombre' => $row['nombre'], 'telefono' => $row['telefono'], 'nombre_social' => $row['nombre_social'], 'ciudad' => $row['ciudad']);                
+                    $productJson = json_encode($Product);
+                    return $productJson;
+                }
+            } catch(PDOException $e)
+            {
+                echo "Error: " . $e->getMessage();
+            }
+        }  
+
 //#endregion
     }
 ?>

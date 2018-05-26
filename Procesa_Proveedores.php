@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $id     = $valida->test_input($_POST['txt_id']);
         $tel        = $valida->test_input($_POST['txt_telefono']);
         $nombre_social  = $valida->test_input($_POST['txt_nombre_social']);
-        $ciudad = $valida->test_input($_POST['ciudad_proveedor']);
+        $ciudad = $valida->test_input($_POST['txt_ciudad']);
         $pro->setNombre($nombre);
         $pro->setID($id);
         $pro->setTelefono($tel);
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $pro->setCiudad($ciudad);
         $pro->Insertar();
 	} elseif ( isset($_POST['btnActualizar'])){
-        echo "btnActualizar";
+        $hidenid             = $valida->test_input($_POST['hiddenEdit_ID']);
         $id         = $valida->test_input($_POST['txt_edit_id']);
         $nombre     = $valida->test_input($_POST['txt_edit_nombre']);
         $tel        = $valida->test_input($_POST['txt_edit_telefono']);
@@ -36,15 +36,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         echo $id;
         echo $tel;
         echo $nombre;
-        $pro->Editar();
+        $pro->Editar($hidenid);
         exit();
-	} else if ( isset($_POST['btnEliminar'])){
+    }else if(isset($_POST['getDataProveedor'])){
+        if(isset($_POST['id'])){
+            $product = new mantenimiento_proveedores();
+            $id = $valida->test_input($_POST['id']);
+            echo $product->getProveedorByCampoJSON("id",$id);           
+        }
+        exit();
+    } else if ( isset($_POST['btnEliminar'])){
         $id = $valida->test_input($_POST['lbl_ID']);
         $pro = new mantenimiento_proveedores();
         $pro->setId($id);
         $pro->Eliminar();
     } else if ( isset($_POST['btnBuscar'])){
-        echo "buscar";
+        if ( isset($_POST['btnBuscar'])){ 
+            if(isset($_POST['ProveedorABuscar'])){
+                $concepto =  $_POST['ProveedorABuscar'];
+                $product = new mantenimiento_proveedores();
+                $product->getTablaProveedor($concepto);
+            }
+            else  {
+                echo "No existe valor a buscar";
+            }
+            exit();
+        }
     } 
     else if(isset($_POST['getDataUser'])){
         if(isset($_POST['id'])){

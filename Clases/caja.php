@@ -45,11 +45,11 @@ include_once("conexion.php");
         public function getSaldo()                       { return $this->saldo;         }    
 
         public function setId($id)                       { $this->id = $id;             }    
-        public function setNombre($nombre)               { $this->id = $nombre;         }    
-        public function setDescipcion($descripcion)      { $this->id = $descripcion;    }    
-        public function setUsuarioActivo($usuarioActivo) { $this->id = $usuarioActivo;  }    
-        public function setUltimoUsuario($ultimoUsuario) { $this->id = $ultimoUsuario;  }    
-        public function setSaldo($saldo)                 { $this->id = $saldo;          }    
+        public function setNombre($nombre)               { $this->nombre = $nombre;         }    
+        public function setDescipcion($descripcion)      { $this->descripcion = $descripcion;    }    
+        public function setUsuarioActivo($usuarioActivo) { $this->UsuarioActivo = $usuarioActivo;  }    
+        public function setUltimoUsuario($ultimoUsuario) { $this->ultimoUsuario = $ultimoUsuario;  }    
+        public function setSaldo($saldo)                 { $this->saldo = $saldo;          }    
         
     // ---------- M E T O D O S   F U N C I O N A L E S ------------      
     
