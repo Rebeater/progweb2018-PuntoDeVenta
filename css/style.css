@@ -14,6 +14,45 @@
 body{
 	font-family: 'Open sans';
 }
+.login-container *{
+	margin-bottom: 1em;
+}
+.login-container p{
+	margin-bottom: .3em;
+}
+
+.bodylogin{
+	
+	background-image: url('../img/sliderposA.jpg');
+	/*background-image: url('../img/pexels-photo-994197.jpeg');*/
+	background-size: cover; 	
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.login-container{
+	background: rgba(255,255,255,.5);
+	background: rgba(0,0,0,.4);
+	border-radius: 25px;
+	margin:  7em 55em;
+	margin:  5em auto;
+	margin:  7em 10em;
+	width: 30%;
+	padding: 1em 2em;
+	padding-top: 1em;
+
+	color: black;
+	color: white;
+	box-shadow: 5px 5px 20px 0px black;
+}
+
+.login-container h1{
+	margin: 0;
+	font-family: serif;	
+	margin-bottom: .5em;
+	color: rgba(255,255,255,1);	
+	text-align: center;
+}
 
 
 .buscador{

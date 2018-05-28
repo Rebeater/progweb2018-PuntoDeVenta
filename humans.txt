@@ -1,14 +1,15 @@
 /* TEAM */
-    Web designer: Jorge Rubio
+    Frontend: Eber Reta
+    Contact: eberretab [at] gmail.com
     From: La Paz, Baja California Sur, México
 
-    Web designer: Eber Reta
+    Backend: Jorge Rubio
     From: La Paz, Baja California Sur, México
+
 
 /* SITE */
     Last update:2018/05/22
 	Language: Español
-	Doctype: HTML5, CSS4, PHP, JS
-    Components: jQuery, Fontawesome, PHPMailer
-	IDE: Visual Studio Code, Notepad++, FileZilla, Photoshop
-    Data base hosted on: Amazon Web Services RDS
+	Doctype: HTML5, CSS4, PHP, JavaScript
+    Components: jQuery, Fontawesome, PHPMailer, restcountries
+	IDE: Visual Studio Code

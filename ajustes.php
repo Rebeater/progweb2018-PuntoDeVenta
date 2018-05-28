@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="cache-control" content="no-cache" />
+    
     <script src="js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
@@ -47,29 +48,27 @@
         </div>
         <div class="grid-container-telefono">
             <p                 style="grid-area:lbltel" >Teléfono</p>
-            <input type="tel" style="grid-area:telcode" class="form-control " id="txt_telefonoCode" name="txt_telefonoCode" placeholder="00" >
-            <input type="tel" style="grid-area:tel"     class="form-control " id="txt_telefono"     name="txt_telefono"     placeholder="Teléfono">
+            <input type="tel"  style="grid-area:telcode" class="form-control " id="txt_telefonoCode" name="txt_telefonoCode" placeholder="00" >
+            <input type="tel"  style="grid-area:tel"     class="form-control " id="txt_telefono"     name="txt_telefono"     placeholder="Teléfono">
         </div>
         <p>Correo electronico</p>
-        <input type="email" class="form-control" id="txt_correo" name="txt_correo" placeholder="Correo electronico" >
+        <input type="email"    class="form-control" id="txt_correo"            name="txt_correo"            placeholder="Correo electronico" >
         <p>Soporte</p>
-        <input type="email" class="form-control" id="txt_correoSoporte" name="txt_passCorreoSoporte" placeholder="Correo electronico Soporte" autocomplete="off"  appnoautocomplete="">
-        
-        <input type="password" class="form-control" id="txt_passCorreoSoporte" name="txt_passSoporte" placeholder="Contraseña soporte"  autocomplete="off"  appnoautocomplete="">  
+        <input type="email"    class="form-control" id="txt_correoSoporte"     name="txt_passCorreoSoporte" placeholder="Correo electronico Soporte" autocomplete="off"  appnoautocomplete="">
+        <input type="password" class="form-control" id="txt_passCorreoSoporte" name="txt_passSoporte"       placeholder="Contraseña soporte"         autocomplete="off"  appnoautocomplete="">  
     </div>
 
     <div id="div_Personalizacion" style="grid-area: div_Personalizacion; ">
         <h3>Personalización</h3>
         <p>logo</p>
-        <div id="divLogo" class="grid-content-logo" style="width: 100%">
-            <img    class="rounded" style="grid-area:imgLogo; margin:auto; width: 21em;" alt="logo"   id="logo"        name="logo"    value="img\photo.png"    src="img\photo.png" >
-            <input type="button" class="form-control btn-primary " style="grid-area:btnSubir;"        id="btnSubir"    name="btnSubir"    value="Subir">
-            <input type="button" class="form-control btn-danger"   style="grid-area:btnEliminar;"     id="btnEliminar" name="btnEliminar" value="Eliminar">
+        <div class="grid-content-logo" id="divLogo"  style="width: 100%">
+            <img    class="rounded" style="grid-area:imgLogo; margin:auto; width: 21em;" alt="logo" id="logo"        name="logo"    value="img\photo.png"    src="img\photo.png" >
+            <input type="button" class="form-control btn-primary " style="grid-area:btnSubir;"      id="btnSubir"    name="btnSubir"    value="Subir">
+            <input type="button" class="form-control btn-danger"   style="grid-area:btnEliminar;"   id="btnEliminar" name="btnEliminar" value="Eliminar">
         </div>
         <p>Descripción de la empresa</p>
-        <textarea class="form-control" name="txt_Descripcion" id="txt_Descripcion" name="txt_Descripcion" cols="30" rows="4" placeholder="Descripción de la empresa"></textarea>
-        <br>
-        <input type="button" class="form-control btn btn-success"  id="btnGuardar" name="btnGuardar" value="Guardar" onclick="saveData();">   
+        <textarea class="form-control" id="txt_Descripcion" name="txt_Descripcion" cols="30" rows="4" placeholder="Descripción de la empresa"></textarea><br>
+        <input type="button" class="form-control btn btn-success" id="btnGuardar" name="btnGuardar" value="Guardar" onclick="saveData();">   
     </div>
 </div>
 <!--</form>-->
