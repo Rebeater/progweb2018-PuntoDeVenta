@@ -62,7 +62,7 @@ function armarCboxPaises(paises){
 
 function loadData(){
     //obeto de prueba
-     /*var result2 = '{ "companyName":"Electronics" ,'+
+     var result2 = '{ "companyName":"Electronics" ,'+
                        ' "pais":"Mexico" ,'+
                        ' "cp":"2305" ,'+
                        ' "ciudad":"La Pah" ,'+
@@ -75,7 +75,7 @@ function loadData(){
                        ' "passSoporte":"contrasena" ,'+
                        ' "img":"img/131-logo-steren.png" ,'+
                        ' "descripcion":"Electrónica Steren es una empresa Mexicana que fue fundada en la Ciudad de México en 1956 que se dedica a comercializar bienes electrónicos, de computación y tecnología. Tiene más de 360 tiendas distribuidas en México, Costa Rica, República Dominicana, Guatemala, Colombia y Estados Unidos, y una oficina de control de calidad en Shanghai, China."}';
-       */ 
+        
                       
     $.ajax(
         {
@@ -84,40 +84,40 @@ function loadData(){
             data: "loadData=" + "true",
             contentType: "application/x-www-form-urlencoded",
             success: function(result){
-                var ajustes = JSON.parse(result);
-                document.getElementById("companyName").value = ajustes.companyName;
-                document.getElementById("cbx_pais").value = ajustes.pais;
-                document.getElementById("txt_cp").value = ajustes.cp;
-                document.getElementById("txt_ciudad").value = ajustes.ciudad;
-                document.getElementById("txt_estado").value = ajustes.estado;
-                document.getElementById("txt_domicilio").value = ajustes.domicilio;
-                document.getElementById("txt_telefonoCode").value = ajustes.telefonoCode;
-                document.getElementById("txt_telefono").value = ajustes.telefono;
-                document.getElementById("txt_correo").value = ajustes.correo;
-                document.getElementById("txt_correoSoporte").value = ajustes.correoSoporte;
-                document.getElementById("txt_passCorreoSoporte").value = ajustes.passSoporte;
-                document.getElementById("logo").src = ajustes.img;
-                document.getElementById("logo").value = ajustes.img;
-                document.getElementById("txt_Descripcion").value = ajustes.descripcion;
+                var ajustes = JSON.parse(result2);
+                $('#companyName').val(ajustes.companyName);
+                $('#cbx_pais').val(ajustes.pais);
+                $('#txt_cp').val(ajustes.cp);
+                $('#txt_ciudad').val(ajustes.ciudad);
+                $('#txt_estado').val(ajustes.estado);
+                $('#txt_domicilio').val(ajustes.domicilio);
+                $('#txt_telefonoCode').val(ajustes.telefonoCode);
+                $('#txt_telefono').val(ajustes.telefono);
+                $('#txt_correo').val(ajustes.correo);
+                $('#txt_correoSoporte').val(ajustes.correoSoporte);
+                $('#txt_passCorreoSoporte').val(ajustes.passSoporte);
+                $('#logo').attr("src",ajustes.img);
+                $('#logo').val(ajustes.img);
+                $('#txt_Descripcion').val(ajustes.descripcion);
             }						
         });		
 }
 
 
 function saveData(){
-    var companyName = document.getElementById("companyName").value;
-    var pais = document.getElementById("cbx_pais").value;
-    var cp = document.getElementById("txt_cp").value;
-    var ciudad = document.getElementById("txt_ciudad").value;
-    var estado = document.getElementById("txt_estado").value;
-    var domicilio= document.getElementById("txt_domicilio").value;
-    var telefonoCode= document.getElementById("txt_telefonoCode").value;
-    var telefono= document.getElementById("txt_telefono").value;
-    var correo = document.getElementById("txt_correo").value;
-    var correoSoporte = document.getElementById("txt_correoSoporte").value;
-    var passCorreoSoporte = document.getElementById("txt_passCorreoSoporte").value;
-    var descripcion = document.getElementById("txt_Descripcion").value;
-    var img = document.getElementById("logo").value;
+    var companyName       = $('#companyName').val();
+    var pais              = $('#cbx_pais').val();
+    var cp                = $('#txt_cp').val();
+    var ciudad            = $('#txt_ciudad').val();
+    var estado            = $('#txt_estado').val();
+    var domicilio         = $('#txt_domicilio').val();
+    var telefonoCode      = $('#txt_telefonoCode').val();
+    var telefono          = $('#txt_telefono').val();
+    var correo            = $('#txt_correo').val();
+    var correoSoporte     = $('#txt_correoSoporte').val();
+    var passCorreoSoporte = $('#txt_passCorreoSoporte').val();
+    var descripcion       = $('#txt_Descripcion').val();
+    var img               = $('#logo').val();
 
     obj = { "companyName":      companyName, 
             "pais":             pais,         
