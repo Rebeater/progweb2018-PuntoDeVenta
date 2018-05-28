@@ -1,0 +1,71 @@
+#btn-login{
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.grid-container *{
+    margin-bottom: 1em;
+}
+
+#title           { grid-area: title;}
+#lblInstructions { grid-area: lblInstructions; margin:.5em 0;}
+#email           { grid-area: email;}
+#btn-login       { grid-area: btn-login;}
+#linkBack        { grid-area: linkBack;}
+
+.grid-container{    
+    margin:2em auto;
+    width:40%;
+    display: grid;
+    grid-gap: 5px 2em;
+    grid-template-areas:
+    'title'
+    'lblInstructions'
+    'email'
+    'btn-login'
+    'linkBack'
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .grid-container{
+     width:90%;
+     grid-gap: 2px;
+     padding: 2px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .grid-container {
+     width:90%;
+        grid-gap: 2px;
+        padding: 2px;
+      }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .grid-container {
+        width:50%;
+     
+    }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .grid-container {
+        width:40%;
+      
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .grid-container {
+        width:40%;
+      
+    }
+}
+
+

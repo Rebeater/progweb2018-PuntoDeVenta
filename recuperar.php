@@ -1,61 +1,41 @@
-<?php
-include ("Clases/conexion.php");
-include ("Clases/funciones.php");
-$errores = array();
+<!--<?php
+	include ("Clases/conexion.php");
+	include ("Clases/funciones.php");
+	$errores = array();
 
-if(empty($_POST)){
+	if(empty($_POST)){
 
-}
-?>
-
+	}
+?>-->
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Recuperar Password</title>
-		
-		<link rel="stylesheet" href="css/bootstrap.min.css" >
-		<link rel="stylesheet" href="css/bootstrap-theme.min.css" >
-		<script src="js/bootstrap.min.js" ></script>
-	</head>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="cache-control" content="no-cache" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css" >
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css" >
+	<script src="js/bootstrap.min.js" ></script>
 	
-	<body>
+	<link rel="stylesheet" href="css/grid-login.css" >
+	<title>Recuperar Password</title>
+</head>
+<body style="background:#f1f1f1">
+	<header style="height: 43px; background: #34495E;">
 		
-		<div class="container">    
-			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-				<div class="panel panel-info" >
-					<div class="panel-heading">
-						<div class="panel-title">Recuperar Password</div>
-					</div>     
-					
-					<div style="padding-top:30px" class="panel-body" >
-						
-						<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-						
-						<form id="loginform" class="form-horizontal" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
-							
-							<div style="margin-bottom: 25px" class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-								<input id="email" type="email" class="form-control" name="email" placeholder="email" required>                                        
-							</div>
-							
-							<div style="margin-top:10px" class="form-group">
-								<div class="col-sm-12 controls">
-									<button id="btn-login" type="submit" class="btn btn-success">Enviar</a>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<div class="col-md-12 control">
-									<div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
-										<a href="login.php">Regresar</a>
-									</div>
-								</div>
-							</div>    
-						</form>
-						
-					</div>                     
-				</div>  
-			</div>
-		</div>
-	</body>
+	</header>
+	
+	<div class="grid-container">
+		<form id="loginform" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
+			<h4 id="title" >Olvidé mi contraseña</h4>
+			<p id="lblInstructions">Ingresa tu correo electrónico</p>
+			<input  type="email"  class="form-control" id="email"     name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
+			<button type="submit" class="form-control" id="btn-login" name="btn-login" >Siguiente</button>
+			<a href="login.php" id="linkBack">Regresar</a>
+		</form>
+	</div>                     
+</body>
 </html>
