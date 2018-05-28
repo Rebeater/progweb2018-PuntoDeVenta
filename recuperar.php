@@ -1,12 +1,11 @@
-<!--<?php
+<?php
 	include ("Clases/conexion.php");
 	include ("Clases/funciones.php");
 	$errores = array();
 
 	if(empty($_POST)){
-
 	}
-?>-->
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
