@@ -1,4 +1,5 @@
 var paisesJSON;
+
 $( document ).ready(function() {
     recuperarPaises();
 

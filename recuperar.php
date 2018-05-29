@@ -24,15 +24,15 @@
 </head>
 <body style="background:#f1f1f1">
 	<header style="height: 43px; background: #34495E;">
-		
 	</header>
 	
 	<div class="grid-container">
-		<form id="loginform" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
+		<!--<form id="loginform" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">-->
+		<form id="loginform" role="form" action="procesa_recuperar.php" method="POST">
 			<h4 id="title" >Olvidé mi contraseña</h4>
 			<p id="lblInstructions">Ingresa tu correo electrónico</p>
-			<input  type="email"  class="form-control" id="email"     name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
-			<button type="submit" class="form-control" id="btn-login" name="btn-login" >Siguiente</button>
+			<input  type="email"  class="form-control" id="email"         name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
+			<button type="submit" class="form-control" id="btn-recuperar" name="btn-recuperar" >Siguiente</button>
 			<a href="login.php" id="linkBack">Regresar</a>
 		</form>
 	</div>                     
