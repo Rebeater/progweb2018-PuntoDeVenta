@@ -4,7 +4,6 @@
 	$errores = array();
 
 	if(empty($_POST)){
-
 	}
 ?>
 <!DOCTYPE html>
