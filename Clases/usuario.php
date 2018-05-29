@@ -29,7 +29,7 @@
          }
 
         
-         public function setCorreo($correo){ $this->correo = $correo; }
+        public function setCorreo($correo){ $this->correo = $correo; }
         public function getCorreo(){ return $this->correo; }
 
         public function setContrasena($contrasena){ $this->contrasena = $contrasena; }
@@ -378,7 +378,80 @@
             echo "</div>";
         }
 
+        public function validarExistenciaUsuario($usr){
+            $conex = new conexion();
+            $result = $conex->Consultar("Select id, nombre, correo, contrasena, telefono from usuario where correo = '".$usr."' OR telefono = '".$usr."'" );
+            $user = "";
+            foreach($result as $row){                
+                $user = (array('id' => $row['id'], 'nombre' => $row['nombre'],'correo' => $row['correo'], 'telefono' => $row['telefono']));
+            }
+            return $user;
+        }
+     
+        public function updateCampo($id, $campo, $data){
+            try{
+                $cadena= "update usuario set ".$campo."=:data WHERE id=:id";
+				$conex=new conexion();
+				$conn = $conex->conectarse();
+                $stmt = $conn->prepare($cadena);
 
+				$stmt->bindParam(':data', $data);
+                $stmt->bindParam(':id', $id);
+            
+				if($stmt->execute())
+				{
+					echo "No hubo error";
+					return true;
+				}
+				else
+				{
+                    
+                    foreach($stmt->errorInfo() as $errores){
+                        echo "<br>";
+                        echo $errores;}
+                        echo "<br>";
+                    
+					echo "hubo error";
+					return false;
+				}
+				$conn = null;
+            }catch(PDOException $e)
+			{
+				echo "Error: " . $e->getMessage();
+			} 
+        }
 
+        public function validarToken($token){
+            try{
+                $conex = new conexion();
+                $resultado = $conex->Consultar("Select id, correo, timestamptoken, NOW() as now from usuario where token = $token");
+                
+                $usr = "";
+                foreach($resultado as $row){
+                    $usr = (array('id' => $row['id'], 'correo' => $row['correo'], 'timestamptoken' => $row['timestamptoken'], 'now' => $row['now']));
+                    
+                }
+                if($usr != ""){
+                $retardo =  date_diff(date_create($usr['timestamptoken']), date_create($usr['now']));
+                if($retardo->format('%i')<10){
+                    $this->setId($usr['id']);
+                    $this->setCorreo($usr['correo']);
+                    
+                    return (array('usuario'=> $usr['id'], 'valido' => true, 'respuesta' => 'valido'));
+                }
+                else{
+
+                    return (array('valido' => false, 'respuesta' => 'Se agoto el tiempo'));
+
+                }
+                }
+                else{
+                    return (array('valido' => false, 'respuesta' => 'Se agoto el tiempo'));
+                }
+            }
+            catch(PDOException $e){
+                return false;
+            }
+        }
     }
 ?>

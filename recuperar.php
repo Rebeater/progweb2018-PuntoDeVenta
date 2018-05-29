@@ -29,11 +29,11 @@
 	
 	<div class="grid-container">
 		<!--<form id="loginform" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">-->
-		<form id="loginform" role="form" action="paso1.html" method="POST">
+		<form id="loginform" role="form" action="procesa_recuperar.php" method="POST">
 			<h4 id="title" >Olvidé mi contraseña</h4>
 			<p id="lblInstructions">Ingresa tu correo electrónico</p>
-			<input  type="email"  class="form-control" id="email"     name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
-			<button type="submit" class="form-control" id="btn-login" name="btn-login" >Siguiente</button>
+			<input  type="email"  class="form-control" id="email"         name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
+			<button type="submit" class="form-control" id="btn-recuperar" name="btn-recuperar" >Siguiente</button>
 			<a href="login.php" id="linkBack">Regresar</a>
 		</form>
 	</div>                     
