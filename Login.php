@@ -13,7 +13,8 @@
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
-	
+	<script src="js/popper.js"></script>
+
 	<script src="js/bootstrap.js"></script>
 	<title>Login</title>
 </head>
@@ -23,12 +24,12 @@
 		<div class="login-container">
 			<h1>Bienvenido!</h1>
 			<p>Correo</p>			
-			<input type="text" 	   class="form-control" id="correo" 	name = "correo"   placeholder="Correo"     maxlength="30" autofocus>
+			<input type="email" 	   class="form-control" id="correo" 	name = "correo"   placeholder="Correo"     maxlength="30" autofocus>
 			<span>Constraseña</span>			
 			<a href="recuperar.php" target:"_blank" style="float:right; margin-bottom:.5em;">¿Olvidaste tu contraseña?</a>
-			<input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" maxlength = "10">
-			<input type="checkbox" id="cbox_showPass" > Mostrar contraseña
-			<input type="submit"   class="form-control btn-primary" value = "Ingresar">
+			<input type="password"  class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" data-toggle="tooltip" data-placement="right" data-trigger='manual' title="Mayúsculas activadas" >
+			<input type="checkbox"  id="cbox_showPass" > Mostrar contraseña
+			<input type="submit"    class="form-control btn-primary" value = "Ingresar">
 		</div>
 	</form>
 
@@ -43,7 +44,23 @@
 			else if(cboxShowPass[0].checked == false)
 				txtPass.get(0).type = 'password';
 		});
+
+		txtPass.blur(function(){
+			$('#contraseña').tooltip('hide');			
+		});
+
+		txtPass.keypress(function (event) {
+			kCode = event.keyCode? event.keyCode : event.which;
+			sKey = event.shiftKey ? event.shiftKey : ((kCode==16)? true : false);
+			if(((kCode>=65&&kCode<=90)&&!sKey)||((kCode>=97&&kCode<=122)&&sKey ))
+				$('#contraseña').tooltip('show');
+			else
+				$('#contraseña').tooltip('hide');
+		});
+
 	});
 </script>
 </body>
 </html>
+
+
