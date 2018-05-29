@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="cache-control" content="no-cache" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" >
+	<script src="js/bootstrap.min.js" ></script>
+    <link rel="stylesheet" href="css/grid-login.css" >
+    <title>Paso2</title>
+</head>
+<body>
+<body style="background:#f1f1f1">
+    <header style="height: 43px; background: #34495E;">
+    </header>
+        <form id="loginform" class="grid-container-paso2" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
+            <h4 id="title" >Autentificación de 2 pasos</h4>
+            <p id="lblInstructions">Ingresa el codigo que enviamos a tu número celular</p>
+            <div class="grid-container-inputs">
+                <input  type="text"  class="form-control" id="code1"     name="code1" placeholder="*" onkeyup="sigInput(1)"required autofocus>
+                <input  type="text"  class="form-control" id="code2"     name="code2" placeholder="*" onkeyup="sigInput(2)"required autofocus>
+                <input  type="text"  class="form-control" id="code3"     name="code3" placeholder="*" onkeyup="sigInput(3)"required autofocus>
+                <input  type="text"  class="form-control" id="code4"     name="code4" placeholder="*" onkeyup="sigInput(4)"required autofocus>
+            </div>
+            <button type="submit" class="form-control" id="btn-login" name="btn-login" >Siguiente</button>
+            <a href="login.php" id="linkBack">Regresar</a>
+        </form>
+</body>
+</html>
+
+<script>
+    function sigInput(n){
+        switch (n) {
+            case 1:
+               $('#code2').focus();
+                break;
+            case 2:
+               $('#code3').focus();
+                break;
+            case 3:
+               $('#code4').focus();
+                break;
+            case 4:
+               $('#btn-login').focus();
+                break;
+            default:
+                break;
+        }
+    }
+</script>

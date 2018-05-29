@@ -1,4 +1,4 @@
-<!--<?php
+<?php
 	include ("Clases/conexion.php");
 	include ("Clases/funciones.php");
 	$errores = array();
@@ -6,7 +6,7 @@
 	if(empty($_POST)){
 
 	}
-?>-->
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,11 +25,11 @@
 </head>
 <body style="background:#f1f1f1">
 	<header style="height: 43px; background: #34495E;">
-		
 	</header>
 	
 	<div class="grid-container">
-		<form id="loginform" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
+		<!--<form id="loginform" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">-->
+		<form id="loginform" role="form" action="paso1.html" method="POST">
 			<h4 id="title" >Olvidé mi contraseña</h4>
 			<p id="lblInstructions">Ingresa tu correo electrónico</p>
 			<input  type="email"  class="form-control" id="email"     name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
