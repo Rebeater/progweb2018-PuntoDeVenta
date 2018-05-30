@@ -23,8 +23,7 @@
 <body>
   <?php include_once("header.php"); ?>
 
-    <form id='proveedoresList' name='proveedoresList' action="procesa_proveedores.php" class="container" method="POST">
-          
+          <div class="container">
         <crumb>
           <span>Inicio > Proveedores</span>
         </crumb>
@@ -34,7 +33,7 @@
         <!-- Bscador <input type="text" id="txt_Buscador" name="txt_Buscador" class="buscador" onKeyUp="buscar();" placeholder="Escribe el nombre del usuario o parte de este para realizar una busqueda...">
         <input type="submit" class="btn btn-default" id="btnBuscar"    name="btnBuscar" value="Buscar">-->
         <div class="input-group">
-          <input type="text" class="form-control" id="txt_Buscador" href='js/proveedores.js:;' name="txt_Buscador" onKeyUp="onKeyDownHandler();" placeholder="Escriba el id a buscar...">
+          <input type="text" class="form-control" id="txt_Buscador" href='js/proveedores.js:;' name="txt_Buscador" onKeyUp="onKeyDownHandler();" placeholder="Escriba el nombre del proveedor o la razón social para realizar una busqueda...">
           <div class="input-group-btn">
             <button class="btn btn-default" type="submit" id="btnBuscar" name="btnBuscar" onClick = "buscarProveedor();">
             <i class="fas fa-search"></i>
@@ -65,7 +64,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Ingresar proveedor</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" id="modalNewClose" class="close" data-dismiss="modal">&times;</button>
               </div>
 
               <div class="modal-body">            
@@ -74,7 +73,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Nombre</div>
                   </div>
-                  <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre" size="40" maxlength="40" >
+                  <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre" size="40" maxlength="40" autofocus>
                 </div>
 
                 <label class="sr-only" for="txt_telefono">Teléfono</label>
@@ -82,15 +81,15 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Teléfono</div>
                   </div>
-                  <input type="number" class="form-control"  name="txt_telefono" id="txt_telefono" size="10" placeholder="Teléfono" maxlength="10">
+                  <input type="text" class="form-control"  name="txt_telefono" id="txt_telefono" size="10" placeholder="Teléfono" maxlength="10">
                 </div>
 
-                <label class="sr-only" for="txt_nombre_social">Nombre social</label>
+                <label class="sr-only" for="txt_nombre_social">Razón social</label>
                 <div class="input-group mb-2 mr-sm-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text">Nombre social</div>
+                    <div class="input-group-text">Razón social</div>
                   </div>
-                  <input type="text" class="form-control"  name="txt_nombre_social" id="txt_nombre_social" placeholder="nombre social" maxlength="20">
+                  <input type="text" class="form-control"  name="txt_nombre_social" id="txt_nombre_social" placeholder="Razón social" maxlength="20">
                 </div>
 
                 <label class="sr-only" for="txt_ciudad">Ciudad</label>
@@ -104,8 +103,8 @@
                     
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <input type="submit" value="Insertar" id="btnInsertar"  name="btnInsertar" class="btn btn-success" onClick = "createProveedorAJAX()">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button value="Insertar" id="btnInsertar"  name="btnInsertar" class="btn btn-success" onClick="createProveedorAJAX()">Insertar</button>
               </div>
             </div>
 
@@ -120,7 +119,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Editar proveedor</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" id="modalEditClose" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">            
               <input type="hidden" id="hiddenEdit_ID" name="hiddenEdit_ID">
@@ -146,15 +145,15 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Teléfono</div>
                   </div>
-                  <input type="number" class="form-control"  name="txt_edit_telefono" id="txt_edit_telefono" placeholder="Teléfono">
+                  <input type="text" class="form-control"  name="txt_edit_telefono" id="txt_edit_telefono" placeholder="Teléfono" maxlength="10">
                 </div>
 
-                <label class="sr-only" for="txt_edit_nombre_social">Nombre social</label>
+                <label class="sr-only" for="txt_edit_nombre_social">Razón social</label>
                 <div class="input-group mb-2 mr-sm-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text">Nombre social</div>
+                    <div class="input-group-text">Razón social</div>
                   </div>
-                  <input type="text" class="form-control"  name="txt_edit_nombre_social" id="txt_edit_nombre_social" placeholder="nombre social">
+                  <input type="text" class="form-control"  name="txt_edit_nombre_social" id="txt_edit_nombre_social" placeholder="Razón social">
                 </div>
 
                 <label class="sr-only" for="txt_edit_ciudad">Ciudad</label>
@@ -162,7 +161,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Ciudad</div>
                   </div>
-                  <input type="text" class="form-control"  name="txt_edit_ciudad" id="date_edit_Nacimiento" placeholder="Ciudad">
+                  <input type="text" class="form-control"  name="txt_edit_ciudad" id="txt_edit_ciudad" placeholder="Ciudad">
                 </div>
 
               </div>
@@ -183,15 +182,17 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">¿Eliminar usuario?</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" id="modalDeleteClose" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">            
-                    <input type="hidden" id="lbl_ID" name="lbl_ID">ID:
-                    <label id="lbl_id">id</label><br>
+                    <input type="hidden" id="lbl_ID" name="lbl_ID">
+                    ID:
+                    <label id="lbl_id">id</label>
+                    <br>Nombre: 
                     <label id="lbl_nombre">nombre</label>
                     <br> Teléfono:
                     <label id="lbl_telefono">Teléfono</label>
-                    <br> Nombre Social:
+                    <br> Razón Social:
                     <label id="lbl_nombre_social">Nombre Social</label>
                     <br> Ciudad:
                     <label id="lbl_ciudad">Ciudad</label>
@@ -204,7 +205,7 @@
 
           </div>
         </div>
-    </form>
+        </div>  
 </body>
 </html>
 

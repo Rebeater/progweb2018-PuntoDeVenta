@@ -12,7 +12,8 @@
             $usuario = $valida->test_input($_POST['email']);
             $usr = new usuario();
             $user = $usr->validarExistenciaUsuario($usuario);
-            if($usr != ""){
+            if($user != ""){
+                
                 $s = new smsup\smsuplib('22fa24052582a4e0d9e242d34d924755', 'a068a4614ca4add5e63ebc944b8c8d205d5efcd2');
                 $resul = '';
                 
@@ -24,13 +25,13 @@
                 $remitente = '';
                 $codificacion = 'GSM';
                 //DESCOMENTAR ESTA LINEA PARA ENVIAR MENSAJE SI ESTA COMENTADA USAR PARA PRUEBA EL TOKEN GENERADO EN LA BASE DE DATOS EN LA TABLA USARIO.
-                //$resul = json_encode($s->NuevoSMS($texto, $numeros, '', $referencia, $remitente, $codificacion), JSON_PRETTY_PRINT);
+//                $resul = json_encode($s->NuevoSMS($texto, $numeros, '', $referencia, $remitente, $codificacion), JSON_PRETTY_PRINT);
                 
                 //if($resul['httpcode'] == 200){
                     $usr->updateCampo($user['id'],"token", $token);
-                    header("location: paso1");  
-                //}
+                    //}
             }
+            header("location: paso1");  
 
         } else if(isset($_POST['btn-siguiente'])){    
             $token1 = $valida->test_input($_POST['code1']);

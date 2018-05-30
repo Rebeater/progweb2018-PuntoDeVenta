@@ -400,7 +400,7 @@
             
 				if($stmt->execute())
 				{
-					echo "No hubo error";
+					echo "";
 					return true;
 				}
 				else

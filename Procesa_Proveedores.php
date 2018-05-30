@@ -10,17 +10,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $pro = new mantenimiento_proveedores();	
 	if (isset($_POST['btnInsertar'])){
          //guardar del post 
+        $pro = new mantenimiento_proveedores();	
         $nombre     = $valida->test_input($_POST['txt_nombre']);
-        $id     = $valida->test_input($_POST['txt_id']);
         $tel        = $valida->test_input($_POST['txt_telefono']);
         $nombre_social  = $valida->test_input($_POST['txt_nombre_social']);
         $ciudad = $valida->test_input($_POST['txt_ciudad']);
         $pro->setNombre($nombre);
-        $pro->setID($id);
         $pro->setTelefono($tel);
         $pro->setNombre_social($nombre_social);
         $pro->setCiudad($ciudad);
         $pro->Insertar();
+        exit();
 	} elseif ( isset($_POST['btnActualizar'])){
         $hidenid             = $valida->test_input($_POST['hiddenEdit_ID']);
         $id         = $valida->test_input($_POST['txt_edit_id']);
@@ -33,9 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $pro->setTelefono($tel);
         $pro->setNombre_social($nombre_social);
         $pro->setCiudad($ciudad);
-        echo $id;
-        echo $tel;
-        echo $nombre;
         $pro->Editar($hidenid);
         exit();
     }else if(isset($_POST['getDataProveedor'])){
@@ -50,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $pro = new mantenimiento_proveedores();
         $pro->setId($id);
         $pro->Eliminar();
+        exit();
     } else if ( isset($_POST['btnBuscar'])){
         if ( isset($_POST['btnBuscar'])){ 
             if(isset($_POST['ProveedorABuscar'])){
@@ -72,15 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
     }
     else if(isset($_POST['getTabla'])){
-        $pro = new usuario();
         $pro->LeerTodo();
         exit();
     }
     else {
 	    echo "Nada";
     }
-   header("Location: proveedores.php"); 
-
 }
 else if ($_SERVER["REQUEST_METHOD"] == "GET") 
 {
@@ -94,5 +89,4 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
         
     }
 }
-        
 ?> 
