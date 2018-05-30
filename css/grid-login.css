@@ -7,7 +7,11 @@
 #code2           { grid-area: code2; text-align: center; text-transform: uppercase; width: 3em; height: 3em}
 #code3           { grid-area: code3; text-align: center; text-transform: uppercase; width: 3em; height: 3em}
 #code4           { grid-area: code4; text-align: center; text-transform: uppercase; width: 3em; height: 3em}
-.grid-containe-inputs { grid-area: inputs; }
+#reenviar1       { grid-area: reenviar1; }
+#reenviar2       { grid-area: reenviar2; }
+
+.grid-container-inputs { grid-area: inputs; }
+.grid-container-linksBack { grid-area: linksBack; }
 
 #btn-login{
     color: #fff;
@@ -20,7 +24,6 @@
 .grid-container-inputs *{
     margin-bottom: .5em;
 }
-
 
 .grid-container{    
     margin:2em auto;
@@ -35,17 +38,17 @@
     'linkBack';
 }
 
-.grid-container-paso2{    
+.grid-container-paso1{    
     margin: 2em auto;
-    width:40%;
+    width:60%;
     display: grid;
     grid-gap: 5px 2em;
     grid-template-areas:
     'title'
     'lblInstructions'
-    'inputs'
+    'inputs '
     'btn-login'
-    'linkBack ';
+    'linksBack';
 }
 
 .grid-container-inputs{    
@@ -54,8 +57,16 @@
     grid-gap: 5px 2em;
     grid-template-areas: 'code1 code2 code3 code4 ';
 }
+.grid-container-linksBack{    
+    display: grid;
+    grid-gap: 5px 2em;
+    grid-template-areas: 
+        'linkBack reenviar1';
+}
 
-
+#reenviar2{
+    display: none;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .grid-container{
@@ -63,15 +74,22 @@
      grid-gap: 2px;
      padding: 2px;
     }
+    .grid-container-linksBack{    
+        grid-template-areas: 
+            'linkBack reenviar2';
+    }
+    #reenviar2{ display: unset; }
+    #reenviar1{ display: none; }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .grid-container {
-     width:90%;
+        width:90%;
         grid-gap: 2px;
         padding: 2px;
-      }
+    }
+    
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -88,6 +106,7 @@
         width:40%;
       
     }
+    .grid-container-paso1{ width:40%; }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -95,6 +114,7 @@
     .grid-container {
         width:40%;      
     }
+    .grid-container-paso1{ width:40%; }
 }
 
 

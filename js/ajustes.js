@@ -62,7 +62,7 @@ function armarCboxPaises(paises){
 }
 
 function loadData(){
-    //obeto de prueba
+    //objeto de prueba
      var result2 = '{ "companyName":"Electronics" ,'+
                        ' "pais":"Mexico" ,'+
                        ' "cp":"2305" ,'+

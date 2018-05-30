@@ -16,7 +16,7 @@
 <body style="background:#f1f1f1">
     <header style="height: 43px; background: #34495E;">
     </header>
-        <form id="loginform" class="grid-container-paso2" role="form" action="procesa_recuperar.php" method="POST" autocomplete="off">
+        <form id="loginform" class="grid-container-paso1" role="form" action="procesa_recuperar.php" method="POST" autocomplete="off">
             <h4 id="title" >Autentificación de 2 pasos: Paso 1</h4>
             <p id="lblInstructions">Ingresa el codigo que enviamos a tu número celular</p>
             <div class="grid-container-inputs">
@@ -26,7 +26,12 @@
                 <input  type="text"  class="form-control" id="code4" name="code4" placeholder="•" required autofocus maxlength="1">
             </div>
             <button type="submit" class="form-control" id="btn-siguiente" name="btn-siguiente" >Siguiente</button>
-            <a href="login.php" id="linkBack">Regresar</a>
+            <div class="grid-container-linksBack">
+                <a href="login.php" id="linkBack">Regresar</a> 
+                <span id="reenviar1" style="text-align:right;">¿No has recibido tu código? <a href="recuperar.php"> Prueba de nuevo!</a> </span> 
+
+                <a id="reenviar2" style="text-align:right;" href="recuperar.php">Reenviar codigo</a>
+            </div>
         </form>
         
 <script>

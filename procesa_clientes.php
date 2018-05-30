@@ -26,10 +26,11 @@
             $rfc        = $valida->test_input($_POST['txt_rfc']);
             $tel        = $valida->test_input($_POST['txt_telefono']);
             $domicilio  = $valida->test_input($_POST['txt_domicilio']);
-            $ciudad  = $valida->test_input($_POST['txt_ciudad']);
-
+            $ciudad     = $valida->test_input($_POST['txt_ciudad']);
+            $correo     = $valida->test_input($_POST['txt_correo']);
             $client->setNombre($nombre);
             $client->setRfc($rfc);
+            $client->setCorreo($correo);
             $client->setTelefono($tel);
             $client->setDomicilio($domicilio);
             $client->setCiudad($ciudad);
