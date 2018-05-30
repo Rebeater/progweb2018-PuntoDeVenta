@@ -1,6 +1,8 @@
 <?php 
     include_once("Clases/conexion.php");
     include_once("Clases/mantenimiento_proveedores.php");
+    include_once("Clases/usuario.php");
+    include_once("ValidarSesion.php");
     include_once("Clases/puesto.php");
 ?>
 
@@ -45,7 +47,7 @@
         <a data-toggle="modal" href="#myModal">Nuevo proveedor</a>
 
         <!-- users table -->
-        <div id="divUsers" name="divUsers" class="col">
+        <div id="divUsers" name="divUsers" class="table-container">
             <?php  
                 $user = new mantenimiento_proveedores();
                 $user->LeerTodo();

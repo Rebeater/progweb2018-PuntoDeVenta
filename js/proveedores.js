@@ -1,3 +1,9 @@
+$( document ).ready(function() {
+    txt_nombre        = $('#txt_nombre');
+    txt_telefono      = $('#txt_telefono');
+    txt_nombre_social = $('#txt_nombre_social');
+    txt_ciudad        = $('#txt_ciudad');
+});
 
 function buscarByNombre(){    
     var button = "btnBuscar";
@@ -34,75 +40,51 @@ function openProveedor(user){
     if (id == "") {
         return;
     } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-    
-        //#region AJAX para los datos del usario
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var proveedorJson = JSON.parse(this.responseText);
-                document.getElementById("hiddenEdit_ID").value          = proveedorJson.id;
-                //proveedor { 'id', 'nombre', 'telefono', 'nombre_social', 'ciudad' };                
-                document.getElementById("txt_edit_id").value          = proveedorJson.id;
-                document.getElementById("txt_edit_nombre").value      = proveedorJson.nombre;
-                document.getElementById("txt_edit_telefono").value      = proveedorJson.telefono;
-                document.getElementById("txt_edit_nombre_social").value      = proveedorJson.nombre_social;
-                document.getElementById("txt_edit_ciudad").value      = proveedorJson.ciudad;
-            
-            }
-        };
-        xmlhttp.open("POST","procesa_proveedores.php",true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("getDataProveedor=true&id="+id);
-    
-        //#endregion
 
-       
+        $.ajax(
+            {
+                type:"POST",
+                url: "procesa_proveedores.php", 
+                data: "getDataProveedor=true" + "&id="+id,
+                contentType: "application/x-www-form-urlencoded",
+                success: function(result){
+                    var proveedorJson = JSON.parse(result);
+                    $('#hiddenEdit_ID').val(proveedorJson.id);
+                    $('#txt_edit_id').val(proveedorJson.id);
+                    $('#txt_edit_nombre').val(proveedorJson.nombre);
+                    $('#txt_edit_telefono').val(proveedorJson.telefono);
+                    $('#txt_edit_nombre_social').val(proveedorJson.nombre_social);
+                    $('#txt_edit_ciudad').val(proveedorJson.ciudad);
+                }						
+            });		
     }
-    //#endregion
 }
 
 function updateTableProveedores(){
-    if (window.XMLHttpRequest) {
-        // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        // code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    //#region AJAX para actualizar el registro 
-    var data =  "btnActualizar=true"+
-                "&hiddenEdit_ID="+            document.getElementById("hiddenEdit_ID").value+
-                "&txt_edit_id="+            document.getElementById("txt_edit_id").value+
-                "&txt_edit_nombre="+        document.getElementById("txt_edit_nombre").value+
-                "&txt_edit_telefono="+        document.getElementById("txt_edit_telefono").value+
-                "&txt_edit_nombre_social="+           document.getElementById("txt_edit_nombre_social").value +
-                "&txt_edit_ciudad="+           document.getElementById("txt_edit_ciudad").value;
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-               if(this.responseText == "No hubo error")
-                show_snackbar("Registro actualizado correctamente." , 3000);
+    $.ajax(
+        {
+            type:"POST",
+            url: "procesa_proveedores.php", 
+            data: "btnActualizar=true"+
+            "&hiddenEdit_ID="         + $('#hiddenEdit_ID').val()+
+            "&txt_edit_id="           + $('#txt_edit_id').val()+
+            "&txt_edit_nombre="       + $('#txt_edit_nombre').val()+
+            "&txt_edit_telefono="     + $('#txt_edit_telefono').val()+
+            "&txt_edit_nombre_social="+ $('#txt_edit_nombre_social').val() +
+            "&txt_edit_ciudad="       + $('#txt_edit_ciudad').val(),
+            contentType: "application/x-www-form-urlencoded",
+            success: function(result){
+                if(result == "No hubo error")
+                    show_snackbar("Registro actualizado correctamente." , 3000);
                 else    
-               show_snackbar("Error al guardar los cambios.", 3000);
-               rellenarTabla();
-            }
-        };
-        xmlhttp.open("POST","procesa_proveedores.php",true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send(data);
-    //#endregion
+                    show_snackbar("Error al guardar los cambios.", 3000);
+                rellenarTabla();
+            }						
+        });		
     $('#modalEditClose').trigger('click'); 
-
 }
 
 function rellenarTabla(){
-    //#region AJAX para la tabla
     $.ajax(
         {
             type:"POST",
@@ -117,8 +99,6 @@ function rellenarTabla(){
                 }
             }
         });
-
-    //#endregion
 }
 
 function createProveedorAJAX(){ 
@@ -128,10 +108,10 @@ function createProveedorAJAX(){
             url: "procesa_proveedores.php", 
             contentType: "application/x-www-form-urlencoded",
             data:  "btnInsertar=true"+
-            "&txt_nombre="+        document.getElementById("txt_nombre").value+
-            "&txt_telefono="+      document.getElementById("txt_telefono").value+
-            "&txt_nombre_social="+ document.getElementById("txt_nombre_social").value+
-            "&txt_ciudad="+        document.getElementById("txt_ciudad").value,
+            "&txt_nombre="+        txt_nombre.val()+
+            "&txt_telefono="+      txt_telefono.val()+
+            "&txt_nombre_social="+ txt_nombre_social.val()+
+            "&txt_ciudad="+        txt_ciudad.val(),
             success: function(result){
                     if(result == "No hubo error")
                         show_snackbar("Registro creado correctamente." , 3000);
@@ -140,12 +120,11 @@ function createProveedorAJAX(){
                     rellenarTabla();
             }
         });
-    //#endregion
     $('#modalNewClose').trigger('click'); 
-    document.getElementById("txt_nombre").value = "";
-    document.getElementById("txt_telefono").value = "";
-    document.getElementById("txt_nombre_social").value = "";
-    document.getElementById("txt_ciudad").value = "";
+    txt_nombre.val("");
+    txt_telefono.val("");
+    txt_nombre_social.val("");
+    txt_ciudad.val("");
     
 }
 
