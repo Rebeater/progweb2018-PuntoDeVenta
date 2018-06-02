@@ -55,37 +55,42 @@
 //#region CRUD = Create, Read, Update, Delete
         public function Insertar(){
             try{
-                $cadena= "INSERT INTO usuario (nombre, correo, contrasena, puesto, telefono, domicilio, fechaNacimiento, fechaAlta) VALUES (:nombre, :correo, :contrasena, :puesto, :telefono, :domicilio, :fechaNacimiento, :fechaAlta)";
-				$conex=new conexion();
-				$conn = $conex->conectarse();
-                $stmt = $conn->prepare($cadena);
+                $passCifrada = password_hash($this->contrasena, PASSWORD_DEFAULT);
+                if($passCifrada != false){
 
-                $stmt->bindParam(':nombre', $this->nombre);                    
-				$stmt->bindParam(':correo', $this->correo);
-				$stmt->bindParam(':contrasena', $this->contrasena);
-				$stmt->bindParam(':puesto', $this->puesto);
-				$stmt->bindParam(':telefono', $this->telefono);
-				$stmt->bindParam(':domicilio', $this->domicilio);
-				$stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
-                $stmt->bindParam(':fechaAlta', $this->fechaAlta);                
-            
-				if($stmt->execute())
-				{
-					echo "No hubo error";
-					return true;
-				}
-				else
-				{
+                    $cadena= "INSERT INTO usuario (nombre, correo, contrasena, puesto, telefono, domicilio, fechaNacimiento, fechaAlta) VALUES (:nombre, :correo, :contrasena, :puesto, :telefono, :domicilio, :fechaNacimiento, :fechaAlta)";
+				    $conex=new conexion();
+				    $conn = $conex->conectarse();
+                    $stmt = $conn->prepare($cadena);
+
+                    $stmt->bindParam(':nombre', $this->nombre);                    
+				    $stmt->bindParam(':correo', $this->correo);
+				    $stmt->bindParam(':contrasena', $passCifrada);
+				    $stmt->bindParam(':puesto', $this->puesto);
+				    $stmt->bindParam(':telefono', $this->telefono);
+				    $stmt->bindParam(':domicilio', $this->domicilio);
+				    $stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
+                    $stmt->bindParam(':fechaAlta', $this->fechaAlta);                
                     
-                    foreach($stmt->errorInfo() as $errores){
-                        echo "<br>";
-                        echo $errores;}
-                        echo "<br>";
-                    
-					echo "hubo error";
-					return false;
-				}
-				$conn = null;
+				    if($stmt->execute())
+				    {
+				    	echo "No hubo error";
+				    	return true;
+				    }
+				    else
+				    {
+
+                        foreach($stmt->errorInfo() as $errores){
+                            echo "<br>";
+                            echo $errores;}
+                            echo "<br>";
+                        
+				    	echo "hubo error";
+				    	return false;
+                    }
+                    $conn = null;
+                }
+                else{ echo'"No se pudo encriptar la contraseña'; }
             }catch(PDOException $e)
 			{
 				echo "Error: " . $e->getMessage();

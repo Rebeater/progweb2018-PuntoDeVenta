@@ -81,6 +81,7 @@ function updateTableProveedores(){
                 rellenarTabla();
             }						
         });		
+        
     $('#modalEditClose').trigger('click'); 
 }
 
