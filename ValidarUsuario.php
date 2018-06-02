@@ -24,13 +24,13 @@ include 'Clases/usuario.php';
 			$this->getConexion();
 			
 			$result = $conex->Consultar($cons);
-			$usr;
+			$usr = "";
 			foreach($result as $row){
 				if(password_verify($contraseña, $row['contrasena'])){
 					 $usr = array('id' => $row['id'], 'puesto' => $row['puesto'], 'contrasena' => $row['contrasena'], 'correo' => $row['correo']);                
 				}
 			}
-
+			if($usr!=""){
 			$puesto = $usr['puesto'];
 			$_SESSION["usuario"] = $usr['correo'];
 			$_SESSION["idUsuario"] = $usr['id'];
@@ -57,7 +57,10 @@ include 'Clases/usuario.php';
 					# code...
 					break;
 			}
-						
+		}
+		else{
+			header("location: login.php");
+		}
 			
 			
 		}

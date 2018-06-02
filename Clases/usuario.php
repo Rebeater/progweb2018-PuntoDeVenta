@@ -176,7 +176,10 @@
 
         public function editar(){
             try{
-                $cadena= "update usuario set nombre=:nombre, correo=:correo, contrasena=:contrasena, puesto=:puesto, telefono=:telefono, domicilio=:domicilio, fechaNacimiento=:fechaNacimiento WHERE id=:id";
+                $passCifrada = password_hash($this->contrasena, PASSWORD_DEFAULT);
+                $ter = ($this->contrasena == "")? "" : 'contrasena=:contrasena,';
+                $cadena= "update usuario set nombre=:nombre, correo=:correo,". $ter." puesto=:puesto, telefono=:telefono, domicilio=:domicilio, fechaNacimiento=:fechaNacimiento WHERE id=:id";
+                echo $cadena;
 				$conex=new conexion();
 				$conn = $conex->conectarse();
                 $stmt = $conn->prepare($cadena);
@@ -184,31 +187,28 @@
                 $stmt->bindParam(':id', $this->id);
                 $stmt->bindParam(':nombre', $this->nombre);                    
 				$stmt->bindParam(':correo', $this->correo);
-				$stmt->bindParam(':contrasena', $this->contrasena);
+                if($ter!="") {$stmt->bindParam(':contrasena', $passCifrada);}
 				$stmt->bindParam(':puesto', $this->puesto);
 				$stmt->bindParam(':telefono', $this->telefono);
 				$stmt->bindParam(':domicilio', $this->domicilio);
 				$stmt->bindParam(':fechaNacimiento', $this->fechaNacimiento);
-            
-                //echo $this->id;
 
-				if($stmt->execute())
+                if($stmt->execute())
 				{
-					echo "No hubo error";
-					return true;
+    			 echo "No hubo error";
+				    return true;
 				}
 				else
 				{
-                    
                     foreach($stmt->errorInfo() as $errores){
                         echo "<br>";
-                        echo $errores;}
-                        echo "<br>";
-                    
-					echo "hubo error";
-					return false;
+                        echo $errores;
+                    }
+                    echo "<br>";
+				    echo "hubo error";
+				    return false;
 				}
-				$conn = null;
+                $conn = null;
             }catch(PDOException $e)
 			{
 				echo "Error: " . $e->getMessage();

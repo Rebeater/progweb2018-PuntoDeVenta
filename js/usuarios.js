@@ -22,7 +22,7 @@ function openUser(user){
                 //document.getElementById('').src = "img/perfiles/" + usrJson.id;
                 document.getElementById("txt_edit_id").value          = usrJson.id;
                 document.getElementById("txt_edit_correo").value      = usrJson.correo;
-                document.getElementById("txt_edit_contrasena").value  = usrJson.contrasena;
+                document.getElementById("txt_edit_contrasena").value  = "";
                 document.getElementById("txt_edit_nombre").value      = usrJson.nombre;
                 document.getElementById("txt_edit_telefono" ).value   = usrJson.telefono;
                 document.getElementById("txt_edit_domicilio" ).value  = usrJson.domicilio;
@@ -79,7 +79,6 @@ function updateTableUsers(){
                 "&date_edit_Nacimiento="+   document.getElementById("date_edit_Nacimiento").value;
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               // $("#divUsers").innerHTML =  this.responseText;
 
             }
         };
