@@ -90,7 +90,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Correo</div>
           </div>
-          <input type="text" class="form-control"  name="txt_correo" id="txt_correo" placeholder="Correo"  maxlength="255" required>
+          <input type="text" class="form-control"  name="txt_correo" id="txt_correo" placeholder="Correo"  maxlength="255" >
         </div>
 
         <label class="sr-only" for="txt_contrasena">Contraseña</label>
@@ -98,7 +98,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Contraseña</div>
           </div>
-          <input type="password" class="form-control"  name="txt_contrasena" id="txt_contrasena" placeholder="Contraseña" maxlength="255" required>
+          <input type="password" class="form-control"  name="txt_contrasena" id="txt_contrasena" placeholder="Contraseña" maxlength="255" >
           <div class="input-group-btn">
           <i id="icon-pass_New" class="fas fa-lock" onclick="iconpassNew()"></i>
           </div>
@@ -109,7 +109,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Nombre</div>
           </div>
-          <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre" maxlength="255" required>
+          <input type="text" class="form-control"  name="txt_nombre" id="txt_nombre" placeholder="Nombre" maxlength="255" >
         </div>
 
             <?php 
@@ -181,7 +181,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Correo</div>
           </div>
-          <input type="text" class="form-control"  name="txt_edit_correo" id="txt_edit_correo" placeholder="Correo" maxlength="255" required>
+          <input type="text" class="form-control"  name="txt_edit_correo" id="txt_edit_correo" placeholder="Correo" maxlength="255" >
         </div>
 
         <label class="sr-only" for="txt_edit_contrasena">Contraseña</label>
@@ -189,7 +189,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Contraseña</div>
           </div>
-          <input type="password" class="form-control"  name="txt_edit_contrasena" id="txt_edit_contrasena" placeholder="Contraseña" maxlength="255" required>
+          <input type="password" class="form-control"  name="txt_edit_contrasena" id="txt_edit_contrasena" placeholder="Contraseña" maxlength="255" >
           <div class="input-group-btn">
           <i id="icon-pass" class="fas fa-lock" onclick="iconpass()"></i>
           </div>
@@ -200,7 +200,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Nombre</div>
           </div>
-          <input type="text" class="form-control"  name="txt_edit_nombre" id="txt_edit_nombre" placeholder="Nombre" maxlength="255" required>
+          <input type="text" class="form-control"  name="txt_edit_nombre" id="txt_edit_nombre" placeholder="Nombre" maxlength="255">
         </div>
 
             

@@ -78,7 +78,7 @@
                         Total Articulos: <span id="lbl_totalArticulos">0</span><br>
                     </div>  
                     <div id="datosCliente">
-                        Cliente: <select  id="cbox_cliente">
+                        Cliente: <select class="form-control" id="cbox_cliente">
                         </select>
                     </div>
                 </div>

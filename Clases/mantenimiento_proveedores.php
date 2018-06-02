@@ -84,7 +84,7 @@
                 $array_Puestos += [$row['id']=> $row['nombre']];
             }*/
             
-            echo "<table id='tabla_usuarios' class='table table-striped'>";
+            echo "<table id='tabla_usuarios' class='table table-striped  table-rwd'>";
             echo "<thead>";
             echo "<tr>";
             echo "<th>Id</th>";
@@ -298,8 +298,9 @@
             try{
                 $result = $this->getProveedorByCampo($campo, $data);
                 foreach($result as $row){                        
-                    $productJson = json_encode($row);
-                    return $productJson;
+                    $provedores = array('id' => $row['id'], 'nombre' => $row['nombre'], 'telefono' => $row['telefono'], 'nombre_social' => $row['nombre_social'], 'ciudad' => $row['ciudad']);                
+                    $provedoresJson = json_encode($provedores);
+                    return $provedoresJson;
                 }
             } catch(PDOException $e)
             {

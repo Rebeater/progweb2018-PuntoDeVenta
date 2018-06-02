@@ -16,40 +16,48 @@ include 'Clases/usuario.php';
 		
 		public function login($correo, $contraseña){
 			session_start();
-			
 			$conex = new conexion;
 			$puesto = "";
 			
-			$cons = "SELECT id, puesto, correo FROM usuario WHERE correo ='" .$correo."' AND contrasena ='" .$contraseña."'";
+			$cons = "SELECT id, puesto, correo, contrasena FROM usuario WHERE correo ='" .$correo."'";
 			
 			$this->getConexion();
 			
 			$result = $conex->Consultar($cons);
-			
+			$usr;
 			foreach($result as $row){
-				$puesto = $row['puesto'];
-				$_SESSION["usuario"] = $correo;
-				$_SESSION["idUsuario"] = $row['id'];
-				$_SESSION['logged'] = true;
-				if($puesto == "Supervisor"){
+				if(password_verify($contraseña, $row['contrasena'])){
+					 $usr = array('id' => $row['id'], 'puesto' => $row['puesto'], 'contrasena' => $row['contrasena'], 'correo' => $row['correo']);                
+				}
+			}
+
+			$puesto = $usr['puesto'];
+			$_SESSION["usuario"] = $usr['correo'];
+			$_SESSION["idUsuario"] = $usr['id'];
+			$_SESSION['logged'] = true;
+			switch ($usr['puesto']) {
+				case '1': //Admin
+					$_SESSION["puesto"] = "Administrador";
+					header("location: mantenimiento_Usuarios.php");	
+					break;
+				case '2': // Ventas
+						$_SESSION["puesto"] = "Ventas";
+						header("location: puntoventa.php");
+					break;
+				case '3': // Supervisor
 					echo "idhid";
 					$_SESSION["puesto"] = "Supervisor";
 					header("location: Supervisor.php");
-				}
-				if($puesto == "1"){
-					$_SESSION["puesto"] = "Administrador";
-					header("location: mantenimiento_Usuarios.php");
-				}
-				if($puesto == "4"){
+					break;
+				case '4': // Caja
 					$_SESSION["puesto"] = "Caja";
 					header("location: puntoventa.php");
-				}
-				if($puesto == "2"){
-					$_SESSION["puesto"] = "Ventas";
-					header("location: puntoventa.php");
-				}
+					break;
+				default:
+					# code...
+					break;
 			}
-			
+						
 			
 			
 		}
