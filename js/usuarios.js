@@ -6,45 +6,44 @@ function openUser(user){
     if (id == "") {
         return;
     } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-    
-        //#region AJAX para los datos del usario
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var usrJson = JSON.parse(this.responseText);
-                document.getElementById("photo-EditUsr").src = "img/perfiles/" + usrJson.id + ".png";
-                //document.getElementById('').src = "img/perfiles/" + usrJson.id;
-                document.getElementById("txt_edit_id").value          = usrJson.id;
-                document.getElementById("txt_edit_correo").value      = usrJson.correo;
-                document.getElementById("txt_edit_contrasena").value  = usrJson.contrasena;
-                document.getElementById("txt_edit_nombre").value      = usrJson.nombre;
-                document.getElementById("txt_edit_telefono" ).value   = usrJson.telefono;
-                document.getElementById("txt_edit_domicilio" ).value  = usrJson.domicilio;
-                document.getElementById("date_edit_Nacimiento").value = usrJson.fechaNacimiento;
-            
-            }
-        };
-        xmlhttp.open("POST","Procesa_Usuarios.php",false);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("getDataUser=true&id="+id);
-    
-        //#endregion
 
+        $.ajax(
+            {
+                type:"POST",
+                url: "Procesa_Usuarios.php", 
+                data: "getDataUser=" + "true" + "&id="+id,
+                contentType: "application/x-www-form-urlencoded",
+                success: function(result){
+                    if(result != ""){
+                        var usrJson = JSON.parse(result);
+                        document.getElementById("photo-EditUsr").src = "img/perfiles/" + usrJson.id + ".png";
+                        $('#txt_edit_id').val(usrJson.id);
+                        $('#txt_edit_correo').val(usrJson.correo);
+                        $('#txt_edit_contrasena').val("");
+                        $('#txt_edit_nombre').val(usrJson.nombre);
+                        $('#txt_edit_telefono' ).val(usrJson.telefono);
+                        $('#txt_edit_domicilio' ).val(usrJson.domicilio);
+                        $('#date_edit_Nacimiento').val(usrJson.fechaNacimiento);
+                    }						
+                }
+            });   
+        
         //#region AJAX para el combobox del puesto
     
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("cbx_edit_puesto" ).innerHTML = this.responseText;
-            }
-        };
-        xmlhttp.open("GET","Procesa_Usuarios.php?u="+id,true);
-        xmlhttp.send();
+        $.ajax(
+            {
+                type:"GET",
+                url: "Procesa_Usuarios.php", 
+                data: "u="+id,
+                contentType: "application/x-www-form-urlencoded",
+                success: function(result){
+                    if(result != ""){
+                        document.getElementById("cbx_edit_puesto" ).innerHTML = result;
+                      
+                    }						
+                }
+            });   
+
     }
     //#endregion
 }
@@ -59,37 +58,40 @@ function deleteUser(user){
 } 
 
 function updateTableUsers(){
-    if (window.XMLHttpRequest) {
-        // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        // code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
 
-    //#region AJAX para actualizar el registro 
-    var data =  "btnActualizar=true"+
-                "&txt_edit_id="+            document.getElementById("txt_edit_id").value+
-                "&txt_edit_nombre="+        document.getElementById("txt_edit_nombre").value+
-                "&txt_edit_correo="+        document.getElementById("txt_edit_correo").value+
-                "&txt_edit_contrasena="+    document.getElementById("txt_edit_contrasena").value+
-                "&cbx_edit_puesto="+        document.getElementById("cbx_edit_puesto").value+
-                "&txt_edit_telefono="+      document.getElementById("txt_edit_telefono").value+
-                "&txt_edit_domicilio="+     document.getElementById("txt_edit_domicilio").value+
-                "&date_edit_Nacimiento="+   document.getElementById("date_edit_Nacimiento").value;
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-               // $("#divUsers").innerHTML =  this.responseText;
-
+    $.ajax(
+        {
+            type:"POST",
+            url: "Procesa_Usuarios.php", 
+            data: "btnActualizar=true"+
+            "&txt_edit_id="+            document.getElementById("txt_edit_id").value+
+            "&txt_edit_nombre="+        document.getElementById("txt_edit_nombre").value+
+            "&txt_edit_correo="+        document.getElementById("txt_edit_correo").value+
+            "&txt_edit_contrasena="+    document.getElementById("txt_edit_contrasena").value+
+            "&cbx_edit_puesto="+        document.getElementById("cbx_edit_puesto").value+
+            "&txt_edit_telefono="+      document.getElementById("txt_edit_telefono").value+
+            "&txt_edit_domicilio="+     document.getElementById("txt_edit_domicilio").value+
+            "&date_edit_Nacimiento="+   document.getElementById("date_edit_Nacimiento").value,
+            contentType: "application/x-www-form-urlencoded",
+            success: function(result){
+                if(result != ""){
+                    $.ajax(
+                        {
+                            type:"POST",
+                            url: "Procesa_Usuarios.php", 
+                            data: "getTabla=true",
+                            contentType: "application/x-www-form-urlencoded",
+                            success: function(result){
+                                if(result != ""){
+                                    document.getElementById("divUsers").innerHTML =  result;
+                                    $("#modalEdit").hide();
+                                    $('.modal-backdrop').remove();
+                                }						
+                            }
+                        });   
+                }						
             }
-        };
-        xmlhttp.open("POST","Procesa_Usuarios.php",false);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send(data);
-        btnActualizar
-    //#endregion
-
-
+        });   
 
 
 
@@ -97,15 +99,12 @@ function updateTableUsers(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 
-            document.getElementById("divUsers").innerHTML =  this.responseText;
-            $("#modalEdit").hide();
-            $('.modal-backdrop').remove();
+           
 
         }
     };
     xmlhttp.open("POST","Procesa_Usuarios.php",true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("getTabla=true");
     //#endregion
 
 

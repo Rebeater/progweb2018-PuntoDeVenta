@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-
     <form id='uploadImg' name='uploadImg' action="procesa_upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" id="fileToUpload"  name="fileToUpload" class="inputFileLogo" onchange="uploadFoto()">
             <input type="hidden" id="updatePhotoId" name="updatePhotoId">

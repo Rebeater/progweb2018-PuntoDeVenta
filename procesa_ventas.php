@@ -58,5 +58,11 @@
             }
             exit();
          }
+         else if(isset($_POST['getVentas'])){
+            echo "POST";
+            foreach ($_POST as $value) {
+                echo $value;
+            }
+         }
     }
 ?>

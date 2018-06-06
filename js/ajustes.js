@@ -63,7 +63,7 @@ function armarCboxPaises(paises){
 
 function loadData(){
     //objeto de prueba
-     var result2 = '{ "companyName":"Electronics" ,'+
+     /*var result2 = '{ "companyName":"Electronics" ,'+
                        ' "pais":"Mexico" ,'+
                        ' "cp":"2305" ,'+
                        ' "ciudad":"La Pah" ,'+
@@ -77,7 +77,7 @@ function loadData(){
                        ' "img":"img/131-logo-steren.png" ,'+
                        ' "descripcion":"Electrónica Steren es una empresa Mexicana que fue fundada en la Ciudad de México en 1956 que se dedica a comercializar bienes electrónicos, de computación y tecnología. Tiene más de 360 tiendas distribuidas en México, Costa Rica, República Dominicana, Guatemala, Colombia y Estados Unidos, y una oficina de control de calidad en Shanghai, China."}';
         
-                      
+                      */
     $.ajax(
         {
             type:"POST",
@@ -85,7 +85,7 @@ function loadData(){
             data: "loadData=" + "true",
             contentType: "application/x-www-form-urlencoded",
             success: function(result){
-                var ajustes = JSON.parse(result2);
+                var ajustes = JSON.parse(result);
                 $('#companyName').val(ajustes.companyName);
                 $('#cbx_pais').val(ajustes.pais);
                 $('#txt_cp').val(ajustes.cp);
@@ -120,17 +120,17 @@ function saveData(){
     var descripcion       = $('#txt_Descripcion').val();
     var img               = $('#logo').val();
 
-    obj = { "companyName":      companyName, 
-            "pais":             pais,         
-            "cp":               cp,           
-            "ciudad":           ciudad,       
-            "estado":           estado,       
-            "domicilio":        domicilio,    
-            "telefonoCode":     telefonoCode, 
-            "telefono":         telefono,     
-            "correo":           correo,       
+    obj = { "companyName":      companyName,
+            "pais":             pais,
+            "cp":               cp,
+            "ciudad":           ciudad,
+            "estado":           estado,
+            "domicilio":        domicilio,
+            "telefonoCode":     telefonoCode,
+            "telefono":         telefono,
+            "correo":           correo,
             "correoSoporte":    correoSoporte,
-            "passCorreoSoporte":passCorreoSoporte, 
+            "passCorreoSoporte":passCorreoSoporte,
             "img":              img,
             "descripcion":      descripcion };
     var ajustesJSON = JSON.stringify(obj);
@@ -142,10 +142,44 @@ function saveData(){
             data: "saveData=" + "true" + "&ajustesJSON=" + ajustesJSON,
             contentType: "application/x-www-form-urlencoded",
             success: function(result){
-                    show_snackbar(result)
+                document.forms['uploadImg_Ajustes'].submit(); //uploadFoto();
+                show_snackbar(result);
+                loadData();
             }						
         });		
 
 
     
 }
+
+
+
+
+function cambiarFoto(){    
+    $('#fileToUpload_Ajustes').trigger('click');        
+}
+
+
+
+function uploadFoto() {
+
+    var updatePhotoId_Ajustes = document.getElementById('updatePhotoId_Ajustes');
+    var fileToUpload_Ajustes = document.getElementById('fileToUpload_Ajustes');
+    $.ajax({
+        type: "POST",
+        url: "procesa_upload.php",
+        //data: new FormData($('#uploadImgPublicidad')[0]), updatePhotoIdPublicidad
+        contentType: false,
+        data: "updatePhotoId_Ajustes=" + updatePhotoId_Ajustes + "&fileToUpload_Ajustes=" + fileToUpload_Ajustes,
+        cache: false,
+        processData:false,
+        success: function (result) {
+            if(result == "The file has been uploaded"){
+                AsignarImg(result,id);
+            }
+            else{
+                document.getElementById('uploadImg').innerHTML = result;
+            }
+        }
+    });
+};

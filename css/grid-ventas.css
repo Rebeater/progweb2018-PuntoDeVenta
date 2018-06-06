@@ -1,0 +1,61 @@
+#lbl_Desde          { grid-area: lbl_Desde       ;}
+#lbl_Hasta          { grid-area: lbl_Hasta       ;}
+#lbl_Cliente        { grid-area: lbl_Cliente     ;}
+#lbl_VentasTotales  { grid-area: lbl_VentasTotales;}
+#lbl_ImporteTotal   { grid-area: lbl_ImporteTotal;}
+
+#date_Desde         { grid-area: date_Desde;}
+#date_Hasta         { grid-area: date_Hasta;}
+
+#cbox_Cliente       { grid-area: cbox_Cliente;}
+#btnBuscar          { grid-area: btnBuscar;}
+#txt_VentasTotales  { grid-area: txt_VentasTotales;}
+#txt_ImporteTotal   { grid-area: txt_ImporteTotal;}
+#tablaVentas        { grid-area: tablaVentas;}
+
+
+.grid-container{    
+    margin:2em auto;
+    display: grid;
+    grid-gap: 5px 2em;
+    grid-template-areas:
+    'lbl_Desde         date_Desde        lbl_Hasta         date_Hasta       lbl_Cliente      cbox_Cliente     btnBuscar'
+    'lbl_VentasTotales lbl_VentasTotales lbl_VentasTotales lbl_ImporteTotal lbl_ImporteTotal lbl_ImporteTotal lbl_ImporteTotal'
+    'txt_VentasTotales txt_VentasTotales txt_VentasTotales txt_ImporteTotal txt_ImporteTotal txt_ImporteTotal txt_ImporteTotal'
+    'tablaVentas       tablaVentas       tablaVentas       tablaVentas      tablaVentas      tablaVentas      tablaVentas';
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .grid-container {
+     
+    }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .grid-container {
+        
+      
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .grid-container {
+        
+    }
+}
+
+

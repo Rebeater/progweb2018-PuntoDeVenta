@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $usr->setFechaAlta($fechaAlta);
         $usr->Insertar();
 	} elseif ( isset($_POST['btnActualizar'])){
-        echo "btnActualizar";
         $id         = $valida->test_input($_POST['txt_edit_id']);
         $nombre     = $valida->test_input($_POST['txt_edit_nombre']);
         $correo     = $valida->test_input($_POST['txt_edit_correo']);
@@ -45,9 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $usr->setTelefono($tel);
         $usr->setDomicilio($domicilio);
         $usr->setFechaNacimiento($fechaNacimiento);
-        echo $id;
-        echo $tel;
-        echo $nombre;
         $usr->Editar();
         exit();
 	} else if ( isset($_POST['btnEliminar'])){

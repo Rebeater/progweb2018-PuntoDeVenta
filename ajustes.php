@@ -20,9 +20,9 @@
     <title>Ajustes</title>
 </head>
 <body>
-    <form id='uploadImg' name='uploadImg' action="procesa_upload.php" method="POST" enctype="multipart/form-data">
-        <input type="file" id="fileToUpload" name="fileToUpload" class="inputFileLogo" onchange="uploadFoto()">
-        <input type="hidden" id="updatePhotoId" name="updatePhotoId">
+    <form id='uploadImg_Ajustes' name='uploadImg_Ajustes' action="procesa_upload.php" method="POST" enctype="multipart/form-data">
+        <input type="file" id="fileToUpload_Ajustes" name="fileToUpload" class="inputFileLogo">
+         <input type="hidden" id="updatePhotoId_Ajustes" name="updatePhotoId_Ajustes">
     </form>
     <?php include_once("header.php"); ?>
 
@@ -62,18 +62,21 @@
         <h3>Personalización</h3>
         <p>logo</p>
         <div class="grid-content-logo" id="divLogo"  style="width: 100%">
-            <img    class="rounded" style="grid-area:imgLogo; margin:auto; width: 21em;" alt="logo" id="logo"        name="logo"    value="img\photo.png"    src="img\photo.png" >
-            <input type="button" class="form-control btn-primary " style="grid-area:btnSubir;"      id="btnSubir"    name="btnSubir"    value="Subir">
-            <input type="button" class="form-control btn-danger"   style="grid-area:btnEliminar;"   id="btnEliminar" name="btnEliminar" value="Eliminar">
+            <img    class="rounded" style="grid-area:imgLogo; margin:auto; width: 21em;" alt="logo" id="logo"        name="logo"    value="img\photo.png"    src="img\photo.png"  >
+            <input type="button" class="btn form-control btn-primary " style="grid-area:btnSubir;"      id="btnSubir"    name="btnSubir"    value="Subir" onclick="cambiarFoto()">
+            <input type="button" class="btn form-control btn-danger"   style="grid-area:btnEliminar;"   id="btnEliminar" name="btnEliminar" value="Eliminar">
         </div>
         <p>Descripción de la empresa</p>
         <textarea class="form-control" id="txt_Descripcion" name="txt_Descripcion" cols="30" rows="4" placeholder="Descripción de la empresa"></textarea><br>
-        <input type="button" class="form-control btn btn-success" id="btnGuardar" name="btnGuardar" value="Guardar" onclick="saveData();">   
+        <input type="button" class="btn form-control btn-success" id="btnGuardar" name="btnGuardar" value="Guardar" onclick="saveData();">   
     </div>
 </div>
 <!--</form>-->
 
         <br>            
+
+
+
 </body>
 </html>
 
